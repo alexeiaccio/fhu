@@ -1,22 +1,24 @@
-const path = require('path');
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+const path = require('path')
 
 // SEO configuration
-const siteTitle = 'FHU';
-const siteUrl = 'https://github.com/alexeiaccio/fhu';
-const siteDescription = 'Free Home University';
-const siteKeywords = 'Gatsby, web';
-const siteThemeColor = '#009688';
-
+const siteTitle = 'FHU'
+const siteUrl = 'https://github.com/alexeiaccio/fhu'
+const siteDescription = 'Free Home University'
+const siteKeywords = 'Gatsby, web'
+const siteThemeColor = '#009688'
 
 // Accounts & API keys
-const twitter = 'your-twitter-account';
-const fbAppId = 'your-fb-app-id';
-const gaId = 'your-ga-id';
+const twitter = 'your-twitter-account'
+const fbAppId = 'your-fb-app-id'
+// const gaId = 'your-ga-id'
 
 // Used internally
-const utilsTitleShort = 'FHU';
-const utilsIcon = 'static/images/icon.png';
-const utilsBackgroundColor = '#009688';
+const utilsTitleShort = 'FHU'
+const utilsIcon = 'static/images/icon.png'
+const utilsBackgroundColor = '#009688'
 
 // Do not modify unless you know what you're doing
 module.exports = {
@@ -29,21 +31,28 @@ module.exports = {
     siteThemeColor,
     social: {
       twitter,
-      fbAppId
+      fbAppId,
     },
     // Utils
     utilsTitleShort,
     utilsIcon: path.resolve(__dirname, utilsIcon),
-    utilsBackgroundColor
+    utilsBackgroundColor,
   },
   plugins: [
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: 'gatsby-source-prismic',
       options: {
-        trackingId: gaId,
-        head: false // put GA in the <head> for optimal tracking
-      }
+        repositoryName: 'freehome',
+        accessToken: process.env.PRICMIC_TOKEN,
+      },
     },
+    // {
+    //   resolve: 'gatsby-plugin-google-analytics',
+    //   options: {
+    //     trackingId: gaId,
+    //     head: false // put GA in the <head> for optimal tracking
+    //   }
+    // },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -53,13 +62,13 @@ module.exports = {
         theme_color: siteThemeColor,
         background_color: utilsBackgroundColor,
         display: 'minimal-ui',
-        icon: utilsIcon // This path is relative to the root of the site.
-      }
+        icon: utilsIcon, // This path is relative to the root of the site.
+      },
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-robots-txt',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
-    'gatsby-plugin-webpack-size'
-  ]
-};
+    'gatsby-plugin-webpack-size',
+  ],
+}

@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React from 'react'
+import { Link } from 'gatsby'
 
-import Layout from '../components/layout/layout';
-import Seo from '../components/seo/seo';
+import Layout from '../components/layout/layout'
+import Seo from '../components/seo/seo'
 
 const seo = {
-  pageTitle: 'Learn More'
-};
+  pageTitle: 'Learn More',
+}
 
 const LearnMore = ({ location }) => (
   <Layout>
@@ -19,6 +19,6 @@ const LearnMore = ({ location }) => (
     <p>Happy Hacking!</p>
     <Link to="/">Back to Index</Link>
   </Layout>
-);
+)
 
-export default LearnMore;
+export default LearnMore

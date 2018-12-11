@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React from 'react'
+import { Link } from 'gatsby'
 
-import Layout from '../components/layout/layout';
-import Seo from '../components/seo/seo';
+import Layout from '../components/layout/layout'
+import Seo from '../components/seo/seo'
 
 const seo = {
-  pageTitle: 'Welcome'
-};
+  pageTitle: 'Welcome',
+}
 
 const IndexPage = ({ location }) => (
   <Layout>
@@ -26,6 +26,6 @@ const IndexPage = ({ location }) => (
     <p>You are all set to start your own project!</p>
     <Link to="/learn-more">Learn More</Link>
   </Layout>
-);
+)
 
-export default IndexPage;
+export default IndexPage

@@ -1,8 +1,15 @@
 // This does not support nested pages (level 2 and up)
 // If you're working with deeply nested pages, remove this or rework it.
 
-export default ({ pathname, canonical, siteUrl, pageTitle, siteTitle, pageTitleFull }) => {
-  const isSubPage = pageTitle && pathname !== '/';
+export default ({
+  pathname,
+  canonical,
+  siteUrl,
+  pageTitle,
+  siteTitle,
+  pageTitleFull,
+}) => {
+  const isSubPage = pageTitle && pathname !== '/'
 
   const schema = [
     {
@@ -10,9 +17,9 @@ export default ({ pathname, canonical, siteUrl, pageTitle, siteTitle, pageTitleF
       '@type': 'WebSite',
       url: canonical,
       name: pageTitle || siteTitle,
-      alternateName: pageTitleFull
-    }
-  ];
+      alternateName: pageTitleFull,
+    },
+  ]
 
   if (isSubPage) {
     schema.push({
@@ -24,20 +31,20 @@ export default ({ pathname, canonical, siteUrl, pageTitle, siteTitle, pageTitleF
           position: 1,
           item: {
             '@id': siteUrl,
-            name: siteTitle
-          }
+            name: siteTitle,
+          },
         },
         {
           '@type': 'ListItem',
           position: 2,
           item: {
             '@id': canonical,
-            name: pageTitle
-          }
-        }
-      ]
-    });
+            name: pageTitle,
+          },
+        },
+      ],
+    })
   }
 
-  return schema;
-};
+  return schema
+}
