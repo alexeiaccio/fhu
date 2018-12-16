@@ -5,7 +5,7 @@ const path = require('path')
 
 // SEO configuration
 const siteTitle = 'FHU'
-const siteUrl = 'https://github.com/alexeiaccio/fhu'
+const siteUrl = 'https://freehome.art'
 const siteDescription = 'Free Home University'
 const siteKeywords = 'Gatsby, web'
 const siteThemeColor = '#009688'
@@ -72,6 +72,17 @@ module.exports = {
     'gatsby-plugin-robots-txt',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
+    `gatsby-transformer-sharp`,
     'gatsby-plugin-webpack-size',
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-netlify-cache`,
+    {
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        mergeSecurityHeaders: true,
+        mergeLinkHeaders: true,
+        mergeCachingHeaders: true,
+      },
+    },
   ],
 }
