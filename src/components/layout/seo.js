@@ -1,8 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery } from 'gatsby'
 import jsonldGenerator from '../../utils/jsonld-generator'
+
+const seoQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        siteTitle
+        siteUrl
+        siteDescription
+        siteKeywords
+        siteThemeColor
+        social {
+          twitter
+          fbAppId
+        }
+      }
+    }
+  }
+`
 
 const Seo = ({
   pageTitle,
@@ -205,23 +223,7 @@ Seo.defaultProps = {
 
 const withStaticQuery = props => (
   <StaticQuery
-    query={graphql`
-      query {
-        site {
-          siteMetadata {
-            siteTitle
-            siteUrl
-            siteDescription
-            siteKeywords
-            siteThemeColor
-            social {
-              twitter
-              fbAppId
-            }
-          }
-        }
-      }
-    `}
+    query={seoQuery}
     render={data => <Seo config={data.site.siteMetadata} {...props} />}
   />
 )

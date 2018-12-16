@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { chain, compose, map, option, prop, propPathOr } from 'crocks'
-import Seo from '../seo/seo'
+
+import Seo from './seo'
+import Menu from './menu'
 
 const Layout = ({ children, ...props }) => {
   const pageDataKey = compose(
@@ -20,6 +22,7 @@ const Layout = ({ children, ...props }) => {
     pageData
   )
   const pathname = propPathOr('/', ['location', 'pathname'], props)
+  const location = propPathOr(null, ['location'], props)
 
   return (
     <Fragment>
@@ -30,6 +33,7 @@ const Layout = ({ children, ...props }) => {
         pageImage={pageImage}
         pathname={pathname}
       />
+      <Menu location={location} />
       <div>{children}</div>
     </Fragment>
   )
