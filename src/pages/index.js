@@ -1,31 +1,105 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
+import { css } from '@emotion/core'
+import styled from '@emotion/styled'
 
 import Layout from '../components/layout/layout'
 import Seo from '../components/seo/seo'
 
-const seo = {
-  pageTitle: 'Welcome',
+const H1 = styled.div`
+  color: red;
+`
+
+function IndexPage({ data, location }) {
+  const seo = {
+    pageTitle: 'Welcome',
+  }
+  console.log(data)
+
+  return (
+    <Layout>
+      <Seo {...seo} pathname={location.pathname} />
+      <H1
+        css={css`
+          color: green;
+        `}
+        dangerouslySetInnerHTML={{ __html: data.homepage.data.title.html }}
+      />
+    </Layout>
+  )
 }
 
-const IndexPage = ({ location }) => (
-  <Layout>
-    <Seo {...seo} pathname={location.pathname} />
-    <h1>Hi there!</h1>
-    <h3>
-      Welcome to the{' '}
-      <a href="https://github.com/mkitio/mkit-bundle-gatsby">
-        mkit-bundle-gatsby
-      </a>{' '}
-      template
-    </h3>
-    <p>
-      This project strives to deliver clean folder structure and satisfying
-      development experience. <strong>Easy.</strong>
-    </p>
-    <p>You are all set to start your own project!</p>
-    <Link to="/learn-more">Learn More</Link>
-  </Layout>
-)
-
 export default IndexPage
+
+export const PageQuery = graphql`
+  query IndexQuery {
+    homepage: prismicHomepage {
+      data {
+        title {
+          html
+        }
+        body {
+          __typename
+          ... on PrismicHomepageBodyListOfArticles {
+            items {
+              menu {
+                document {
+                  __typename
+                  ... on PrismicVolume {
+                    uid
+                    data {
+                      title {
+                        text
+                      }
+                      body {
+                        items {
+                          link {
+                            document {
+                              uid
+                              data {
+                                title {
+                                  text
+                                }
+                                body {
+                                  items {
+                                    link {
+                                      document {
+                                        uid
+                                        data {
+                                          title {
+                                            text
+                                          }
+                                          image {
+                                            url
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          ... on PrismicHomepageBodySlider {
+            items {
+              image {
+                url
+              }
+              link {
+                uid
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`

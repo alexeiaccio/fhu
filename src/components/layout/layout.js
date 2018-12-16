@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Seo from '../seo/seo';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Seo from '../seo/seo'
 
 const Layout = ({ children }) => (
   <React.Fragment>
@@ -9,10 +9,10 @@ const Layout = ({ children }) => (
     <div>{children}</div>
     {/* Footer component goes here */}
   </React.Fragment>
-);
+)
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
-};
+  children: PropTypes.node.isRequired,
+}
 
-export default Layout;
+export default Layout
