@@ -1,11 +1,17 @@
+/* global tw */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { css } from '@emotion/core'
 import uuid from 'uuid/v4'
 import { map, propPathOr } from 'crocks'
 
 import { FlexBox } from '../elements/boxs'
 import MenuChapters from './menu-levels'
-import { MenuItemContent } from '../elements/shared'
+import { Content } from '../elements/shared'
+
+const valueStyles = css`
+  ${tw(['font-extrabold', 'text-2xl'])};
+`
 
 function MenuValues({ items }) {
   if (!items) return null
@@ -18,7 +24,7 @@ function MenuValues({ items }) {
 
         return (
           <FlexBox key={uuid()} to={`/${uid}`}>
-            <MenuItemContent>{title}</MenuItemContent>
+            <Content css={valueStyles}>{title}</Content>
             <MenuChapters items={chapterItems} />
           </FlexBox>
         )

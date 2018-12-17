@@ -33,6 +33,7 @@ const menuQuery = graphql`
                   items {
                     link {
                       document {
+                        type
                         uid
                         data {
                           title {
@@ -42,6 +43,7 @@ const menuQuery = graphql`
                             items {
                               link {
                                 document {
+                                  type
                                   uid
                                   data {
                                     title {
@@ -129,7 +131,7 @@ function Menu({ location }) {
         return (
           <nav
             css={css`
-              ${tw(['flex', 'w-1/2'])};
+              ${tw(['flex', 'flex-1'])};
             `}
           >
             <MenuValues items={valuesItems} location={location} />

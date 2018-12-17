@@ -10,7 +10,7 @@ export const Box = css`
 
 export const FlexBox = styled.div`
   ${Box};
-  ${tw(['flex', 'flex-grow'])};
+  ${tw(['flex', 'flex-1'])};
 `
 
 export const InlineBox = styled.span`
@@ -19,5 +19,5 @@ export const InlineBox = styled.span`
 `
 
 export const Column = styled.div`
-  ${tw(['flex', 'flex-col', 'max-w-1/2'])};
+  ${tw(['flex', 'flex-col', 'flex-1'])};
 `

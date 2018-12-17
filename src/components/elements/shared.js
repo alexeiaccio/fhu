@@ -1,6 +1,6 @@
 /* global tw */
 import styled from '@emotion/styled'
 
-export const MenuItemContent = styled.span`
-  ${tw(['flex-grow', 'p-q24', 'truncate', 'whitespace-no-wrap'])};
+export const Content = styled.span`
+  ${tw(['flex-1', 'p-q24', 'whitespace-no-wrap'])};
 `

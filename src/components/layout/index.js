@@ -9,6 +9,7 @@ import '../fonts/stylesheet.css'
 
 import Seo from './seo'
 import Menu from './menu'
+import { FlexBox } from '../elements/boxs'
 
 const globalStyles = css`
   html {
@@ -20,7 +21,7 @@ const globalStyles = css`
 `
 
 const Container = styled.div`
-  ${tw(['p-q24'])};
+  ${tw(['flex', 'flex-row', 'p-q24'])};
 `
 
 const Layout = ({ children, ...props }) => {
@@ -53,7 +54,7 @@ const Layout = ({ children, ...props }) => {
         pathname={pathname}
       />
       <Menu location={location} />
-      <div>{children}</div>
+      <FlexBox>{children}</FlexBox>
     </Container>
   )
 }

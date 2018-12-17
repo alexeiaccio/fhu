@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
+
+import { Content } from '../components/elements/shared'
 
 const H1 = styled.div`
   color: red;
@@ -10,14 +12,14 @@ const H1 = styled.div`
 
 function IndexPage({ data }) {
   return (
-    <Fragment>
+    <Content>
       <H1
         css={css`
           color: green;
         `}
         dangerouslySetInnerHTML={{ __html: data.homepage.data.title.html }}
       />
-    </Fragment>
+    </Content>
   )
 }
 
