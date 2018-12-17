@@ -18,6 +18,21 @@
     "serve": "gatsby serve",
     "clean": "rimraf .cache public"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{js,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@emotion/core": "^10.0.5",
     "@emotion/styled": "^10.0.5",
@@ -52,18 +67,18 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.6.1",
+    "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.1.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
-    "husky": "^1.1.1",
+    "husky": "^1.2.1",
     "lint-staged": "^7.3.0",
     "postcss": "^7.0.5",
     "postcss-cli": "^6.0.0",
-    "prettier": "^1.14.3",
+    "prettier": "^1.15.3",
     "rimraf": "^2.6.2"
   },
   "author": "Alexei Accio <alexei.accio@gmail.com>",
