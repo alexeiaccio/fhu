@@ -1,10 +1,11 @@
 /* global tw */
-import { jsx, css } from '@emotion/core' // eslint-disable-line no-unused-vars
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-import { map, propPathOr } from 'crocks'
+import { compose, equals, filter, map, omit, propPathOr } from 'crocks'
 
-import MenuItems from './menu-items' // eslint-disable-line
+import MenuValues from './menu-values'
 
 const menuQuery = graphql`
   query {
@@ -14,7 +15,6 @@ const menuQuery = graphql`
           document {
             __typename
             ... on PrismicVolume {
-              id
               uid
               data {
                 title {
@@ -33,7 +33,6 @@ const menuQuery = graphql`
                   items {
                     link {
                       document {
-                        id
                         uid
                         data {
                           title {
@@ -43,7 +42,6 @@ const menuQuery = graphql`
                             items {
                               link {
                                 document {
-                                  id
                                   uid
                                   data {
                                     title {
@@ -78,7 +76,6 @@ const menuQuery = graphql`
               }
             }
             ... on PrismicAbout {
-              id
               data {
                 title {
                   about: text
@@ -86,7 +83,6 @@ const menuQuery = graphql`
                 body {
                   __typename
                   ... on PrismicAboutBodyText {
-                    id
                     primary {
                       text {
                         html
@@ -94,7 +90,6 @@ const menuQuery = graphql`
                     }
                   }
                   ... on PrismicAboutBodyImage {
-                    id
                     items {
                       imagesrc {
                         localFile {
@@ -124,7 +119,12 @@ function Menu({ location }) {
       render={data => {
         const menu = propPathOr(null, ['mainmenu', 'items'], data)
         const menuItems = map(propPathOr(null, ['menu', 'document', 0]), menu)
-        // console.log(menuItems)
+        const valuesItems = compose(
+          map(omit(['__typename'])),
+          filter(item =>
+            equals('PrismicVolume', propPathOr(false, ['__typename'], item))
+          )
+        )(menuItems)
 
         return (
           <div
@@ -132,7 +132,7 @@ function Menu({ location }) {
               ${tw(['flex', 'w-1/2'])};
             `}
           >
-            <MenuItems items={menuItems} location={location} />
+            <MenuValues items={valuesItems} location={location} />
           </div>
         )
       }}

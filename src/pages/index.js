@@ -39,54 +39,6 @@ export const PageQuery = graphql`
         }
         body {
           __typename
-          ... on PrismicHomepageBodyListOfArticles {
-            items {
-              menu {
-                document {
-                  __typename
-                  ... on PrismicVolume {
-                    uid
-                    data {
-                      title {
-                        text
-                      }
-                      body {
-                        items {
-                          link {
-                            document {
-                              uid
-                              data {
-                                title {
-                                  text
-                                }
-                                body {
-                                  items {
-                                    link {
-                                      document {
-                                        uid
-                                        data {
-                                          title {
-                                            text
-                                          }
-                                          image {
-                                            url
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
           ... on PrismicHomepageBodySlider {
             items {
               image {

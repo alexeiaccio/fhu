@@ -1,9 +1,28 @@
-import React, { Fragment } from 'react'
+/* global tw */
+import React from 'react'
 import PropTypes from 'prop-types'
+import { Global, css } from '@emotion/core'
+import styled from '@emotion/styled'
 import { chain, compose, map, option, prop, propPathOr } from 'crocks'
 
 import Seo from './seo'
 import Menu from './menu'
+
+const globalStyles = css`
+  * {
+    ${tw(['m-0', 'p-0'])};
+  }
+  ul {
+    ${tw(['p-0'])};
+  }
+  li {
+    list-style: none;
+  }
+`
+
+const Container = styled.div`
+  ${tw(['p-q24'])};
+`
 
 const Layout = ({ children, ...props }) => {
   const pageDataKey = compose(
@@ -25,7 +44,8 @@ const Layout = ({ children, ...props }) => {
   const location = propPathOr(null, ['location'], props)
 
   return (
-    <Fragment>
+    <Container>
+      <Global styles={globalStyles} />
       <Seo
         pageTitle={pageTitle}
         pageDescription={pageDescription}
@@ -35,7 +55,7 @@ const Layout = ({ children, ...props }) => {
       />
       <Menu location={location} />
       <div>{children}</div>
-    </Fragment>
+    </Container>
   )
 }
 

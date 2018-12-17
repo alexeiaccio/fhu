@@ -4520,6 +4520,10 @@ table {
   max-width: 100rem;
 }
 
+.max-w-1\/2 {
+  max-width: 50%;
+}
+
 .max-w-full {
   max-width: 100%;
 }
@@ -11776,6 +11780,10 @@ table {
     max-width: 100rem;
   }
 
+  .sm\:max-w-1\/2 {
+    max-width: 50%;
+  }
+
   .sm\:max-w-full {
     max-width: 100%;
   }
@@ -19011,6 +19019,10 @@ table {
 
   .md\:max-w-5xl {
     max-width: 100rem;
+  }
+
+  .md\:max-w-1\/2 {
+    max-width: 50%;
   }
 
   .md\:max-w-full {
@@ -26250,6 +26262,10 @@ table {
     max-width: 100rem;
   }
 
+  .lg\:max-w-1\/2 {
+    max-width: 50%;
+  }
+
   .lg\:max-w-full {
     max-width: 100%;
   }
@@ -33485,6 +33501,10 @@ table {
 
   .xl\:max-w-5xl {
     max-width: 100rem;
+  }
+
+  .xl\:max-w-1\/2 {
+    max-width: 50%;
   }
 
   .xl\:max-w-full {
@@ -40724,6 +40744,10 @@ table {
     max-width: 100rem;
   }
 
+  .screen\:max-w-1\/2 {
+    max-width: 50%;
+  }
+
   .screen\:max-w-full {
     max-width: 100%;
   }
@@ -47959,6 +47983,10 @@ table {
 
   .desktop\:max-w-5xl {
     max-width: 100rem;
+  }
+
+  .desktop\:max-w-1\/2 {
+    max-width: 50%;
   }
 
   .desktop\:max-w-full {
