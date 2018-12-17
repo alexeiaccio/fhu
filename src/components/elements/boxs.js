@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 
 export const Box = css`
   ${tw(['items-start', 'justify-start', 'max-w-full'])};
-  outline: 4px solid pink;
+  outline: 4px solid fuchsia;
   outline-offset: -2px;
 `
 

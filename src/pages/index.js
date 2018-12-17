@@ -15,7 +15,7 @@ function IndexPage({ data }) {
     <Content>
       <H1
         css={css`
-          color: green;
+          color: teal;
         `}
         dangerouslySetInnerHTML={{ __html: data.homepage.data.title.html }}
       />

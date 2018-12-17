@@ -5,7 +5,7 @@ const path = require('path')
 
 // SEO configuration
 const siteTitle = 'FHU'
-const siteUrl = 'https://freehome.art'
+const siteUrl = 'https://fhu.art'
 const siteDescription = 'Free Home University'
 const siteKeywords = 'Gatsby, web'
 const siteThemeColor = '#009688'

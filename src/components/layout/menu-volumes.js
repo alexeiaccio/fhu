@@ -13,7 +13,7 @@ const valueStyles = css`
   ${tw(['font-extrabold', 'text-2xl'])};
 `
 
-function MenuValues({ items }) {
+function MenuVolumes({ items }) {
   if (!items) return null
 
   return (
@@ -33,12 +33,12 @@ function MenuValues({ items }) {
   )
 }
 
-MenuValues.propTypes = {
+MenuVolumes.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
 }
 
-MenuValues.defaultProps = {
+MenuVolumes.defaultProps = {
   items: null,
 }
 
-export default MenuValues
+export default MenuVolumes
