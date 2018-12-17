@@ -8,7 +8,8 @@
   "rules": {
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": ["off"],
-    "react/react-in-jsx-scope": ["off"]
+    "react/react-in-jsx-scope": ["off"],
+    "import/no-named-as-default-member": ["off"]
   },
   "parser": "babel-eslint",
   "parserOptions": {

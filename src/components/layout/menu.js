@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { map, propPathOr } from 'crocks'
 
-import MenuItems from './menu-items'
+import MenuItems from './menu-items' // eslint-disable-line
 
 const menuQuery = graphql`
   query {

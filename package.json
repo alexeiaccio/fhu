@@ -7,7 +7,7 @@
     "web"
   ],
   "scripts": {
-    "lint": "eslint --fix src/**/*.js && prettier --write src/**/*.{js,json,md}",
+    "lint": "eslint --fix src/**/**/*.js && prettier --write src/**/**/*.{js,json,md}",
     "develop": "gatsby develop",
     "build:dir": "mkdir -p public/icons/",
     "build:favicons": "node scripts/favicons",
