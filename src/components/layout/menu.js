@@ -127,13 +127,13 @@ function Menu({ location }) {
         )(menuItems)
 
         return (
-          <div
+          <nav
             css={css`
               ${tw(['flex', 'w-1/2'])};
             `}
           >
             <MenuValues items={valuesItems} location={location} />
-          </div>
+          </nav>
         )
       }}
     />
