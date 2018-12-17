@@ -5,18 +5,17 @@ import { Global, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { chain, compose, map, option, prop, propPathOr } from 'crocks'
 
+import '../fonts/stylesheet.css'
+
 import Seo from './seo'
 import Menu from './menu'
 
 const globalStyles = css`
+  html {
+    ${tw(['font-sans'])};
+  }
   * {
     ${tw(['m-0', 'p-0'])};
-  }
-  ul {
-    ${tw(['p-0'])};
-  }
-  li {
-    list-style: none;
   }
 `
 

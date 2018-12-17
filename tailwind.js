@@ -195,6 +195,7 @@ module.exports = {
 
   fonts: {
     sans: [
+      'Raleway',
       '-apple-system',
       'BlinkMacSystemFont',
       'Segoe UI',
@@ -227,8 +228,6 @@ module.exports = {
       'Courier New',
       'monospace',
     ],
-    // Custom
-    montserrat: ['Montserrat', 'sans-serif'],
   },
 
   /*

@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
 export const Box = css`
-  ${tw(['items-center', 'justify-start', 'max-w-full'])};
+  ${tw(['items-start', 'justify-start', 'max-w-full'])};
   outline: 4px solid pink;
   outline-offset: -2px;
 `
