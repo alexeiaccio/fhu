@@ -1,9 +1,10 @@
 /* global tw */
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/core' // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { map, propPathOr } from 'crocks'
 
-import MenuItems from '../elements/menu-items'
+import MenuItems from './menu-items'
 
 const menuQuery = graphql`
   query {
@@ -123,20 +124,26 @@ function Menu({ location }) {
       render={data => {
         const menu = propPathOr(null, ['mainmenu', 'items'], data)
         const menuItems = map(propPathOr(null, ['menu', 'document', 0]), menu)
-        console.log(menuItems)
+        // console.log(menuItems)
 
         return (
           <div
             css={css`
-              ${tw(['flex', 'w-1/2'])}
+              ${tw(['flex', 'w-1/2'])};
             `}
           >
-            <MenuItems items={menuItems} />
+            <MenuItems items={menuItems} location={location} />
           </div>
         )
       }}
     />
   )
+}
+
+Menu.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
 }
 
 export default Menu

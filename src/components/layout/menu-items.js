@@ -1,4 +1,5 @@
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/core' // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { map, propPathOr } from 'crocks'
 
@@ -23,6 +24,18 @@ function MenuItems({ items }) {
       }, items)}
     </ul>
   )
+}
+
+MenuItems.propTypes = {
+  items: PropTypes.arrayOf({
+    data: PropTypes.object,
+    id: PropTypes.string,
+    uid: PropTypes.string,
+  }),
+}
+
+MenuItems.defaultProps = {
+  items: null,
 }
 
 export default MenuItems
