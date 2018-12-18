@@ -26,10 +26,14 @@ function MenuVolumes({ isVisible, items, toggle }) {
 
         return (
           <FlexBox key={uuid()} to={`/${uid}`}>
-            <TextContent key={uuid()} css={valueStyles} onClick={toggle}>
+            <TextContent
+              key={uuid()}
+              css={valueStyles}
+              onClick={() => toggle(uid)}
+            >
               {title}
             </TextContent>
-            <Appeared key={uuid()} pose={isVisible ? 'visible' : 'hidden'}>
+            <Appeared key={uuid()} pose={isVisible[uid] ? 'visible' : 'hidden'}>
               <MenuChapters key={uuid()} items={chapterItems} />
             </Appeared>
           </FlexBox>
@@ -40,7 +44,7 @@ function MenuVolumes({ isVisible, items, toggle }) {
 }
 
 MenuVolumes.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
+  isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
   toggle: PropTypes.func.isRequired,
 }

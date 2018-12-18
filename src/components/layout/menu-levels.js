@@ -27,20 +27,20 @@ function MenuLevels({ isVisible, items, toggle }) {
       {map(({ link }) => {
         const document = propPathOr(null, ['document', 0], link)
         const type = equals('chapter', propPathOr(null, ['type'], document))
+        const uid = propPathOr(null, ['uid'], document)
         const data = propPathOr(null, ['data'], document)
         const title = propPathOr(null, ['title', 'text'], data)
-        const uid = propPathOr(null, ['uid'], data)
         const nextLevelItems = propPathOr(null, ['body', 0, 'items'], data)
 
         return (
-          <FlexBox key={uuid()} to={`/${uid}`}>
+          <FlexBox key={uuid()}>
             <TextContent
               css={type ? chapterStyles : textStyles}
-              onClick={toggle}
+              onClick={() => toggle(uid)}
             >
               {title}
             </TextContent>
-            <Appeared key={uuid()} pose={isVisible ? 'visible' : 'hidden'}>
+            <Appeared key={uuid()} pose={isVisible[uid] ? 'visible' : 'hidden'}>
               <MenuLevels items={nextLevelItems} />
             </Appeared>
           </FlexBox>
@@ -51,13 +51,15 @@ function MenuLevels({ isVisible, items, toggle }) {
 }
 
 MenuLevels.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
+  isVisible: PropTypes.objectOf(PropTypes.bool),
   items: PropTypes.arrayOf(PropTypes.object),
-  toggle: PropTypes.func.isRequired,
+  toggle: PropTypes.func,
 }
 
 MenuLevels.defaultProps = {
+  isVisible: {},
   items: null,
+  toggle: null,
 }
 
 export default withOpener(MenuLevels)

@@ -168,13 +168,13 @@ function Menu({ isVisible, location, toggle }) {
                     <TextContent
                       key={uuid()}
                       css={valueStyles}
-                      onClick={toggle}
+                      onClick={() => toggle(menuId)}
                     >
                       {menuId}
                     </TextContent>
                     <Appeared
                       key={uuid()}
-                      pose={isVisible ? 'visible' : 'hidden'}
+                      pose={isVisible[menuId] ? 'visible' : 'hidden'}
                     >
                       <MenuValues
                         key={uuid()}
@@ -202,7 +202,7 @@ function Menu({ isVisible, location, toggle }) {
 }
 
 Menu.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
+  isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,

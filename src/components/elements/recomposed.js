@@ -2,9 +2,14 @@ import { withStateHandlers } from 'recompose'
 
 export const withOpener = withStateHandlers(
   {
-    isVisible: false,
+    isVisible: {},
   },
   {
-    toggle: ({ isVisible }) => () => ({ isVisible: !isVisible }),
+    toggle: ({ isVisible }) => key => ({
+      isVisible: {
+        ...isVisible,
+        [key]: isVisible[key] ? false : true, // eslint-disable-line no-unneeded-ternary
+      },
+    }),
   }
 )
