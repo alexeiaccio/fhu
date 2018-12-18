@@ -7,13 +7,15 @@ import { map, propPathOr } from 'crocks'
 
 import { FlexBox } from '../elements/boxs'
 import MenuChapters from './menu-levels'
-import { Content } from '../elements/shared'
+import { TextContent } from '../elements/shared'
+import { Appeared } from '../elements/posed'
+import { withOpener } from '../elements/recomposed'
 
 const valueStyles = css`
   ${tw(['font-extrabold', 'text-2xl'])};
 `
 
-function MenuVolumes({ items }) {
+function MenuVolumes({ isVisible, items, toggle }) {
   if (!items) return null
 
   return (
@@ -24,8 +26,12 @@ function MenuVolumes({ items }) {
 
         return (
           <FlexBox key={uuid()} to={`/${uid}`}>
-            <Content css={valueStyles}>{title}</Content>
-            <MenuChapters items={chapterItems} />
+            <TextContent key={uuid()} css={valueStyles} onClick={toggle}>
+              {title}
+            </TextContent>
+            <Appeared key={uuid()} pose={isVisible ? 'visible' : 'hidden'}>
+              <MenuChapters key={uuid()} items={chapterItems} />
+            </Appeared>
           </FlexBox>
         )
       }, items)}
@@ -34,11 +40,13 @@ function MenuVolumes({ items }) {
 }
 
 MenuVolumes.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
+  toggle: PropTypes.func.isRequired,
 }
 
 MenuVolumes.defaultProps = {
   items: null,
 }
 
-export default MenuVolumes
+export default withOpener(MenuVolumes)

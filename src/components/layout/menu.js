@@ -4,15 +4,22 @@ import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { compose, equals, filter, map, omit, propPathOr } from 'crocks'
+import uuid from 'uuid/v4'
 
 import MenuValues from './menu-volumes'
-import { Column } from '../elements/boxs'
+import { Column, FlexBox } from '../elements/boxs'
+import { TextContent } from '../elements/shared'
+import { Appeared } from '../elements/posed'
+import { withOpener } from '../elements/recomposed'
 
 const menuQuery = graphql`
   query {
     mainmenu: allPrismicHomepageBodyMenu {
       edges {
         node {
+          primary {
+            menuid
+          }
           items {
             menu {
               document {
@@ -121,7 +128,11 @@ const menuQuery = graphql`
 
 const Nav = Column.withComponent('nav')
 
-function Menu({ location }) {
+const valueStyles = css`
+  ${tw(['capitalize', 'font-extrabold', 'text-2xl'])};
+`
+
+function Menu({ isVisible, location, toggle }) {
   return (
     <StaticQuery
       query={menuQuery}
@@ -135,6 +146,7 @@ function Menu({ location }) {
             `}
           >
             {map(({ node }) => {
+              const menuId = propPathOr(null, ['primary', 'menuid'], node)
               const items = propPathOr(null, ['items'], node)
               const menuItems = map(
                 propPathOr(null, ['menu', 'document', 0]),
@@ -149,7 +161,38 @@ function Menu({ location }) {
                   )
                 )
               )(menuItems)
-              return <MenuValues items={valumesItems} location={location} />
+
+              if (equals(menuId, 'sessions')) {
+                return (
+                  <FlexBox key={uuid()}>
+                    <TextContent
+                      key={uuid()}
+                      css={valueStyles}
+                      onClick={toggle}
+                    >
+                      {menuId}
+                    </TextContent>
+                    <Appeared
+                      key={uuid()}
+                      pose={isVisible ? 'visible' : 'hidden'}
+                    >
+                      <MenuValues
+                        key={uuid()}
+                        items={valumesItems}
+                        location={location}
+                      />
+                    </Appeared>
+                  </FlexBox>
+                )
+              }
+
+              return (
+                <MenuValues
+                  key={uuid()}
+                  items={valumesItems}
+                  location={location}
+                />
+              )
             }, menu)}
           </Nav>
         )
@@ -159,9 +202,11 @@ function Menu({ location }) {
 }
 
 Menu.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
+  toggle: PropTypes.func.isRequired,
 }
 
-export default Menu
+export default withOpener(Menu)

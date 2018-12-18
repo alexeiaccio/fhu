@@ -1,6 +1,10 @@
 /* global tw */
 import styled from '@emotion/styled'
 
-export const Content = styled.span`
-  ${tw(['flex-1', 'p-q24', 'whitespace-no-wrap'])};
+export const TextContent = styled.span`
+  ${tw(['flex-1', 'px-q24', 'py-q12', 'whitespace-no-wrap'])};
+`
+
+export const Content = styled.div`
+  ${tw(['flex-1', 'p-q24'])};
 `

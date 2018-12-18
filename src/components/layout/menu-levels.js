@@ -7,17 +7,19 @@ import uuid from 'uuid/v4'
 import { equals, map, propPathOr } from 'crocks'
 
 import { FlexBox, Column } from '../elements/boxs'
-import { Content } from '../elements/shared'
+import { TextContent } from '../elements/shared'
+import { Appeared } from '../elements/posed'
+import { withOpener } from '../elements/recomposed'
 
 const chapterStyles = css`
-  ${tw(['font-semibold', 'text-lg'])};
+  ${tw(['font-extrabold', 'text-lg'])};
 `
 
 const textStyles = css`
-  ${tw(['font-normal', 'italic', 'text-sm', 'truncate'])};
+  ${tw(['font-semibold', 'italic', 'text-sm', 'truncate'])};
 `
 
-function MenuLevels({ items }) {
+function MenuLevels({ isVisible, items, toggle }) {
   if (!items) return null
 
   return (
@@ -32,8 +34,15 @@ function MenuLevels({ items }) {
 
         return (
           <FlexBox key={uuid()} to={`/${uid}`}>
-            <Content css={type ? chapterStyles : textStyles}>{title}</Content>
-            <MenuLevels items={nextLevelItems} />
+            <TextContent
+              css={type ? chapterStyles : textStyles}
+              onClick={toggle}
+            >
+              {title}
+            </TextContent>
+            <Appeared key={uuid()} pose={isVisible ? 'visible' : 'hidden'}>
+              <MenuLevels items={nextLevelItems} />
+            </Appeared>
           </FlexBox>
         )
       }, items)}
@@ -42,11 +51,13 @@ function MenuLevels({ items }) {
 }
 
 MenuLevels.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
+  toggle: PropTypes.func.isRequired,
 }
 
 MenuLevels.defaultProps = {
   items: null,
 }
 
-export default MenuLevels
+export default withOpener(MenuLevels)

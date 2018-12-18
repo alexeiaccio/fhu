@@ -8,9 +8,10 @@
   "rules": {
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": ["off"],
+    "react/destructuring-assignment": ["off"],
     "react/react-in-jsx-scope": ["off"],
-    "import/no-named-as-default-member": ["off"],
-    "import/prefer-default-export": ["off"]
+    "import/prefer-default-export": ["off"],
+    "import/no-named-as-default-member": ["off"]
   },
   "parser": "babel-eslint",
   "parserOptions": {

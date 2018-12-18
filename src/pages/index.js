@@ -42,6 +42,9 @@ export const PageQuery = graphql`
         body {
           __typename
           ... on PrismicHomepageBodySlider {
+            primary {
+              sliderid
+            }
             items {
               image {
                 url
