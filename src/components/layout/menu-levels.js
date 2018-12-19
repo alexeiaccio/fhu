@@ -35,12 +35,13 @@ function MenuLevels({ isVisible, items, toggle }) {
           <FlexBox key={uuid()}>
             <TextContent
               css={type ? chapterStyles : textStyles}
-              onClick={() => toggle(uid)}
+              key={uuid()}
+              onClick={() => (type ? toggle(uid) : null)}
             >
               {title}
             </TextContent>
             <Appeared key={uuid()} isVisible={isVisible[uid]}>
-              <MenuLevels items={nextLevelItems} />
+              <MenuLevels key={uuid()} items={nextLevelItems} />
             </Appeared>
           </FlexBox>
         )

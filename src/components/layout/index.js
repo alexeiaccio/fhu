@@ -9,7 +9,7 @@ import '../fonts/stylesheet.css'
 
 import Seo from './seo'
 import Menu from './menu'
-import { FlexBox } from '../elements/boxs'
+import { Box } from '../elements/boxs'
 
 const globalStyles = css`
   html {
@@ -25,6 +25,7 @@ const Container = styled.div`
   box-sizing: border-box;
 `
 const MainContent = styled.div`
+  ${Box};
   ${tw(['flex', 'flex-col', 'min-w-1/2'])};
   flex: 10 1 0%;
 `
@@ -58,9 +59,7 @@ const Layout = ({ children, ...props }) => {
         pathname={pathname}
       />
       <Menu location={location} />
-      <MainContent>
-        <FlexBox>{children}</FlexBox>
-      </MainContent>
+      <MainContent>{children}</MainContent>
     </Container>
   )
 }

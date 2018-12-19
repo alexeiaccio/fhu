@@ -19,5 +19,5 @@ export const InlineBox = styled.span`
 `
 
 export const Column = styled.div`
-  ${tw(['flex', 'flex-col', 'flex-grow', 'flex-shrink'])};
+  ${tw(['flex', 'flex-col', 'flex-grow', 'flex-shrink', 'max-w-full'])};
 `
