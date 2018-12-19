@@ -15,7 +15,7 @@ const chapterStyles = css`
 `
 
 const textStyles = css`
-  ${tw(['font-semibold', 'italic', 'text-sm', 'truncate'])};
+  ${tw(['font-semibold', 'italic', 'text-lg', 'truncate'])};
 `
 
 function MenuLevels({ isVisible, items, toggle }) {

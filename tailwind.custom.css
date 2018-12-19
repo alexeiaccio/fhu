@@ -4544,6 +4544,14 @@ table {
   min-width: 0;
 }
 
+.min-w-1\/4 {
+  min-width: 25%;
+}
+
+.min-w-1\/2 {
+  min-width: 50%;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -11800,6 +11808,14 @@ table {
     min-width: 0;
   }
 
+  .sm\:min-w-1\/4 {
+    min-width: 25%;
+  }
+
+  .sm\:min-w-1\/2 {
+    min-width: 50%;
+  }
+
   .sm\:min-w-full {
     min-width: 100%;
   }
@@ -19035,6 +19051,14 @@ table {
 
   .md\:min-w-0 {
     min-width: 0;
+  }
+
+  .md\:min-w-1\/4 {
+    min-width: 25%;
+  }
+
+  .md\:min-w-1\/2 {
+    min-width: 50%;
   }
 
   .md\:min-w-full {
@@ -26274,6 +26298,14 @@ table {
     min-width: 0;
   }
 
+  .lg\:min-w-1\/4 {
+    min-width: 25%;
+  }
+
+  .lg\:min-w-1\/2 {
+    min-width: 50%;
+  }
+
   .lg\:min-w-full {
     min-width: 100%;
   }
@@ -33509,6 +33541,14 @@ table {
 
   .xl\:min-w-0 {
     min-width: 0;
+  }
+
+  .xl\:min-w-1\/4 {
+    min-width: 25%;
+  }
+
+  .xl\:min-w-1\/2 {
+    min-width: 50%;
   }
 
   .xl\:min-w-full {
@@ -40748,6 +40788,14 @@ table {
     min-width: 0;
   }
 
+  .screen\:min-w-1\/4 {
+    min-width: 25%;
+  }
+
+  .screen\:min-w-1\/2 {
+    min-width: 50%;
+  }
+
   .screen\:min-w-full {
     min-width: 100%;
   }
@@ -47983,6 +48031,14 @@ table {
 
   .desktop\:min-w-0 {
     min-width: 0;
+  }
+
+  .desktop\:min-w-1\/4 {
+    min-width: 25%;
+  }
+
+  .desktop\:min-w-1\/2 {
+    min-width: 50%;
   }
 
   .desktop\:min-w-full {

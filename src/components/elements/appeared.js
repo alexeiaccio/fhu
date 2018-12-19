@@ -9,7 +9,6 @@ const Posed = posed.div({
   enter: {
     height: 'auto',
     width: 'auto',
-    overflow: 'visible',
     transition: { duration: 600, ease: 'easeInOut' },
   },
   exit: {

@@ -21,9 +21,13 @@ const globalStyles = css`
 `
 
 const Container = styled.div`
-  ${tw(['flex', 'flex-row', 'p-q24'])};
+  ${tw(['flex', 'flex-row', 'flex-no-grow', 'p-q24', 'w-screen'])};
+  box-sizing: border-box;
 `
-
+const MainContent = styled.div`
+  ${tw(['flex', 'flex-col', 'min-w-1/2'])};
+  flex: 10 1 0%;
+`
 const Layout = ({ children, ...props }) => {
   const pageDataKey = compose(
     option('nope'),
@@ -54,7 +58,9 @@ const Layout = ({ children, ...props }) => {
         pathname={pathname}
       />
       <Menu location={location} />
-      <FlexBox>{children}</FlexBox>
+      <MainContent>
+        <FlexBox>{children}</FlexBox>
+      </MainContent>
     </Container>
   )
 }
