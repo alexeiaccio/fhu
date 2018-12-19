@@ -11,7 +11,7 @@ import uuid from 'uuid/v4'
 import Img from '../elements/img'
 import { withHover } from '../elements/recomposed'
 import { Content } from '../elements/shared'
-import { Column } from '../elements/boxs'
+import { Column } from '../elements/boxes'
 
 const Wrapper = styled.div`
   ${tw(['relative'])};

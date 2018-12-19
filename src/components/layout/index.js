@@ -2,7 +2,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Global, css } from '@emotion/core'
-import styled from '@emotion/styled'
 import { ThemeProvider } from 'emotion-theming'
 import { chain, compose, map, option, prop, propPathOr } from 'crocks'
 import { withStateHandlers, lifecycle } from 'recompose'
@@ -12,8 +11,7 @@ import '../fonts/stylesheet.css'
 import Seo from './seo'
 import Menu from './menu'
 import Title from './title'
-import { Box } from '../elements/boxs'
-import { Content } from '../elements/shared'
+import { Content, Container, MainContent } from '../elements/shared'
 
 const globalStyles = css`
   html {
@@ -33,24 +31,6 @@ const globalStyles = css`
   }
 `
 
-const Container = styled.div`
-  ${tw([
-    'flex',
-    'flex-row',
-    'flex-no-grow',
-    'h-screen',
-    'items-start',
-    'p-q24',
-    'w-screen',
-  ])};
-  box-sizing: border-box;
-`
-const MainContent = styled.div`
-  ${Box};
-  ${tw(['flex', 'flex-col', 'min-w-1/2'])};
-  flex: 10 1 0%;
-  outline: 4px solid ${({ theme }) => theme.color};
-`
 const Layout = ({ children, currentTheme, ...props }) => {
   const pageDataKey = compose(
     option('nope'),

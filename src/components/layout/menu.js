@@ -7,7 +7,7 @@ import { compose, equals, filter, map, omit, propPathOr } from 'crocks'
 import uuid from 'uuid/v4'
 
 import MenuValues from './menu-volumes'
-import { Column, FlexBox } from '../elements/boxs'
+import { Column, FlexBox } from '../elements/boxes'
 import { TextContent } from '../elements/shared'
 import Appeared from '../elements/appeared'
 import { withOpener } from '../elements/recomposed'

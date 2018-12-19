@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { StaticQuery, Link, graphql } from 'gatsby'
 
-import { Box } from '../elements/boxs'
+import { Box } from '../elements/boxes'
 
 const query = graphql`
   {

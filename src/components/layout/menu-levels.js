@@ -7,7 +7,7 @@ import uuid from 'uuid/v4'
 import { getContext } from 'recompose'
 import { equals, map, propPathOr } from 'crocks'
 
-import { FlexBox, Column } from '../elements/boxs'
+import { FlexBox, Column } from '../elements/boxes'
 import { TextContent } from '../elements/shared'
 import Appeared from '../elements/appeared'
 
