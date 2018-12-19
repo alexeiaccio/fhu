@@ -21,7 +21,15 @@ const globalStyles = css`
 `
 
 const Container = styled.div`
-  ${tw(['flex', 'flex-row', 'flex-no-grow', 'p-q24', 'w-screen'])};
+  ${tw([
+    'flex',
+    'flex-row',
+    'flex-no-grow',
+    'h-screen',
+    'items-start',
+    'p-q24',
+    'w-screen',
+  ])};
   box-sizing: border-box;
 `
 const MainContent = styled.div`

@@ -4,8 +4,14 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { css } from '@emotion/core'
+import { propPathOr } from 'crocks'
 
 function TextsPage({ data }) {
+  const imgSrc = propPathOr(
+    null,
+    ['texts', 'data', 'image', 'localFile', 'childImageSharp', 'fluid'],
+    data
+  )
   return (
     <Fragment>
       <div
@@ -14,9 +20,7 @@ function TextsPage({ data }) {
         `}
         dangerouslySetInnerHTML={{ __html: data.texts.data.title.html }} // eslint-disable-line react/no-danger
       />
-      {data.texts.data.image && (
-        <Img fluid={data.texts.data.image.localFile.childImageSharp.fluid} />
-      )}
+      {imgSrc && <Img fluid={imgSrc} />}
     </Fragment>
   )
 }

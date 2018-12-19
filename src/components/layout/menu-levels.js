@@ -1,6 +1,7 @@
 /* global tw */
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
+import { navigate } from 'gatsby'
 import PropTypes from 'prop-types'
 import uuid from 'uuid/v4'
 import { getContext } from 'recompose'
@@ -36,7 +37,7 @@ function MenuLevels({ isVisible, items, toggle }) {
             <TextContent
               css={type ? chapterStyles : textStyles}
               key={uuid()}
-              onClick={() => (type ? toggle(uid) : null)}
+              onClick={() => (type ? toggle(uid) : navigate(uid))}
             >
               {title}
             </TextContent>
