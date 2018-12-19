@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import uuid from 'uuid/v4'
 import { map, propPathOr } from 'crocks'
+import { getContext } from 'recompose'
 
 import { FlexBox } from '../elements/boxs'
 import MenuChapters from './menu-levels'
 import { TextContent } from '../elements/shared'
-import { Appeared } from '../elements/posed'
-import { withOpener } from '../elements/recomposed'
+import Appeared from '../elements/appeared'
 
 const valueStyles = css`
   ${tw(['font-extrabold', 'text-2xl'])};
@@ -33,7 +33,7 @@ function MenuVolumes({ isVisible, items, toggle }) {
             >
               {title}
             </TextContent>
-            <Appeared key={uuid()} pose={isVisible[uid] ? 'visible' : 'hidden'}>
+            <Appeared key={uuid()} isVisible={isVisible[uid]}>
               <MenuChapters key={uuid()} items={chapterItems} />
             </Appeared>
           </FlexBox>
@@ -53,4 +53,7 @@ MenuVolumes.defaultProps = {
   items: null,
 }
 
-export default withOpener(MenuVolumes)
+export default getContext({
+  isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
+  toggle: PropTypes.func.isRequired,
+})(MenuVolumes)

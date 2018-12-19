@@ -3,13 +3,12 @@
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import uuid from 'uuid/v4'
-
+import { getContext } from 'recompose'
 import { equals, map, propPathOr } from 'crocks'
 
 import { FlexBox, Column } from '../elements/boxs'
 import { TextContent } from '../elements/shared'
-import { Appeared } from '../elements/posed'
-import { withOpener } from '../elements/recomposed'
+import Appeared from '../elements/appeared'
 
 const chapterStyles = css`
   ${tw(['font-extrabold', 'text-lg'])};
@@ -40,7 +39,7 @@ function MenuLevels({ isVisible, items, toggle }) {
             >
               {title}
             </TextContent>
-            <Appeared key={uuid()} pose={isVisible[uid] ? 'visible' : 'hidden'}>
+            <Appeared key={uuid()} isVisible={isVisible[uid]}>
               <MenuLevels items={nextLevelItems} />
             </Appeared>
           </FlexBox>
@@ -62,4 +61,7 @@ MenuLevels.defaultProps = {
   toggle: null,
 }
 
-export default withOpener(MenuLevels)
+export default getContext({
+  isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
+  toggle: PropTypes.func.isRequired,
+})(MenuLevels)

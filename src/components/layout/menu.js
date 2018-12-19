@@ -9,7 +9,7 @@ import uuid from 'uuid/v4'
 import MenuValues from './menu-volumes'
 import { Column, FlexBox } from '../elements/boxs'
 import { TextContent } from '../elements/shared'
-import { Appeared } from '../elements/posed'
+import Appeared from '../elements/appeared'
 import { withOpener } from '../elements/recomposed'
 
 const menuQuery = graphql`
@@ -172,10 +172,7 @@ function Menu({ isVisible, location, toggle }) {
                     >
                       {menuId}
                     </TextContent>
-                    <Appeared
-                      key={uuid()}
-                      pose={isVisible[menuId] ? 'visible' : 'hidden'}
-                    >
+                    <Appeared key={uuid()} isVisible={isVisible[menuId]}>
                       <MenuValues
                         key={uuid()}
                         items={valumesItems}
