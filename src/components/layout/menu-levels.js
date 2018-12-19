@@ -12,11 +12,11 @@ import { TextContent } from '../elements/shared'
 import Appeared from '../elements/appeared'
 
 const chapterStyles = css`
-  ${tw(['font-extrabold', 'text-lg'])};
+  ${tw(['font-extrabold'])};
 `
 
 const textStyles = css`
-  ${tw(['font-semibold', 'italic', 'text-lg', 'truncate'])};
+  ${tw(['font-semibold', 'italic', 'truncate'])};
 `
 
 function MenuLevels({ isVisible, items, toggle }) {

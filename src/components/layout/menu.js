@@ -129,7 +129,7 @@ const menuQuery = graphql`
 const Nav = Column.withComponent('nav')
 
 const valueStyles = css`
-  ${tw(['capitalize', 'font-extrabold', 'text-2xl'])};
+  ${tw(['capitalize', 'font-extrabold'])};
 `
 
 function Menu({ isVisible, location, toggle }) {
@@ -142,7 +142,7 @@ function Menu({ isVisible, location, toggle }) {
         return (
           <Nav
             css={css`
-              ${tw(['flex', 'max-w-1/2', 'min-w-1/4'])};
+              ${tw(['flex', 'max-w-1/2', 'min-w-1/4', 'text-lg'])};
               flex: 1 1 auto;
             `}
           >

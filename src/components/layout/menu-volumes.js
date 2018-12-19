@@ -12,7 +12,7 @@ import { TextContent } from '../elements/shared'
 import Appeared from '../elements/appeared'
 
 const valueStyles = css`
-  ${tw(['font-extrabold', 'text-2xl'])};
+  ${tw(['font-extrabold'])};
 `
 
 function MenuVolumes({ isVisible, items, toggle }) {

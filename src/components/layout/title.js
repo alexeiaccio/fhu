@@ -14,6 +14,19 @@ const query = graphql`
         }
       }
     }
+    slider: allPrismicHomepageBodySlider(
+      filter: { primary: { sliderid: { eq: "titles" } } }
+    ) {
+      edges {
+        node {
+          items {
+            caption {
+              text
+            }
+          }
+        }
+      }
+    }
   }
 `
 
@@ -27,7 +40,6 @@ function Title() {
         <ContentLink
           css={css`
             ${Box};
-            ${tw(['no-underline', 'text-black', 'hover:text-black'])};
           `}
           to="/"
         >

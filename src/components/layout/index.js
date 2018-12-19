@@ -20,6 +20,15 @@ const globalStyles = css`
   * {
     ${tw(['m-0', 'p-0'])};
   }
+  a {
+    ${tw(['no-underline'])};
+    color: inherit;
+    &:hover,
+    &:active,
+    &:focus {
+      color: inherit;
+    }
+  }
 `
 
 const Container = styled.div`

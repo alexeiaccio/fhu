@@ -1,26 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import { compose, equals, filter, propPathOr } from 'crocks'
+import { propPathOr } from 'crocks'
 
 import Slider from '../components/blocks/slider'
 
 function IndexPage({ data }) {
-  const body = propPathOr(null, ['homepage', 'data', 'body'])
-  const isSliders = filter(item =>
-    equals('PrismicHomepageBodySlider', propPathOr(false, ['__typename'], item))
-  )
-  const isImages = filter(item =>
-    equals('images', propPathOr(false, ['primary', 'sliderid'], item))
-  )
-  const getItems = propPathOr(null, [0, 'items'])
-  const items = compose(
-    getItems,
-    isImages,
-    isSliders,
-    body
-  )(data)
-  return <Slider items={items} />
+  const items = propPathOr(null, ['homepage', 'edges', 0, 'node', 'items'])
+  return <Slider items={items(data)} />
 }
 
 IndexPage.propTypes = {
@@ -33,20 +20,32 @@ export default IndexPage
 
 export const PageQuery = graphql`
   query IndexQuery {
-    homepage: prismicHomepage {
-      data {
-        body {
-          __typename
-          ... on PrismicHomepageBodySlider {
-            primary {
-              sliderid
-            }
-            items {
-              image {
-                url
+    homepage: allPrismicHomepageBodySlider(
+      filter: { primary: { sliderid: { eq: "images" } } }
+    ) {
+      edges {
+        node {
+          items {
+            image {
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 1200, jpegProgressive: true) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
               }
-              link {
+            }
+            caption {
+              html
+            }
+            link {
+              document {
                 uid
+                data {
+                  title {
+                    text
+                  }
+                }
               }
             }
           }
