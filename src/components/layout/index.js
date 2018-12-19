@@ -9,7 +9,9 @@ import '../fonts/stylesheet.css'
 
 import Seo from './seo'
 import Menu from './menu'
+import Title from './title'
 import { Box } from '../elements/boxs'
+import { Content } from '../elements/shared'
 
 const globalStyles = css`
   html {
@@ -67,7 +69,10 @@ const Layout = ({ children, ...props }) => {
         pathname={pathname}
       />
       <Menu location={location} />
-      <MainContent>{children}</MainContent>
+      <MainContent>
+        <Title />
+        <Content>{children}</Content>
+      </MainContent>
     </Container>
   )
 }

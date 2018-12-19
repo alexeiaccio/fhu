@@ -1,26 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import { css } from '@emotion/core'
-import styled from '@emotion/styled'
+import { compose, equals, filter, propPathOr } from 'crocks'
 
-import { Content } from '../components/elements/shared'
-
-const H1 = styled.div`
-  color: red;
-`
+import Slider from '../components/blocks/slider'
 
 function IndexPage({ data }) {
-  return (
-    <Content>
-      <H1
-        css={css`
-          color: teal;
-        `}
-        dangerouslySetInnerHTML={{ __html: data.homepage.data.title.html }}
-      />
-    </Content>
+  const body = propPathOr(null, ['homepage', 'data', 'body'])
+  const isSliders = filter(item =>
+    equals('PrismicHomepageBodySlider', propPathOr(false, ['__typename'], item))
   )
+  const isImages = filter(item =>
+    equals('images', propPathOr(false, ['primary', 'sliderid'], item))
+  )
+  const getItems = propPathOr(null, [0, 'items'])
+  const items = compose(
+    getItems,
+    isImages,
+    isSliders,
+    body
+  )(data)
+  return <Slider items={items} />
 }
 
 IndexPage.propTypes = {
@@ -35,10 +35,6 @@ export const PageQuery = graphql`
   query IndexQuery {
     homepage: prismicHomepage {
       data {
-        title {
-          html
-          text
-        }
         body {
           __typename
           ... on PrismicHomepageBodySlider {
