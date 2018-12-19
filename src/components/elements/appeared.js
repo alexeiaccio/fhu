@@ -26,6 +26,7 @@ function Appeared({ children, isVisible }) {
         <Posed
           css={css`
             ${tw(['cursor-pointer', 'flex', 'flex-1'])};
+            max-width: calc(100% - 3.25rem);
           `}
           key={uuid()}
         >

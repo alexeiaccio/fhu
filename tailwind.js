@@ -128,6 +128,8 @@ const colors = {
   'pink-light': '#fa7ea8',
   'pink-lighter': '#ffbbca',
   'pink-lightest': '#ffebef',
+
+  fuchsia: '#ff00ff',
 }
 
 module.exports = {
