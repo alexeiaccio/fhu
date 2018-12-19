@@ -29,7 +29,8 @@ const Posed = posed.div({
 })
 
 const Hover = styled(Posed)`
-  ${tw(['absolute', 'bg-fuchsia', 'pin', 'text-white', 'z-10'])};
+  ${tw(['absolute', 'pin', 'text-white', 'z-10'])};
+  background-color: ${({ theme }) => theme.color};
   & .preview-img {
     ${tw(['flex-1', 'w-2/3'])};
   }

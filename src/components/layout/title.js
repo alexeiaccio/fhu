@@ -1,8 +1,9 @@
 /* global tw */
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
+import styled from '@emotion/styled'
 import { StaticQuery, Link, graphql } from 'gatsby'
-import { Content } from '../elements/shared'
+
 import { Box } from '../elements/boxs'
 
 const query = graphql`
@@ -30,19 +31,19 @@ const query = graphql`
   }
 `
 
-const ContentLink = Content.withComponent(Link)
+const ContentLink = styled(Link)`
+  ${Box};
+  ${tw(['flex-1', 'p-q24'])};
+  box-sizing: border-box;
+  outline: 4px solid ${({ theme }) => theme.color};
+`
 
 function Title() {
   return (
     <StaticQuery
       query={query}
       render={({ home }) => (
-        <ContentLink
-          css={css`
-            ${Box};
-          `}
-          to="/"
-        >
+        <ContentLink to="/">
           <h1
             css={css`
               ${tw(['font-extrabold', 'text-3xl', 'w-full'])};

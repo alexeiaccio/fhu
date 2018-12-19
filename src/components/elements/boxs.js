@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 
 export const Box = css`
   ${tw(['items-stretch', 'justify-start', 'relative', 'max-w-full'])};
-  outline: 4px solid #ff00ff;
   outline-offset: -2px;
 `
 
@@ -18,10 +17,13 @@ export const FlexBox = styled.div`
     'flex-row',
     'flex-wrap',
     'text-black',
-    'hover:bg-fuchsia',
     'hover:text-white',
   ])};
+  outline: 4px solid ${({ theme }) => theme.color};
   transition: all 200ms ease-in-out;
+  &:hover {
+    background-color: ${({ theme }) => theme.color};
+  }
 `
 
 export const InlineBox = styled.span`

@@ -3,7 +3,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Global, css } from '@emotion/core'
 import styled from '@emotion/styled'
+import { ThemeProvider } from 'emotion-theming'
 import { chain, compose, map, option, prop, propPathOr } from 'crocks'
+import { withStateHandlers, lifecycle } from 'recompose'
 
 import '../fonts/stylesheet.css'
 
@@ -47,8 +49,9 @@ const MainContent = styled.div`
   ${Box};
   ${tw(['flex', 'flex-col', 'min-w-1/2'])};
   flex: 10 1 0%;
+  outline: 4px solid ${({ theme }) => theme.color};
 `
-const Layout = ({ children, ...props }) => {
+const Layout = ({ children, currentTheme, ...props }) => {
   const pageDataKey = compose(
     option('nope'),
     chain(prop(0)),
@@ -67,27 +70,59 @@ const Layout = ({ children, ...props }) => {
   const pathname = propPathOr('/', ['location', 'pathname'], props)
   const location = propPathOr(null, ['location'], props)
 
+  const themes = {
+    fuchsia: {
+      color: '#ff00ff',
+    },
+    teal: {
+      color: '#4dc0b5',
+    },
+  }
+
   return (
-    <Container>
-      <Global styles={globalStyles} />
-      <Seo
-        pageTitle={pageTitle}
-        pageDescription={pageDescription}
-        pageKeywords={pageKeywords}
-        pageImage={pageImage}
-        pathname={pathname}
-      />
-      <Menu location={location} />
-      <MainContent>
-        <Title />
-        <Content>{children}</Content>
-      </MainContent>
-    </Container>
+    <ThemeProvider theme={themes[currentTheme]}>
+      <Container>
+        <Global styles={globalStyles} />
+        <Seo
+          pageTitle={pageTitle}
+          pageDescription={pageDescription}
+          pageKeywords={pageKeywords}
+          pageImage={pageImage}
+          pathname={pathname}
+        />
+        <Menu location={location} />
+        <MainContent>
+          <Title />
+          <Content>{children}</Content>
+        </MainContent>
+      </Container>
+    </ThemeProvider>
   )
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  currentTheme: PropTypes.string.isRequired,
 }
 
-export default Layout
+export default compose(
+  withStateHandlers(
+    {
+      currentTheme: 'fuchsia',
+    },
+    {
+      changeTheme: () => current => ({ currentTheme: current }),
+    }
+  ),
+  lifecycle({
+    componentDidUpdate(prevProps) {
+      if (prevProps.location.pathname !== this.props.location.pathname) {
+        if (this.props.location.pathname === '/') {
+          this.props.changeTheme('fuchsia')
+        } else {
+          this.props.changeTheme('teal')
+        }
+      }
+    },
+  })
+)(Layout)
