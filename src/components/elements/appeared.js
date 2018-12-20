@@ -7,12 +7,16 @@ import uuid from 'uuid/v4'
 
 export const Posed = posed.div({
   enter: {
+    height: 'auto',
     opacity: 1,
-    transition: { duration: 600, ease: 'easeInOut' },
+    overflow: 'visible',
+    width: 'auto',
   },
   exit: {
+    height: 0,
     opacity: 0,
-    transition: { duration: 400, ease: 'easeInOut' },
+    overflow: 'hidden',
+    width: 0,
   },
 })
 

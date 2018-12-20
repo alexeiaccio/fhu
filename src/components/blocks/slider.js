@@ -5,18 +5,31 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import { propPathOr } from 'crocks'
-import { PoseGroup } from 'react-pose'
-import uuid from 'uuid/v4'
+import posed from 'react-pose'
 
 import Img from '../elements/img'
-import { withHover } from '../elements/recomposed'
 import { Content } from '../elements/shared'
 import { Column } from '../elements/boxes'
-import { Posed } from '../elements/appeared'
 
 const Wrapper = styled.div`
   ${tw(['relative'])};
 `
+
+const Posed = posed.div({
+  hoverable: true,
+  pressable: true,
+  init: {
+    opacity: 0,
+    scale: 1,
+  },
+  hover: {
+    opacity: 1,
+    scale: 1.02,
+  },
+  press: {
+    scale: 1.01,
+  },
+})
 
 const Hover = styled(Posed)`
   ${tw(['absolute', 'pin', 'text-white', 'z-10'])};
@@ -28,7 +41,7 @@ const Hover = styled(Posed)`
 
 const ContentLink = Content.withComponent(Link)
 
-function Slider({ isVisible, items, toggle }) {
+function Slider({ items }) {
   const imgSrc = propPathOr(null, [0, 'image'], items)
   const caption = propPathOr(null, [0, 'caption', 'html'], items)
   const link = propPathOr(null, [0, 'link', 'document', 0], items)
@@ -37,58 +50,46 @@ function Slider({ isVisible, items, toggle }) {
 
   return (
     <Wrapper>
-      <PoseGroup>
-        {isVisible && (
-          <Hover
-            key={uuid()}
-            onMouseLeave={() => toggle(false)}
-            onBlur={() => toggle(false)}
+      <Hover>
+        <ContentLink
+          css={css`
+            ${tw(['flex', 'h-full'])};
+          `}
+          to={`/${uid}`}
+        >
+          <Column
+            css={css`
+              ${tw(['h-full', 'items-start'])};
+            `}
           >
-            <ContentLink
+            <Img className="preview-img" src={imgSrc} />
+            <h2
               css={css`
-                ${tw(['flex', 'h-full'])};
+                ${tw(['flex-no-grow', 'my-q16'])};
               `}
-              to={`/${uid}`}
             >
-              <Column
-                css={css`
-                  ${tw(['h-full', 'items-start'])};
-                `}
-              >
-                <Img className="preview-img" src={imgSrc} />
-                <h2
-                  css={css`
-                    ${tw(['flex-no-grow', 'my-q16'])};
-                  `}
-                >
-                  {title}
-                </h2>
-                <div
-                  css={css`
-                    ${tw(['flex-no-grow'])};
-                  `}
-                  dangerouslySetInnerHTML={{ __html: caption }} // eslint-disable-line react/no-danger
-                />
-              </Column>
-            </ContentLink>
-          </Hover>
-        )}
-      </PoseGroup>
-      <div onMouseEnter={() => toggle(true)} onFocus={() => toggle(true)}>
-        <Img src={imgSrc} />
-      </div>
+              {title}
+            </h2>
+            <div
+              css={css`
+                ${tw(['flex-no-grow'])};
+              `}
+              dangerouslySetInnerHTML={{ __html: caption }} // eslint-disable-line react/no-danger
+            />
+          </Column>
+        </ContentLink>
+      </Hover>
+      <Img src={imgSrc} />
     </Wrapper>
   )
 }
 
 Slider.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
-  toggle: PropTypes.func.isRequired,
 }
 
 Slider.defaultProps = {
   items: [],
 }
 
-export default withHover(Slider)
+export default Slider

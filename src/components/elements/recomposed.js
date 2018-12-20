@@ -26,12 +26,3 @@ export const withOpener = compose(
     })
   )
 )
-
-export const withHover = withStateHandlers(
-  ({ initial = false }) => ({
-    isVisible: initial,
-  }),
-  {
-    toggle: () => value => ({ isVisible: value }),
-  }
-)
