@@ -53,6 +53,8 @@ const Hover = styled(Posed)`
 const ContentLink = Content.withComponent(Link)
 
 function Slide({ item }) {
+  if (!item) return null
+
   const imgSrc = propPathOr(null, ['image'], item)
   const caption = propPathOr(null, ['caption', 'html'], item)
   const link = propPathOr(null, ['link', 'document', 0], item)

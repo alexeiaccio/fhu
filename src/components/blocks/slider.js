@@ -1,23 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { map, once } from 'crocks'
 import { PoseGroup } from 'react-pose'
 import { compose, lifecycle, withStateHandlers } from 'recompose'
-import uuid from 'uuid/v4'
 
 import Slide from '../elements/slide'
 import random from '../../utils/random'
 
 function Slider({ current, items }) {
-  const slides = items.filter((_, i) => i === current)
-  const key = once(() => uuid())
+  // const key = once(() => uuid())
   return (
     <PoseGroup>
-      {map(
-        (item, i) => (
-          <Slide key={`${key}-${i}`} item={item} />
-        ),
-        slides
+      {items.map((item, idx) =>
+        idx === current ? <Slide key={item} item={item} /> : null
       )}
     </PoseGroup>
   )
