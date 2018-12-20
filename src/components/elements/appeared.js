@@ -7,12 +7,14 @@ import uuid from 'uuid/v4'
 
 export const Posed = posed.div({
   enter: {
+    applyAtStart: { display: 'flex' },
     height: 'auto',
     opacity: 1,
     overflow: 'visible',
     width: 'auto',
   },
   exit: {
+    applyAtEnd: { display: 'none' },
     height: 0,
     opacity: 0,
     overflow: 'hidden',
@@ -26,7 +28,7 @@ function Appeared({ children, isVisible }) {
       {isVisible && (
         <Posed
           css={css`
-            ${tw(['cursor-pointer', 'flex', 'flex-1'])};
+            ${tw(['cursor-pointer', 'flex-1'])};
             max-width: calc(100% - 3.25rem);
           `}
           key={uuid()}
