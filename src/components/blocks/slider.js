@@ -5,28 +5,18 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import { propPathOr } from 'crocks'
-import posed, { PoseGroup } from 'react-pose'
+import { PoseGroup } from 'react-pose'
 import uuid from 'uuid/v4'
 
 import Img from '../elements/img'
 import { withHover } from '../elements/recomposed'
 import { Content } from '../elements/shared'
 import { Column } from '../elements/boxes'
+import { Posed } from '../elements/appeared'
 
 const Wrapper = styled.div`
   ${tw(['relative'])};
 `
-
-const Posed = posed.div({
-  enter: {
-    opacity: 1,
-    transition: { duration: 400, ease: 'easeInOut' },
-  },
-  exit: {
-    opacity: 0,
-    transition: { duration: 200, ease: 'easeInOut' },
-  },
-})
 
 const Hover = styled(Posed)`
   ${tw(['absolute', 'pin', 'text-white', 'z-10'])};

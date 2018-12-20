@@ -5,16 +5,13 @@ import PropTypes from 'prop-types'
 import posed, { PoseGroup } from 'react-pose'
 import uuid from 'uuid/v4'
 
-const Posed = posed.div({
+export const Posed = posed.div({
   enter: {
-    height: 'auto',
-    width: 'auto',
+    opacity: 1,
     transition: { duration: 600, ease: 'easeInOut' },
   },
   exit: {
-    height: 0,
-    width: 0,
-    overflow: 'hidden',
+    opacity: 0,
     transition: { duration: 400, ease: 'easeInOut' },
   },
 })
