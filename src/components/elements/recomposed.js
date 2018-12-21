@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { compose, withStateHandlers, withContext } from 'recompose'
+import random from '../../utils/random'
 
 export const withOpener = compose(
   withStateHandlers(
@@ -25,4 +26,9 @@ export const withOpener = compose(
       toggle,
     })
   )
+)
+
+export const withRandomState = withStateHandlers(
+  ({ init = 0 }) => ({ current: init }),
+  { randomize: () => length => ({ current: random(length) }) }
 )

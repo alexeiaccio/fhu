@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { PoseGroup } from 'react-pose'
-import { compose, lifecycle, withStateHandlers } from 'recompose'
+import { compose, lifecycle } from 'recompose'
 
 import Slide from '../elements/slide'
-import random from '../../utils/random'
+import { withRandomState } from '../elements/recomposed'
 
 function Slider({ current, items }) {
   // const key = once(() => uuid())
@@ -28,19 +28,12 @@ Slider.defaultProps = {
 }
 
 export default compose(
-  withStateHandlers(
-    ({ init = 0 }) => ({
-      current: init,
-    }),
-    {
-      randomize: () => value => ({ current: random(value) }),
-    }
-  ),
+  withRandomState,
   lifecycle({
     componentDidMount() {
       this.ranomizer = setInterval(() => {
         this.props.randomize(this.props.items.length)
-      }, 4000)
+      }, 6000)
     },
     componentWillUnmount() {
       clearInterval(this.ranomizer)

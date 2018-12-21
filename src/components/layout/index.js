@@ -72,7 +72,7 @@ const Layout = ({ children, currentTheme, ...props }) => {
         />
         <Menu location={location} />
         <MainContent>
-          <Title />
+          <Title location={location} />
           <Content>{children}</Content>
         </MainContent>
       </Container>

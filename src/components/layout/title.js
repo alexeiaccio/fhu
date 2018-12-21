@@ -1,10 +1,8 @@
-/* global tw */
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import styled from '@emotion/styled'
-import { StaticQuery, Link, graphql } from 'gatsby'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { StaticQuery, graphql } from 'gatsby'
 
-import { Box } from '../elements/boxes'
+import AnimatedTitle from '../elements/animated-title'
 
 const query = graphql`
   {
@@ -31,30 +29,21 @@ const query = graphql`
   }
 `
 
-const ContentLink = styled(Link)`
-  ${Box};
-  ${tw(['flex-1', 'p-q24'])};
-  box-sizing: border-box;
-  outline: 4px solid ${({ theme }) => theme.color};
-`
-
-function Title() {
+function Title({ location }) {
   return (
     <StaticQuery
       query={query}
-      render={({ home }) => (
-        <ContentLink to="/">
-          <h1
-            css={css`
-              ${tw(['font-extrabold', 'text-3xl', 'w-full'])};
-            `}
-          >
-            {home.data.title.text}
-          </h1>
-        </ContentLink>
+      render={({ home, slider }) => (
+        <AnimatedTitle home={home} location={location} slider={slider} />
       )}
     />
   )
+}
+
+Title.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
 }
 
 export default Title
