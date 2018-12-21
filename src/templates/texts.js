@@ -1,24 +1,31 @@
 /* global tw */
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import { propPathOr } from 'crocks'
 
 import Img from '../components/elements/img'
+import RichContent from '../components/elements/rich-content'
+import TextBody from '../components/blocks/text-body'
 
 function TextsPage({ data }) {
-  const imgSrc = propPathOr(null, ['texts', 'data', 'image'], data)
+  const texts = propPathOr(null, ['texts', 'data'], data)
+  const imgSrc = propPathOr(null, ['image'], texts)
+  const title = propPathOr(null, ['title', 'html'], texts)
+  const body = propPathOr(null, ['body'], texts)
+
   return (
-    <Fragment>
-      <Img src={imgSrc} />
-      <div
+    <>
+      <RichContent
         css={css`
-          ${tw(['text-xl'])}
+          ${tw(['mb-q24', 'text-xl'])}
         `}
-        dangerouslySetInnerHTML={{ __html: data.texts.data.title.html }} // eslint-disable-line react/no-danger
+        content={title}
       />
-    </Fragment>
+      <Img src={imgSrc} />
+      <TextBody body={body} />
+    </>
   )
 }
 
@@ -60,6 +67,34 @@ export const PageQuery = graphql`
         }
         body {
           __typename
+          ... on PrismicTextBodyText {
+            primary {
+              text {
+                html
+              }
+            }
+          }
+          ... on PrismicTextBodyImage {
+            items {
+              imagesrc {
+                url
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 1200, jpegProgressive: true) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+              }
+            }
+          }
+          ... on PrismicTextBodyMedia {
+            items {
+              link {
+                url
+              }
+            }
+          }
         }
       }
     }

@@ -37,7 +37,8 @@ export const Container = styled.div`
 
 export const MainContent = styled.div`
   ${Box};
-  ${tw(['flex', 'flex-col', 'min-w-1/2'])};
+  ${tw(['flex', 'flex-col', 'max-h-full', 'min-w-1/2'])};
   flex: 10 1 0%;
   outline: 4px solid ${({ theme }) => theme.color};
+  padding: 2px;
 `

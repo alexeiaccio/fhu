@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { PoseGroup } from 'react-pose'
 import { compose, lifecycle } from 'recompose'
 
-import Slide from '../elements/slide'
+import Slide from '../elements/slide-with-hover'
 import { withRandomState } from '../elements/recomposed'
 
 function Slider({ current, items }) {

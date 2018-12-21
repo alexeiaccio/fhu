@@ -14,7 +14,7 @@ const ContentLink = styled(Link)`
   ${Box};
   ${tw(['flex-1', 'p-q24'])};
   box-sizing: border-box;
-  outline: 4px solid ${({ theme }) => theme.color};
+  border-bottom: 4px solid ${({ theme }) => theme.color};
 `
 
 function AnimatedTitle({ current, home, slider }) {

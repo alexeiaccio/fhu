@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { propPathOr } from 'crocks'
 
-import Slider from '../components/blocks/slider'
+import Slider from '../components/blocks/main-slider'
 
 function IndexPage({ data }) {
   const items = propPathOr(null, ['homepage', 'edges', 0, 'node', 'items'])

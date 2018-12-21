@@ -73,7 +73,14 @@ const Layout = ({ children, currentTheme, ...props }) => {
         <Menu location={location} />
         <MainContent>
           <Title location={location} />
-          <Content>{children}</Content>
+          <Content
+            css={css`
+              ${tw(['overflow-y-auto'])};
+              outline: 4px solid ${({ theme }) => theme.color};
+            `}
+          >
+            {children}
+          </Content>
         </MainContent>
       </Container>
     </ThemeProvider>
@@ -95,6 +102,13 @@ export default compose(
     }
   ),
   lifecycle({
+    componentDidMount() {
+      if (this.props.location.pathname === '/') {
+        this.props.changeTheme('fuchsia')
+      } else {
+        this.props.changeTheme('teal')
+      }
+    },
     componentDidUpdate(prevProps) {
       if (prevProps.location.pathname !== this.props.location.pathname) {
         if (this.props.location.pathname === '/') {
