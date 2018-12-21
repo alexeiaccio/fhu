@@ -76,17 +76,25 @@ const Layout = ({ children, currentTheme, ...props }) => {
           pathname={pathname}
         />
         <MenuContainer>
-          <Menu location={location} />
+          <div
+            css={css`
+              ${tw(['overflow-y-auto'])};
+              padding-bottom: 2px;
+            `}
+          >
+            <Menu location={location} />
+          </div>
         </MenuContainer>
         <MainContent>
           <Title location={location} />
-          <Content
+          <div
             css={css`
               ${tw(['overflow-y-auto'])};
+              margin-bottom: 2px;
             `}
           >
-            {children}
-          </Content>
+            <Content>{children}</Content>
+          </div>
         </MainContent>
       </Container>
     </ThemeProvider>

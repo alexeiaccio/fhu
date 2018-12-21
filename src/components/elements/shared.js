@@ -40,7 +40,6 @@ export const MainContent = styled.div`
   ${tw(['flex', 'flex-col', 'max-h-full', 'min-w-1/2'])};
   flex: 10 1 0%;
   outline: 4px solid ${({ theme }) => theme.color};
-  padding: 2px;
 `
 
 export const MenuContainer = styled.div`
@@ -55,5 +54,4 @@ export const MenuContainer = styled.div`
     'min-w-1/4',
   ])};
   outline: 4px solid ${({ theme }) => theme.color};
-  padding: 2px;
 `

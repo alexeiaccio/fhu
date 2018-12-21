@@ -142,10 +142,8 @@ function Menu({ isVisible, location, toggle }) {
         return (
           <Nav
             css={css`
-              ${tw(['flex', 'overflow-y-auto', 'text-lg'])};
+              ${tw(['flex', 'text-lg'])};
               flex: 0 1 auto;
-              min-width: calc(100% + 4px);
-              margin: -2px;
             `}
           >
             {map(({ node }) => {
