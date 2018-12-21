@@ -42,3 +42,18 @@ export const MainContent = styled.div`
   outline: 4px solid ${({ theme }) => theme.color};
   padding: 2px;
 `
+
+export const MenuContainer = styled.div`
+  ${Box};
+  ${tw([
+    'flex',
+    'flex-col',
+    'h-full',
+    'items-stretch',
+    'justify-start',
+    'max-w-1/2',
+    'min-w-1/4',
+  ])};
+  outline: 4px solid ${({ theme }) => theme.color};
+  padding: 2px;
+`

@@ -11,7 +11,12 @@ import '../fonts/stylesheet.css'
 import Seo from './seo'
 import Menu from './menu'
 import Title from './title'
-import { Content, Container, MainContent } from '../elements/shared'
+import {
+  Content,
+  Container,
+  MainContent,
+  MenuContainer,
+} from '../elements/shared'
 
 const globalStyles = css`
   html {
@@ -70,13 +75,14 @@ const Layout = ({ children, currentTheme, ...props }) => {
           pageImage={pageImage}
           pathname={pathname}
         />
-        <Menu location={location} />
+        <MenuContainer>
+          <Menu location={location} />
+        </MenuContainer>
         <MainContent>
           <Title location={location} />
           <Content
             css={css`
               ${tw(['overflow-y-auto'])};
-              outline: 4px solid ${({ theme }) => theme.color};
             `}
           >
             {children}
