@@ -6,6 +6,7 @@ import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import { propPathOr } from 'crocks'
 import posed from 'react-pose'
+import uuid from 'uuid/v4'
 
 import Img from './img'
 import { Content } from './shared'
@@ -61,9 +62,31 @@ function Slide({ item }) {
   const title = propPathOr(null, ['data', 'title', 'text'], link)
   const uid = propPathOr(null, ['uid'], link)
 
+  const renderDescription = () => [
+    <h2
+      css={css`
+        ${tw(['flex-no-grow', 'my-q16'])};
+      `}
+      key={uuid()}
+    >
+      {title}
+    </h2>,
+    <div
+      css={css`
+        ${tw(['flex-no-grow'])};
+      `}
+      dangerouslySetInnerHTML={{ __html: caption }} // eslint-disable-line react/no-danger
+      key={uuid()}
+    />,
+  ]
+
   return (
     <Wrapper>
-      <Hover>
+      <Hover
+        css={css`
+          ${tw(['hidden', 'md:block'])};
+        `}
+      >
         <ContentLink
           css={css`
             ${tw(['flex', 'h-full'])};
@@ -76,23 +99,19 @@ function Slide({ item }) {
             `}
           >
             <Img className="preview-img" src={imgSrc} />
-            <h2
-              css={css`
-                ${tw(['flex-no-grow', 'my-q16'])};
-              `}
-            >
-              {title}
-            </h2>
-            <div
-              css={css`
-                ${tw(['flex-no-grow'])};
-              `}
-              dangerouslySetInnerHTML={{ __html: caption }} // eslint-disable-line react/no-danger
-            />
+            {renderDescription()}
           </Column>
         </ContentLink>
       </Hover>
       <Img src={imgSrc} />
+      <ContentLink
+        css={css`
+          ${tw(['flex', 'flex-col', 'md:hidden'])};
+        `}
+        to={`/${uid}`}
+      >
+        {renderDescription()}
+      </ContentLink>
     </Wrapper>
   )
 }
