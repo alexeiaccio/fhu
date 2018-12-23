@@ -26,12 +26,16 @@ function TextBody({ body }) {
         const textContent = propPathOr(null, ['text', 'html'], primary)
 
         return (
-          <section>
+          <section key={uuid()}>
             {equals(__typename, 'PrismicTextBodyText') && (
-              <RichContent content={textContent} css={textStyles} key={uuid} />
+              <RichContent
+                content={textContent}
+                css={textStyles}
+                key={uuid()}
+              />
             )}
             {equals(__typename, 'PrismicTextBodyImage') && (
-              <Slider key={uuid} items={items} />
+              <Slider key={uuid()} items={items} />
             )}
           </section>
         )

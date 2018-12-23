@@ -7,9 +7,11 @@ export const TextContent = styled.div`
   ${tw([
     'cursor-pointer',
     'flex-no-grow',
-    'px-q24',
-    'py-q12',
+    'px-q12',
+    'py-q8',
     'whitespace-no-wrap',
+    'md:px-q24',
+    'md:py-q12',
   ])};
   &::before {
     ${tw(['absolute', 'block', 'pin'])};
@@ -18,7 +20,7 @@ export const TextContent = styled.div`
 `
 
 export const Content = styled.div`
-  ${tw(['flex-1', 'p-q24'])};
+  ${tw(['flex-1', 'p-q12', 'md:p-q24'])};
   box-sizing: border-box;
 `
 
@@ -29,15 +31,16 @@ export const Container = styled.div`
     'flex-no-grow',
     'h-screen',
     'items-start',
-    'p-q24',
+    'p-q8',
     'w-screen',
+    'md:p-q24',
   ])};
   box-sizing: border-box;
 `
 
 export const MainContent = styled.div`
   ${Box};
-  ${tw(['flex', 'flex-col', 'max-h-full', 'min-w-1/2'])};
+  ${tw(['flex', 'flex-col', 'h-full', 'min-w-1/2'])};
   flex: 10 1 0%;
   outline: 4px solid ${({ theme }) => theme.color};
 `
@@ -50,8 +53,9 @@ export const MenuContainer = styled.div`
     'h-full',
     'items-stretch',
     'justify-start',
-    'max-w-1/2',
-    'min-w-1/4',
+    'max-w-full',
+    'md:max-w-1/2',
+    'md:min-w-1/4',
   ])};
   outline: 4px solid ${({ theme }) => theme.color};
 `

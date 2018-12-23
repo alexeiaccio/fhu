@@ -19,7 +19,11 @@ const textStyles = css`
   ${tw(['font-semibold', 'italic', 'truncate'])};
 `
 
-function MenuLevels({ isVisible, items, toggle }) {
+const MenuLevels = getContext({
+  isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
+  toggle: PropTypes.func.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
+})(({ isVisible, items, toggle, toggleMenu }) => {
   if (!items) return null
 
   return (
@@ -37,7 +41,18 @@ function MenuLevels({ isVisible, items, toggle }) {
             <TextContent
               css={type ? chapterStyles : textStyles}
               key={uuid()}
-              onClick={() => (type ? toggle(uid) : navigate(uid))}
+              onClick={() => {
+                if (type) {
+                  if (toggle) {
+                    toggle(uid)
+                  }
+                } else {
+                  navigate(uid)
+                  if (toggleMenu) {
+                    toggleMenu(false)
+                  }
+                }
+              }}
             >
               {title}
             </TextContent>
@@ -49,21 +64,20 @@ function MenuLevels({ isVisible, items, toggle }) {
       }, items)}
     </Column>
   )
-}
+})
 
 MenuLevels.propTypes = {
   isVisible: PropTypes.objectOf(PropTypes.bool),
   items: PropTypes.arrayOf(PropTypes.object),
   toggle: PropTypes.func,
+  toggleMenu: PropTypes.func,
 }
 
 MenuLevels.defaultProps = {
   isVisible: {},
   items: null,
   toggle: null,
+  toggleMenu: null,
 }
 
-export default getContext({
-  isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
-  toggle: PropTypes.func.isRequired,
-})(MenuLevels)
+export default MenuLevels

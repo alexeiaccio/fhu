@@ -132,18 +132,24 @@ const valueStyles = css`
   ${tw(['capitalize', 'font-extrabold'])};
 `
 
-function Menu({ isVisible, location, toggle }) {
+function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
   return (
     <StaticQuery
       query={menuQuery}
       render={data => {
         const menu = propPathOr(null, ['mainmenu', 'edges'], data)
 
-        return (
+        const renderMenuContent = () => (
           <Nav
             css={css`
-              ${tw(['flex', 'text-lg'])};
-              flex: 0 1 auto;
+              ${tw([
+                'flex',
+                'text-lg',
+                'flex-grow',
+                'flex-shrink',
+                'md:flex-no-grow',
+              ])};
+              flex-basis: auto;
             `}
           >
             {map(({ node }) => {
@@ -194,6 +200,73 @@ function Menu({ isVisible, location, toggle }) {
             }, menu)}
           </Nav>
         )
+
+        return (
+          <div
+            css={css`
+              ${tw(['overflow-y-auto'])};
+              padding-bottom: 2px;
+            `}
+          >
+            <div
+              css={css`
+                ${tw(['flex', 'flex-row', 'md:hidden'])};
+                ${isMenu && tw(['fixed', 'p-q8', 'pin', 'z-50'])};
+              `}
+            >
+              <Appeared key={uuid()} isVisible={isMenu}>
+                {renderMenuContent()}
+              </Appeared>
+              <FlexBox
+                css={css`
+                  ${tw(['flex', 'flex-col', 'flex-no-grow'])};
+                `}
+                onClick={() => toggleMenu(!isMenu)}
+              >
+                <FlexBox>
+                  <TextContent css={valueStyles}>S</TextContent>
+                </FlexBox>
+                {map(({ node }) => {
+                  const menuId = propPathOr(null, ['primary', 'menuid'], node)
+                  const items = propPathOr(null, ['items'], node)
+                  const menuItems = map(
+                    propPathOr(null, [
+                      'menu',
+                      'document',
+                      0,
+                      'data',
+                      'title',
+                      'text',
+                      0,
+                    ]),
+                    items
+                  )
+                  if (!equals(menuId, 'sessions')) {
+                    return map(
+                      letter =>
+                        letter ? (
+                          <FlexBox key={uuid()}>
+                            <TextContent key={uuid()} css={valueStyles}>
+                              {letter}
+                            </TextContent>
+                          </FlexBox>
+                        ) : null,
+                      menuItems
+                    )
+                  }
+                  return null
+                }, menu)}
+              </FlexBox>
+            </div>
+            <div
+              css={css`
+                ${tw(['hidden', 'md:block'])};
+              `}
+            >
+              {renderMenuContent()}
+            </div>
+          </div>
+        )
       }}
     />
   )
@@ -201,10 +274,12 @@ function Menu({ isVisible, location, toggle }) {
 
 Menu.propTypes = {
   isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
+  isMenu: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
   toggle: PropTypes.func.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
 }
 
 export default withOpener(Menu)

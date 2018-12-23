@@ -29,7 +29,12 @@ function Appeared({ children, isVisible }) {
         <Posed
           css={css`
             ${tw(['cursor-pointer', 'flex-1'])};
-            max-width: calc(100% - 3.25rem);
+            @media (max-width: 768px) {
+              max-width: calc(100% - 2rem);
+            }
+            @media (min-width: 769px) {
+              max-width: calc(100% - 3.25rem);
+            }
           `}
           key={uuid()}
         >

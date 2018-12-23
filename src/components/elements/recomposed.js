@@ -6,6 +6,7 @@ export const withOpener = compose(
   withStateHandlers(
     ({ initial = {} }) => ({
       isVisible: initial,
+      isMenu: false,
     }),
     {
       toggle: ({ isVisible }) => key => ({
@@ -14,16 +15,19 @@ export const withOpener = compose(
           [key]: isVisible[key] ? false : true, // eslint-disable-line no-unneeded-ternary
         },
       }),
+      toggleMenu: () => value => ({ isMenu: value, isVisible: {} }),
     }
   ),
   withContext(
     {
       isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
       toggle: PropTypes.func.isRequired,
+      toggleMenu: PropTypes.func.isRequired,
     },
-    ({ isVisible, toggle }) => ({
+    ({ isVisible, toggle, toggleMenu }) => ({
       isVisible,
       toggle,
+      toggleMenu,
     })
   )
 )

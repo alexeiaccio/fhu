@@ -12,7 +12,7 @@ import { withRandomState } from './recomposed'
 
 const ContentLink = styled(Link)`
   ${Box};
-  ${tw(['flex-1', 'p-q24'])};
+  ${tw(['flex-no-grow', 'p-q12', 'md:p-q24'])};
   box-sizing: border-box;
   border-bottom: 4px solid ${({ theme }) => theme.color};
 `
