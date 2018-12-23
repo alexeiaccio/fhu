@@ -30,7 +30,7 @@ function Appeared({ children, isVisible }) {
           css={css`
             ${tw(['cursor-pointer', 'flex-1'])};
             @media (max-width: 768px) {
-              max-width: calc(100% - 2rem);
+              max-width: calc(100% - 2.5rem);
             }
             @media (min-width: 769px) {
               max-width: calc(100% - 3.25rem);

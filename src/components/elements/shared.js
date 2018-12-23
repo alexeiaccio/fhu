@@ -59,3 +59,6 @@ export const MenuContainer = styled.div`
   ])};
   outline: 4px solid ${({ theme }) => theme.color};
 `
+export const MobileContainer = styled.div`
+  ${tw(['flex', 'flex-row', 'md:hidden'])};
+`

@@ -8,7 +8,7 @@ import uuid from 'uuid/v4'
 
 import MenuValues from './menu-volumes'
 import { Column, FlexBox } from '../elements/boxes'
-import { TextContent } from '../elements/shared'
+import { TextContent, MobileContainer } from '../elements/shared'
 import Appeared from '../elements/appeared'
 import { withOpener } from '../elements/recomposed'
 
@@ -146,8 +146,10 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
                 'flex',
                 'text-lg',
                 'flex-grow',
-                'flex-shrink',
+                'flex-no-shrink',
+                'min-h-full',
                 'md:flex-no-grow',
+                'md:flex-shrink',
               ])};
               flex-basis: auto;
             `}
@@ -204,18 +206,24 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
         return (
           <div
             css={css`
-              ${tw(['overflow-y-auto'])};
-              padding-bottom: 2px;
+              ${tw(['md:overflow-y-auto'])};
+              margin-bottom: 2px;
             `}
           >
-            <div
+            <MobileContainer
               css={css`
-                ${tw(['flex', 'flex-row', 'md:hidden'])};
                 ${isMenu && tw(['fixed', 'p-q8', 'pin', 'z-50'])};
               `}
             >
               <Appeared key={uuid()} isVisible={isMenu}>
-                {renderMenuContent()}
+                <div
+                  css={css`
+                    ${tw(['h-full', 'overflow-y-auto', 'w-full'])};
+                    margin-bottom: 2px;
+                  `}
+                >
+                  {renderMenuContent()}
+                </div>
               </Appeared>
               <FlexBox
                 css={css`
@@ -257,7 +265,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
                   return null
                 }, menu)}
               </FlexBox>
-            </div>
+            </MobileContainer>
             <div
               css={css`
                 ${tw(['hidden', 'md:block'])};
