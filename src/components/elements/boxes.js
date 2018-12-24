@@ -7,6 +7,21 @@ export const Box = css`
   outline-offset: -2px;
 `
 
+export const SimpleBox = styled.div`
+  ${Box};
+  ${tw([
+    'bg-white',
+    'flex',
+    'flex-grow',
+    'flex-shrink',
+    'flex-row',
+    'flex-wrap',
+    'text-black',
+  ])};
+  outline: 4px solid ${({ theme }) => theme.color};
+  transition: all 200ms ease-in-out;
+`
+
 export const FlexBox = styled.div`
   ${Box};
   ${tw([

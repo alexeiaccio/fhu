@@ -1,8 +1,12 @@
+/* global tw */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
+import styled from '@emotion/styled'
 
 import AnimatedTitle from '../elements/animated-title'
+import { Box } from '../elements/boxes'
+import Search from '../elements/search'
 
 const query = graphql`
   {
@@ -12,6 +16,9 @@ const query = graphql`
           text
         }
       }
+    }
+    search: siteSearchIndex {
+      index
     }
     slider: allPrismicHomepageBodySlider(
       filter: { primary: { sliderid: { eq: "titles" } } }
@@ -29,12 +36,22 @@ const query = graphql`
   }
 `
 
+const Container = styled.div`
+  ${Box};
+  ${tw(['flex-no-grow', 'p-q12', 'relative', 'md:p-q24'])};
+  box-sizing: border-box;
+  outline: 4px solid ${({ theme }) => theme.color};
+`
+
 function Title({ location }) {
   return (
     <StaticQuery
       query={query}
-      render={({ home, slider }) => (
-        <AnimatedTitle home={home} location={location} slider={slider} />
+      render={({ home, search, slider }) => (
+        <Container>
+          <AnimatedTitle home={home} location={location} slider={slider} />
+          <Search location={location} search={search} />
+        </Container>
       )}
     />
   )

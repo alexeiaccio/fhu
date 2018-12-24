@@ -49,6 +49,22 @@ module.exports = {
         accessToken: process.env.PRICMIC_TOKEN,
       },
     },
+    {
+      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+      options: {
+        // Fields to index
+        fields: [`title`, `data`],
+        // How to resolve each field`s value for a supported node type
+        resolvers: {
+          // For any node of type prismicText, list how to resolve the fields` values
+          PrismicText: {
+            title: node => node.data.title.text,
+            data: node => node.dataString,
+            uid: node => node.uid,
+          },
+        },
+      },
+    },
     // {
     //   resolve: 'gatsby-plugin-google-analytics',
     //   options: {

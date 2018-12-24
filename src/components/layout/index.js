@@ -24,6 +24,7 @@ const globalStyles = css`
   }
   * {
     ${tw(['m-0', 'p-0'])};
+    box-sizing: border-box;
   }
   a {
     ${tw(['no-underline'])};
@@ -33,6 +34,10 @@ const globalStyles = css`
     &:focus {
       color: inherit;
     }
+  }
+  ul,
+  li {
+    ${tw(['list-reset'])};
   }
 `
 
