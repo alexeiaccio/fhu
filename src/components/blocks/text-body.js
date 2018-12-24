@@ -9,6 +9,7 @@ import Media from '../elements/media'
 import Slider from '../elements/slider'
 import RichContent from '../elements/rich-content'
 import { RichText } from '../elements/rich-text'
+import Video from '../elements/video'
 
 const articleStyles = css`
   ${tw(['py-q24'])};
@@ -40,6 +41,9 @@ function TextBody({ body }) {
             )}
             {equals(__typename, 'PrismicTextBodyMedia') && (
               <Media key={uuid()} items={items} />
+            )}
+            {equals(__typename, 'PrismicTextBodyVideo') && (
+              <Video key={uuid()} primary={primary} />
             )}
           </section>
         )

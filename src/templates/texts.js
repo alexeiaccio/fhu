@@ -98,6 +98,13 @@ export const PageQuery = graphql`
               }
             }
           }
+          ... on PrismicTextBodyVideo {
+            primary {
+              link {
+                html
+              }
+            }
+          }
         }
       }
     }
