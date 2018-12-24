@@ -17,13 +17,17 @@ function TextsPage({ data }) {
 
   return (
     <>
+      <Img
+        imgStyle={{ objectFit: 'contain' }}
+        src={imgSrc}
+        style={{ maxHeight: '66.66666vh' }}
+      />
       <RichContent
         css={css`
-          ${tw(['mb-q24', 'text-xl'])}
+          ${tw(['mt-q24', 'text-xl'])}
         `}
         content={title}
       />
-      <Img src={imgSrc} />
       <TextBody body={body} />
     </>
   )
@@ -67,7 +71,28 @@ export const PageQuery = graphql`
         }
         body {
           __typename
+          ... on PrismicTextBodyDescription {
+            primary {
+              text {
+                html
+              }
+            }
+          }
           ... on PrismicTextBodyText {
+            primary {
+              text {
+                html
+              }
+            }
+          }
+          ... on PrismicTextBodyRighted {
+            primary {
+              text {
+                html
+              }
+            }
+          }
+          ... on PrismicTextBodyCentered {
             primary {
               text {
                 html

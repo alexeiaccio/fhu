@@ -76,8 +76,8 @@ export const List = css`
   ${tw([
     'font-source',
     'font-medium',
-    'leading-normal',
-    'text-list',
+    'leading-loose',
+    'text-xs',
     'tracking-normal',
     'list-reset',
   ])};
