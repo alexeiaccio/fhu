@@ -32,7 +32,7 @@ export default compose(
   lifecycle({
     componentDidMount() {
       this.ranomizer = setInterval(() => {
-        this.props.randomize(this.props.items.length)
+        this.props.randomize(this.props.items.length - 1)
       }, 6000)
     },
     componentWillUnmount() {

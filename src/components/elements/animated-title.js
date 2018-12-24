@@ -63,7 +63,7 @@ export default compose(
           ['slider', 'edges', 0, 'node', 'items'],
           this.props
         )
-        this.props.randomize(items.length)
+        this.props.randomize(items.length - 1)
       }
     },
   })

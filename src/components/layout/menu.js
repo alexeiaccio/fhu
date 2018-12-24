@@ -208,6 +208,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
             css={css`
               ${tw(['md:overflow-y-auto'])};
               margin-bottom: 2px;
+              padding-bottom: 2px;
             `}
           >
             <MobileContainer

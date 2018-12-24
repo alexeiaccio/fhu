@@ -8,9 +8,10 @@ import { propPathOr } from 'crocks'
 import posed from 'react-pose'
 import uuid from 'uuid/v4'
 
+import { Column, FlexBox } from './boxes'
 import Img from './img'
 import { Content } from './shared'
-import { Column } from './boxes'
+import RichContent from './rich-content'
 
 const Transition = posed.div({
   enter: {
@@ -52,6 +53,7 @@ const Hover = styled(Posed)`
 `
 
 const ContentLink = Content.withComponent(Link)
+const ButtonLink = FlexBox.withComponent(Link)
 
 function Slide({ item }) {
   if (!item) return null
@@ -63,21 +65,25 @@ function Slide({ item }) {
   const uid = propPathOr(null, ['uid'], link)
 
   const renderDescription = () => [
-    <h2
-      css={css`
-        ${tw(['flex-no-grow', 'my-q16'])};
-      `}
-      key={uuid()}
-    >
-      {title}
-    </h2>,
-    <div
-      css={css`
-        ${tw(['flex-no-grow'])};
-      `}
-      dangerouslySetInnerHTML={{ __html: caption }} // eslint-disable-line react/no-danger
-      key={uuid()}
-    />,
+    title && (
+      <h2
+        css={css`
+          ${tw(['flex-no-grow', 'my-q16'])};
+        `}
+        key={uuid()}
+      >
+        {title}
+      </h2>
+    ),
+    caption && (
+      <RichContent
+        css={css`
+          ${tw(['flex-no-grow'])};
+        `}
+        content={caption}
+        key={uuid()}
+      />
+    ),
   ]
 
   return (
@@ -91,7 +97,7 @@ function Slide({ item }) {
           css={css`
             ${tw(['flex', 'h-full'])};
           `}
-          to={`/${uid}`}
+          to={uid ? `/${uid}` : '/'}
         >
           <Column
             css={css`
@@ -104,14 +110,23 @@ function Slide({ item }) {
         </ContentLink>
       </Hover>
       <Img src={imgSrc} />
-      <ContentLink
+      <Content
         css={css`
           ${tw(['flex', 'flex-col', 'md:hidden'])};
         `}
-        to={`/${uid}`}
       >
         {renderDescription()}
-      </ContentLink>
+        {uid && (
+          <ButtonLink
+            css={css`
+              ${tw(['mt-q24'])};
+            `}
+            to={`/${uid}`}
+          >
+            <Content>Read more →</Content>
+          </ButtonLink>
+        )}
+      </Content>
     </Wrapper>
   )
 }
