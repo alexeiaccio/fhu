@@ -91,7 +91,10 @@ export const PageQuery = graphql`
           ... on PrismicTextBodyMedia {
             items {
               link {
+                link_type
+                name
                 url
+                size
               }
             }
           }

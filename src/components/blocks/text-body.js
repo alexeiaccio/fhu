@@ -5,8 +5,9 @@ import PropTypes from 'prop-types'
 import { equals, map, propPathOr } from 'crocks'
 import uuid from 'uuid/v4'
 
-import RichContent from '../elements/rich-content'
+import Media from '../elements/media'
 import Slider from '../elements/slider'
+import RichContent from '../elements/rich-content'
 import { RichText } from '../elements/rich-text'
 
 const articleStyles = css`
@@ -36,6 +37,9 @@ function TextBody({ body }) {
             )}
             {equals(__typename, 'PrismicTextBodyImage') && (
               <Slider key={uuid()} items={items} />
+            )}
+            {equals(__typename, 'PrismicTextBodyMedia') && (
+              <Media key={uuid()} items={items} />
             )}
           </section>
         )
