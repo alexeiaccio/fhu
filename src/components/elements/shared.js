@@ -57,6 +57,9 @@ export const MenuContainer = styled.div`
     'md:max-w-1/2',
     'md:min-w-1/4',
   ])};
+  @media (max-width: 768px) {
+    min-width: 2.5rem;
+  }
   outline: 4px solid ${({ theme }) => theme.color};
 `
 export const MobileContainer = styled.div`

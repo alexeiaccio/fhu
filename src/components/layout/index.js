@@ -5,6 +5,7 @@ import { Global, css } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import { chain, compose, map, option, prop, propPathOr } from 'crocks'
 import { withStateHandlers, lifecycle } from 'recompose'
+import { Scrollbars } from 'react-custom-scrollbars'
 
 import '../fonts/stylesheet.css'
 
@@ -85,14 +86,14 @@ const Layout = ({ children, currentTheme, ...props }) => {
         </MenuContainer>
         <MainContent>
           <Title location={location} />
-          <div
+          <Scrollbars
             css={css`
-              ${tw(['overflow-y-auto'])};
-              margin-bottom: 2px;
+              ${tw(['h-full', 'w-full'])};
+              margin: 2px 0;
             `}
           >
             <Content>{children}</Content>
-          </div>
+          </Scrollbars>
         </MainContent>
       </Container>
     </ThemeProvider>

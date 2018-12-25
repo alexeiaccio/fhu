@@ -4,6 +4,7 @@ import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { compose, equals, filter, map, omit, propPathOr } from 'crocks'
+import { Scrollbars } from 'react-custom-scrollbars'
 import uuid from 'uuid/v4'
 
 import MenuValues from './menu-volumes'
@@ -204,27 +205,14 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
         )
 
         return (
-          <div
-            css={css`
-              ${tw(['md:overflow-y-auto'])};
-              margin-bottom: 2px;
-              padding-bottom: 2px;
-            `}
-          >
+          <Scrollbars>
             <MobileContainer
               css={css`
                 ${isMenu && tw(['fixed', 'p-q8', 'pin', 'z-50'])};
               `}
             >
               <Appeared key={uuid()} isVisible={isMenu}>
-                <div
-                  css={css`
-                    ${tw(['h-full', 'overflow-y-auto', 'w-full'])};
-                    margin-bottom: 2px;
-                  `}
-                >
-                  {renderMenuContent()}
-                </div>
+                <Scrollbars>{renderMenuContent()}</Scrollbars>
               </Appeared>
               <FlexBox
                 css={css`
@@ -274,7 +262,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
             >
               {renderMenuContent()}
             </div>
-          </div>
+          </Scrollbars>
         )
       }}
     />
