@@ -1,4 +1,3 @@
-/* global tw */
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
@@ -205,14 +204,14 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
         )
 
         return (
-          <Scrollbars>
+          <Scrollbars universal>
             <MobileContainer
               css={css`
                 ${isMenu && tw(['fixed', 'p-q8', 'pin', 'z-50'])};
               `}
             >
               <Appeared key={uuid()} isVisible={isMenu}>
-                <Scrollbars>{renderMenuContent()}</Scrollbars>
+                <Scrollbars universal>{renderMenuContent()}</Scrollbars>
               </Appeared>
               <FlexBox
                 css={css`

@@ -1,4 +1,3 @@
-/* global tw */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Global, css } from '@emotion/core'
@@ -88,9 +87,9 @@ const Layout = ({ children, currentTheme, ...props }) => {
           <Title location={location} />
           <Scrollbars
             css={css`
-              ${tw(['h-full', 'w-full'])};
               margin: 2px 0;
             `}
+            universal
           >
             <Content>{children}</Content>
           </Scrollbars>

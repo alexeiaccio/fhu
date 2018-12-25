@@ -1,4 +1,3 @@
-/* global tw */
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'

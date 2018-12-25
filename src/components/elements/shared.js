@@ -1,4 +1,3 @@
-/* global tw */
 import styled from '@emotion/styled'
 
 import { Box } from './boxes'

@@ -1,4 +1,3 @@
-/* global tw */
 import { css } from '@emotion/core'
 
 export const Body = css`
