@@ -20,7 +20,7 @@ function TextsPage({ data }) {
       <Img
         imgStyle={{ objectFit: 'contain' }}
         src={imgSrc}
-        style={{ maxHeight: '66.66666vh' }}
+        style={{ maxHeight: '50vh' }}
       />
       <RichContent
         css={css`

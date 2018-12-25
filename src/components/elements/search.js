@@ -1,5 +1,5 @@
 /* global tw */
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Index } from 'elasticlunr'
@@ -17,6 +17,8 @@ const searchIconStyles = css`
     'cursor-pointer',
     'flex-no-grow',
     'font-bold',
+    'items-center',
+    'justify-center',
     'ml-auto',
     'pin-b',
     'pin-r',
@@ -33,6 +35,24 @@ const Wrapper = styled.div`
   ${tw(['absolute', 'hidden', 'pin', 'z-10'])};
   ${({ isOpen }) => isOpen && tw(['flex'])};
 `
+const paddingsStyles = css`
+  ${tw(['p-q12', 'md:p-q24'])};
+`
+
+const Input = styled.input`
+  ${tw([
+    'border-none',
+    'font-medium',
+    'outline-none',
+    'p-q4',
+    'text-lg',
+    'w-1/2',
+  ])};
+  border-bottom: 4px solid ${({ theme }) => theme.color};
+  &::placeholder {
+    ${tw(['italic'])};
+  }
+`
 
 const Results = styled.div`
   ${tw(['absolute', 'hidden', 'pin-b', 'pin-l', 'pin-r', 'z-20'])};
@@ -41,13 +61,31 @@ const Results = styled.div`
 `
 
 const ResultsList = SimpleBox.withComponent('ul')
-const paddingsStyles = css`
-  ${tw(['p-q12', 'md:p-q24'])};
+const resultListStyles = css`
+  ${tw(['py-q8', 'md:py-q20'])};
+`
+const Li = styled.li`
+  ${tw([
+    'inline-block',
+    'leading-normal',
+    'px-q12',
+    'py-q4',
+    'w-full',
+    'hover:bg-teal-lighter',
+    'md:px-q24',
+  ])};
+`
+const linkStyles = css`
+  ${tw(['inline-block', 'w-full'])};
+`
+const searchedTitleStyles = css`
+  ${tw(['font-extrabold'])};
 `
 
 class Search extends Component {
   constructor(props) {
     super(props)
+    this.input = createRef()
     this.state = {
       isOpen: false,
       query: '',
@@ -55,9 +93,12 @@ class Search extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.resetState()
+    }
+    if (this.state.isOpen && !prevState.isOpen) {
+      this.input.current.focus()
     }
   }
 
@@ -95,49 +136,46 @@ class Search extends Component {
           onClick={this.handleClick}
           type="button"
         >
-          Search
+          {this.state.isOpen ? 'Close' : 'Search'}
         </SearchIcon>
         <Wrapper isOpen={this.state.isOpen}>
           <SimpleBox css={paddingsStyles}>
-            <input
-              type="text"
-              value={this.state.query}
+            <Input
               onChange={this.search}
+              placeholder="Search"
+              ref={this.input}
+              type="search"
+              value={this.state.query}
             />
           </SimpleBox>
         </Wrapper>
         <Results isOpen={this.state.results.length}>
-          <ResultsList css={paddingsStyles}>
+          <ResultsList css={resultListStyles}>
             {this.state.results.slice(0, 4).map(page => {
-              const regex = RegExp(
-                `(?<searched>${this.state.query}.+?)(")`,
-                'gim'
-              )
-              const regexQuery = RegExp(
-                `(?<searched>${this.state.query})(?<rest>.{0,48})`,
+              const regex = new RegExp(`(${this.state.query}.+?)(")`, 'gim')
+              const regexQuery = new RegExp(
+                `(${this.state.query})(.{0,48})`,
                 'gim'
               )
               const matched = regex.exec(page.data)
-              const searched = propPathOr(null, ['groups', 'searched'], matched)
+              const searched = propPathOr(null, [1], matched)
               const matchedQuery = regexQuery.exec(searched)
-              const searchedQuery = propPathOr(
-                '',
-                ['groups', 'searched'],
-                matchedQuery
-              )
-              const restQuery = propPathOr('', ['groups', 'rest'], matchedQuery)
+              const searchedQuery = propPathOr('', [1], matchedQuery)
+              const restQuery = propPathOr('', [2], matchedQuery)
 
               return (
-                <li key={page.uid}>
-                  <Link to={`/${page.uid}`}>{page.title}</Link>
-                  <span>
-                    :{' '}
-                    <span style={{ background: 'yellow' }}>
-                      {searchedQuery}
+                <Li key={page.uid}>
+                  <Link css={linkStyles} to={`/${page.uid}`}>
+                    <span css={searchedTitleStyles}>{page.title}</span>
+                    <span>
+                      :{' '}
+                      <span style={{ background: 'yellow' }}>
+                        {searchedQuery}
+                      </span>
+                      {restQuery}...
                     </span>
-                    {restQuery}...
-                  </span>
-                </li>
+                  </Link>
+                </Li>
               )
             })}
           </ResultsList>
