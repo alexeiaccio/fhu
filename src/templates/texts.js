@@ -6,10 +6,12 @@ import { propPathOr } from 'crocks'
 
 import Img from '../components/elements/img'
 import RichContent from '../components/elements/rich-content'
+import Tags from '../components/elements/tags'
 import TextBody from '../components/blocks/text-body'
 
 function TextsPage({ data }) {
   const texts = propPathOr(null, ['texts', 'data'], data)
+  const tags = propPathOr(null, ['texts', 'tags'], data)
   const imgSrc = propPathOr(null, ['image'], texts)
   const title = propPathOr(null, ['title', 'html'], texts)
   const body = propPathOr(null, ['body'], texts)
@@ -24,6 +26,13 @@ function TextsPage({ data }) {
         `}
         content={title}
       />
+      <div
+        css={css`
+          ${tw(['absolute', 'm-q12', 'pin-r', 'pin-t', 'z-10'])}
+        `}
+      >
+        <Tags tags={tags} />
+      </div>
       <Img src={imgSrc} />
       <TextBody body={body} />
     </>
@@ -41,6 +50,7 @@ export default TextsPage
 export const PageQuery = graphql`
   query TextsQuery($uid: String!) {
     texts: prismicText(uid: { eq: $uid }) {
+      tags
       data {
         title {
           html

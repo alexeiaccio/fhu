@@ -7,6 +7,7 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 
 import { FlexBox, SimpleBox } from './boxes'
+import Tags from './tags'
 
 const SearchIcon = FlexBox.withComponent('button')
 const searchIconStyles = css`
@@ -123,7 +124,11 @@ class Search extends Component {
   }
 
   handleClick = () => {
-    this.setState(state => ({ isOpen: !state.isOpen }))
+    this.setState(state => ({
+      isOpen: !state.isOpen,
+      query: '',
+      results: [],
+    }))
   }
 
   render() {
@@ -173,6 +178,13 @@ class Search extends Component {
                       </span>
                       {restQuery}...
                     </span>
+                    <Tags
+                      css={css`
+                        ${tw(['inline-flex'])};
+                        float: right;
+                      `}
+                      tags={page.tags}
+                    />
                   </Link>
                 </Li>
               )
