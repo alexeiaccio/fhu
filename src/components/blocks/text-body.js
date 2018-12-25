@@ -5,13 +5,17 @@ import { equals, map, propPathOr } from 'crocks'
 import uuid from 'uuid/v4'
 
 import Media from '../elements/media'
+import People from '../elements/people'
+import Related from '../elements/related'
 import Slider from '../elements/slider'
 import RichContent from '../elements/rich-content'
 import { RichText, RichTextSmall } from '../elements/rich-text'
 import Video from '../elements/video'
 
 const articleStyles = css`
-  ${tw(['py-q24'])};
+  ${tw(['py-q24', 'w-full'])};
+  margin: 0 auto;
+  max-width: 40rem;
 `
 
 const descriptionStyles = css`
@@ -78,6 +82,9 @@ function TextBody({ body }) {
                 key={uuid()}
               />
             )}
+            {equals(__typename, 'PrismicTextBodyPeople') && (
+              <People key={uuid()} items={items} />
+            )}
             {equals(__typename, 'PrismicTextBodyImage') && (
               <Slider key={uuid()} items={items} />
             )}
@@ -86,6 +93,9 @@ function TextBody({ body }) {
             )}
             {equals(__typename, 'PrismicTextBodyVideo') && (
               <Video key={uuid()} primary={primary} />
+            )}
+            {equals(__typename, 'PrismicTextBodyRelated') && (
+              <Related key={uuid()} items={items} />
             )}
           </section>
         )

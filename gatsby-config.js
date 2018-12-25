@@ -58,8 +58,9 @@ module.exports = {
         resolvers: {
           // For any node of type prismicText, list how to resolve the fields` values
           PrismicText: {
-            title: node => node.data.title.text,
             data: node => node.dataString,
+            tags: node => node.tags,
+            title: node => node.data.title.text,
             uid: node => node.uid,
           },
         },
