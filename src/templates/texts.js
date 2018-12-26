@@ -2,19 +2,43 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
-import { propPathOr } from 'crocks'
+import { compose, chain, filter, map, propPathOr } from 'crocks'
 
 import Img from '../components/elements/img'
+import Related from '../components/elements/related'
 import RichContent from '../components/elements/rich-content'
 import Tags from '../components/elements/tags'
 import TextBody from '../components/blocks/text-body'
 
 function TextsPage({ data }) {
+  const textsUid = propPathOr(null, ['texts', 'uid'], data)
   const texts = propPathOr(null, ['texts', 'data'], data)
   const tags = propPathOr(null, ['texts', 'tags'], data)
   const imgSrc = propPathOr(null, ['image'], texts)
   const title = propPathOr(null, ['title', 'html'], texts)
   const body = propPathOr(null, ['body'], texts)
+
+  const people = propPathOr(null, ['people', 'edges'], data)
+  const peopleNode = map(propPathOr(null, ['node']), people)
+  const filterPeople = compose(
+    chain(map(propPathOr(null, ['prismicId']))),
+    map(
+      filter(node => {
+        const items = propPathOr([], ['items'], node)
+        return items.some(
+          item => propPathOr(null, ['link', 'uid'], item) === textsUid
+        )
+      })
+    ),
+    map(propPathOr(null, ['node', 'data', 'body']))
+  )
+  const relatedTexts = filter(
+    item =>
+      filterPeople(people).some(
+        x => x && x.includes(propPathOr('', ['id'], item))
+      ),
+    peopleNode
+  )
 
   return (
     <>
@@ -35,6 +59,15 @@ function TextsPage({ data }) {
       </div>
       <Img src={imgSrc} />
       <TextBody body={body} />
+      <aside
+        css={css`
+          ${tw(['pb-q24', 'w-full'])};
+          margin: 0 auto;
+          max-width: 40rem;
+        `}
+      >
+        <Related items={relatedTexts} />
+      </aside>
     </>
   )
 }
@@ -50,6 +83,7 @@ export default TextsPage
 export const PageQuery = graphql`
   query TextsQuery($uid: String!) {
     texts: prismicText(uid: { eq: $uid }) {
+      uid
       tags
       data {
         title {
@@ -173,6 +207,43 @@ export const PageQuery = graphql`
                     description {
                       text
                     }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    people: allPrismicText(
+      filter: {
+        data: { body: { elemMatch: { slice_type: { eq: "people" } } } }
+      }
+    ) {
+      edges {
+        node {
+          id
+          uid
+          data {
+            title {
+              text
+            }
+            image {
+              url
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 600, jpegProgressive: true) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+            body {
+              ... on PrismicTextBodyPeople {
+                prismicId
+                items {
+                  link {
+                    uid
                   }
                 }
               }
