@@ -5,6 +5,7 @@ import uuid from 'uuid/v4'
 import { map, propPathOr } from 'crocks'
 import { getContext } from 'recompose'
 
+import { navigate } from 'gatsby'
 import { FlexBox } from '../elements/boxes'
 import MenuChapters from './menu-levels'
 import News from './news'
@@ -26,6 +27,19 @@ function MenuVolumes({ isVisible, items, toggle }) {
 
         if (uid === 'news') {
           return <News />
+        }
+        if (uid === 'archive') {
+          return (
+            <FlexBox key={uuid()}>
+              <TextContent
+                key={uuid()}
+                css={valueStyles}
+                onClick={() => navigate(uid)}
+              >
+                {title}
+              </TextContent>
+            </FlexBox>
+          )
         }
 
         return (

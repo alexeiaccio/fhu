@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import uuid from 'uuid/v4'
 import { propPathOr } from 'crocks'
+
 import Img from './img'
 
 const H2 = styled.h2`

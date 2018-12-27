@@ -23,11 +23,13 @@ const query = graphql`
               text
             }
             image {
-              url
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 300, jpegProgressive: true) {
-                    ...GatsbyImageSharpFluid
+              full {
+                url
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 600, jpegProgressive: true) {
+                      ...GatsbyImageSharpFluid_noBase64
+                    }
                   }
                 }
               }
@@ -69,7 +71,7 @@ function News() {
         const newsNode = propPathOr(null, ['edges', 0, 'node'], news)
         const uid = propPathOr(null, ['uid'], newsNode)
         const date = propPathOr(null, ['data', 'date'], newsNode)
-        const image = propPathOr(null, ['data', 'image'], newsNode)
+        const image = propPathOr(null, ['data', 'image', 'full'], newsNode)
         const title = propPathOr(
           'News',
           ['data', 'title', 'text'],
