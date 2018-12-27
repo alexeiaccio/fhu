@@ -8,7 +8,7 @@ import uuid from 'uuid/v4'
 import Img from '../components/elements/img'
 
 const H1 = styled.h1`
-  ${tw(['font-extrabold', 'mt-q24', 'text-5xxl'])};
+  ${tw(['font-extrabold', 'text-5xxl'])};
 `
 
 const Wrapper = styled.ul`
@@ -36,7 +36,7 @@ const Date = styled.div`
 `
 
 const Desc = styled.div`
-  ${tw(['text-sm'])};
+  ${tw(['mt-q12', 'text-sm'])};
 `
 
 function ArchivePage({ data }) {

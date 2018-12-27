@@ -7,10 +7,11 @@ import { Scrollbars } from 'react-custom-scrollbars'
 import { getContext } from 'recompose'
 import uuid from 'uuid/v4'
 
-import MenuVolumes from './menu-volumes'
-import { Column, FlexBox } from '../elements/boxes'
-import { TextContent, MobileContainer } from '../elements/shared'
+import About from './about'
 import Appeared from '../elements/appeared'
+import { Column, FlexBox } from '../elements/boxes'
+import MenuVolumes from './menu-volumes'
+import { TextContent, MobileContainer } from '../elements/shared'
 
 const menuQuery = graphql`
   query {
@@ -152,6 +153,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
                 'md:flex-shrink',
               ])};
               flex-basis: auto;
+              margin-top: -2px;
             `}
           >
             {map(({ node }) => {
@@ -223,6 +225,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
                   universal
                 >
                   {renderMenuContent()}
+                  <About />
                 </Scrollbars>
               </Appeared>
               <FlexBox
@@ -272,6 +275,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
               `}
             >
               {renderMenuContent()}
+              <About />
             </div>
           </Scrollbars>
         )

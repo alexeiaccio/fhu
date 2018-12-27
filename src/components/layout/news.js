@@ -47,7 +47,7 @@ const query = graphql`
 const Container = styled.div`
   ${Box};
   ${Outlined};
-  ${tw(['p-q12', 'relative', 'md:p-q24'])};
+  ${tw(['bg-white', 'p-q12', 'relative', 'md:p-q24'])};
   box-sizing: border-box;
 `
 

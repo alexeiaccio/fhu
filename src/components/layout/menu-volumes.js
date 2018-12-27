@@ -26,9 +26,9 @@ function MenuVolumes({ isVisible, items, toggle }) {
         const chapterItems = propPathOr(null, ['body', 0, 'items'], data)
 
         if (uid === 'news') {
-          return <News />
+          return <News key={uuid()} />
         }
-        if (uid === 'archive') {
+        if (!chapterItems) {
           return (
             <FlexBox key={uuid()}>
               <TextContent

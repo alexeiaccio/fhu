@@ -86,6 +86,8 @@ export const MenuContainer = styled.div`
     'md:min-w-1/4',
   ])};
   ${MenuWidth};
+  box-sizing: border-box;
+  padding: 2px 0;
   @media (max-width: 768px) {
     min-width: 2.5rem;
   }
