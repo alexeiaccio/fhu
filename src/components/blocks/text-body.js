@@ -95,7 +95,9 @@ function TextBody({ body }) {
               <Video key={uuid()} primary={primary} />
             )}
             {equals(__typename, 'PrismicTextBodyRelated') && (
-              <Related key={uuid()} items={items} />
+              <aside>
+                <Related key={uuid()} items={items} />
+              </aside>
             )}
           </section>
         )

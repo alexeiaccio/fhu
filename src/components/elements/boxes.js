@@ -1,13 +1,21 @@
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
+import { Outlined } from './shared'
+
+export const Hovered = ({ theme }) => css`
+  &:hover {
+    background-color: ${theme.color};
+  }
+`
+
 export const Box = css`
   ${tw(['items-stretch', 'justify-start', 'relative', 'max-w-full'])};
-  outline-offset: -2px;
 `
 
 export const SimpleBox = styled.div`
   ${Box};
+  ${Outlined};
   ${tw([
     'bg-white',
     'flex',
@@ -17,12 +25,13 @@ export const SimpleBox = styled.div`
     'flex-wrap',
     'text-black',
   ])};
-  outline: 4px solid ${({ theme }) => theme.color};
   transition: all 200ms ease-in-out;
 `
 
 export const FlexBox = styled.div`
   ${Box};
+  ${Hovered};
+  ${Outlined};
   ${tw([
     'bg-white',
     'flex',
@@ -33,11 +42,7 @@ export const FlexBox = styled.div`
     'text-black',
     'hover:text-white',
   ])};
-  outline: 4px solid ${({ theme }) => theme.color};
   transition: all 200ms ease-in-out;
-  &:hover {
-    background-color: ${({ theme }) => theme.color};
-  }
 `
 
 export const InlineBox = styled.span`

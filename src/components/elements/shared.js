@@ -1,6 +1,12 @@
+import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
 import { Box } from './boxes'
+
+export const Outlined = ({ theme }) => css`
+  outline: 4px solid ${theme.color};
+  outline-offset: -2px;
+`
 
 export const TextContent = styled.div`
   ${tw([
@@ -37,30 +43,54 @@ export const Container = styled.div`
   box-sizing: border-box;
 `
 
+const getLevel = (levels, level) => Object.values(levels).some(x => x === level)
+
+const MainWidth = ({ levels }) => css`
+  @media (min-width: 769px) {
+    flex-basis: 75%;
+    flex-basis: ${getLevel(levels, 'volume') && '66%'};
+    flex-basis: ${getLevel(levels, 'volume') &&
+      getLevel(levels, 'chapter') &&
+      '50%'};
+  }
+`
+
 export const MainContent = styled.div`
   ${Box};
-  ${tw(['flex', 'flex-col', 'h-full', 'min-w-1/2'])};
-  flex: 10 1 0%;
-  outline: 4px solid ${({ theme }) => theme.color};
+  ${Outlined};
+  ${tw(['flex', 'flex-1', 'flex-col', 'h-full', 'min-w-1/2'])};
+  ${MainWidth};
+`
+
+const MenuWidth = ({ levels }) => css`
+  @media (min-width: 769px) {
+    flex-basis: 25%;
+    flex-basis: ${getLevel(levels, 'volume') && '34%'};
+    flex-basis: ${getLevel(levels, 'volume') &&
+      getLevel(levels, 'chapter') &&
+      '50%'};
+  }
 `
 
 export const MenuContainer = styled.div`
   ${Box};
+  ${Outlined};
   ${tw([
     'flex',
     'flex-col',
     'h-full',
     'items-stretch',
     'justify-start',
-    'max-w-full',
+    'md:flex-1',
     'md:max-w-1/2',
     'md:min-w-1/4',
   ])};
+  ${MenuWidth};
   @media (max-width: 768px) {
     min-width: 2.5rem;
   }
-  outline: 4px solid ${({ theme }) => theme.color};
 `
+
 export const MobileContainer = styled.div`
   ${tw(['flex', 'flex-row', 'md:hidden'])};
 `

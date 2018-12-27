@@ -23,6 +23,7 @@ const StyledLink = styled(Link)`
 `
 const Card = styled.div`
   ${tw(['bg-teal-lighter', 'p-q8'])};
+  box-sizing: border-box;
 `
 
 const H3 = styled.h3`

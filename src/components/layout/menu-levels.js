@@ -11,7 +11,7 @@ import { TextContent } from '../elements/shared'
 import Appeared from '../elements/appeared'
 
 const chapterStyles = css`
-  ${tw(['font-extrabold'])};
+  ${tw(['font-extrabold', 'truncate'])};
 `
 
 const textStyles = css`
@@ -43,10 +43,11 @@ const MenuLevels = getContext({
               onClick={() => {
                 if (type) {
                   if (toggle) {
-                    toggle(uid)
+                    toggle(uid, 'chapter')
                   }
                 } else {
                   navigate(uid)
+                  toggle(null, 'main')
                   if (toggleMenu) {
                     toggleMenu(false)
                   }

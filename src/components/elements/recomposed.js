@@ -2,17 +2,22 @@ import PropTypes from 'prop-types'
 import { compose, withStateHandlers, withContext } from 'recompose'
 import random from '../../utils/random'
 
-export const withOpener = compose(
+export const withMenu = compose(
   withStateHandlers(
     ({ initial = {} }) => ({
       isVisible: initial,
       isMenu: false,
+      levels: initial,
     }),
     {
-      toggle: ({ isVisible }) => key => ({
+      toggle: ({ isVisible, levels }) => (key, level) => ({
         isVisible: {
           ...isVisible,
           [key]: isVisible[key] ? false : true, // eslint-disable-line no-unneeded-ternary
+        },
+        levels: {
+          ...levels,
+          [key]: isVisible[key] ? null : level,
         },
       }),
       toggleMenu: () => value => ({ isMenu: value, isVisible: {} }),
@@ -20,11 +25,13 @@ export const withOpener = compose(
   ),
   withContext(
     {
+      isMenu: PropTypes.bool.isRequired,
       isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
       toggle: PropTypes.func.isRequired,
       toggleMenu: PropTypes.func.isRequired,
     },
-    ({ isVisible, toggle, toggleMenu }) => ({
+    ({ isMenu, isVisible, toggle, toggleMenu }) => ({
+      isMenu,
       isVisible,
       toggle,
       toggleMenu,

@@ -10,7 +10,7 @@ import { FlexBox, SimpleBox } from './boxes'
 import Tags from './tags'
 
 const SearchIcon = FlexBox.withComponent('button')
-const searchIconStyles = css`
+const searchIconStyles = ({ isOpen }) => css`
   ${tw([
     'absolute',
     'border-none',
@@ -28,15 +28,23 @@ const searchIconStyles = css`
     'z-30',
     'md:px-q24',
   ])};
-  ${({ isOpen }) => isOpen && tw(['bg-teal'])};
+  ${isOpen && tw(['bg-teal'])};
+`
+
+const Open = ({ isOpen }) => css`
+  ${isOpen && tw(['flex'])};
 `
 
 const Wrapper = styled.div`
   ${tw(['absolute', 'hidden', 'pin', 'z-10'])};
-  ${({ isOpen }) => isOpen && tw(['flex'])};
+  ${Open};
 `
 const paddingsStyles = css`
   ${tw(['p-q12', 'md:p-q24'])};
+`
+
+const BorderedBottom = ({ theme }) => css`
+  border-bottom: 4px solid ${theme.color};
 `
 
 const Input = styled.input`
@@ -48,7 +56,7 @@ const Input = styled.input`
     'text-lg',
     'w-1/2',
   ])};
-  border-bottom: 4px solid ${({ theme }) => theme.color};
+  ${BorderedBottom};
   &::placeholder {
     ${tw(['italic'])};
   }
@@ -56,7 +64,7 @@ const Input = styled.input`
 
 const Results = styled.div`
   ${tw(['absolute', 'hidden', 'pin-b', 'pin-l', 'pin-r', 'z-20'])};
-  ${({ isOpen }) => isOpen && tw(['flex'])};
+  ${Open};
   transform: translateY(100%);
 `
 

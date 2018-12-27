@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { compose, equals, filter, map, omit, propPathOr } from 'crocks'
 import { Scrollbars } from 'react-custom-scrollbars'
+import { getContext } from 'recompose'
 import uuid from 'uuid/v4'
 
 import MenuValues from './menu-volumes'
 import { Column, FlexBox } from '../elements/boxes'
 import { TextContent, MobileContainer } from '../elements/shared'
 import Appeared from '../elements/appeared'
-import { withOpener } from '../elements/recomposed'
 
 const menuQuery = graphql`
   query {
@@ -177,7 +177,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
                     <TextContent
                       key={uuid()}
                       css={valueStyles}
-                      onClick={() => toggle(menuId)}
+                      onClick={() => toggle(menuId, 'volume')}
                     >
                       {menuId}
                     </TextContent>
@@ -204,7 +204,12 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
         )
 
         return (
-          <Scrollbars universal>
+          <Scrollbars
+            css={css`
+              ${tw(['overflow-y-auto'])};
+            `}
+            universal
+          >
             <MobileContainer
               css={css`
                 ${isMenu && tw(['fixed', 'p-q8', 'pin', 'z-50'])};
@@ -269,8 +274,8 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
 }
 
 Menu.propTypes = {
-  isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
   isMenu: PropTypes.bool.isRequired,
+  isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
@@ -278,4 +283,9 @@ Menu.propTypes = {
   toggleMenu: PropTypes.func.isRequired,
 }
 
-export default withOpener(Menu)
+export default getContext({
+  isMenu: PropTypes.bool.isRequired,
+  isVisible: PropTypes.objectOf(PropTypes.bool).isRequired,
+  toggle: PropTypes.func.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
+})(Menu)

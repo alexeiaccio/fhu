@@ -28,7 +28,7 @@ function MenuVolumes({ isVisible, items, toggle }) {
             <TextContent
               key={uuid()}
               css={valueStyles}
-              onClick={() => toggle(uid)}
+              onClick={() => toggle(uid, 'volume')}
             >
               {title}
             </TextContent>

@@ -17,6 +17,7 @@ import {
   MainContent,
   MenuContainer,
 } from '../elements/shared'
+import { withMenu } from '../elements/recomposed'
 
 const globalStyles = css`
   html {
@@ -24,7 +25,6 @@ const globalStyles = css`
   }
   * {
     ${tw(['m-0', 'p-0'])};
-    box-sizing: border-box;
   }
   a {
     ${tw(['no-underline'])};
@@ -41,7 +41,7 @@ const globalStyles = css`
   }
 `
 
-const Layout = ({ children, currentTheme, ...props }) => {
+const Layout = ({ children, currentTheme, levels, ...props }) => {
   const pageDataKey = compose(
     option('nope'),
     chain(prop(0)),
@@ -80,16 +80,15 @@ const Layout = ({ children, currentTheme, ...props }) => {
           pageImage={pageImage}
           pathname={pathname}
         />
-        <MenuContainer>
+        <MenuContainer levels={levels}>
           <Menu location={location} />
         </MenuContainer>
-        <MainContent>
+        <MainContent levels={levels}>
           <Title location={location} />
           <Scrollbars
             css={css`
               margin: 2px 0;
             `}
-            universal
           >
             <Content>{children}</Content>
           </Scrollbars>
@@ -102,6 +101,7 @@ const Layout = ({ children, currentTheme, ...props }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   currentTheme: PropTypes.string.isRequired,
+  levels: PropTypes.objectOf(PropTypes.any).isRequired,
 }
 
 export default compose(
@@ -130,5 +130,6 @@ export default compose(
         }
       }
     },
-  })
+  }),
+  withMenu
 )(Layout)

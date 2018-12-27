@@ -45,7 +45,13 @@ function TextsPage({ data }) {
       <RichContent
         css={css`
           & h1 {
-            ${tw(['font-extrabold', 'mb-q24', 'text-5xl'])}
+            ${tw([
+              'break-words',
+              'font-extrabold',
+              'mb-q24',
+              'mt-q12',
+              'text-5xl',
+            ])}
           }
         `}
         content={title}
@@ -95,7 +101,7 @@ export const PageQuery = graphql`
           localFile {
             childImageSharp {
               fluid(maxWidth: 1200, jpegProgressive: true) {
-                ...GatsbyImageSharpFluid
+                ...GatsbyImageSharpFluid_noBase64
               }
             }
           }

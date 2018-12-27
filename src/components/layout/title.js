@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 
 import AnimatedTitle from '../elements/animated-title'
 import { Box } from '../elements/boxes'
+import { Outlined } from '../elements/shared'
 import Search from '../elements/search'
 
 const query = graphql`
@@ -37,9 +38,9 @@ const query = graphql`
 
 const Container = styled.div`
   ${Box};
-  ${tw(['flex-no-grow', 'p-q12', 'relative', 'md:p-q24'])};
+  ${Outlined};
+  ${tw(['flex-no-grow', 'flex-no-shrink', 'p-q12', 'relative', 'md:p-q24'])};
   box-sizing: border-box;
-  outline: 4px solid ${({ theme }) => theme.color};
 `
 
 function Title({ location }) {

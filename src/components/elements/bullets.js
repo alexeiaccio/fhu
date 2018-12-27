@@ -4,6 +4,10 @@ import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import uuid from 'uuid/v4'
 
+const Active = ({ active }) => css`
+  ${active ? tw(['bg-fuchsia']) : tw(['bg-grey', 'cursor-pointer'])};
+`
+
 const Bullet = styled.button`
   ${tw([
     'block',
@@ -16,8 +20,7 @@ const Bullet = styled.button`
   &:not(:last-of-type) {
     ${tw(['mr-q12'])};
   }
-  ${({ active }) =>
-    active ? tw(['bg-fuchsia']) : tw(['bg-grey', 'cursor-pointer'])};
+  ${Active};
 `
 
 function Bullets({ active, length, onClick }) {

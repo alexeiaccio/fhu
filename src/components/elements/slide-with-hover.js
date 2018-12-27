@@ -7,7 +7,7 @@ import { propPathOr } from 'crocks'
 import posed from 'react-pose'
 import uuid from 'uuid/v4'
 
-import { Column, FlexBox } from './boxes'
+import { Column, FlexBox, Hovered } from './boxes'
 import Img from './img'
 import { Content } from './shared'
 import RichContent from './rich-content'
@@ -45,7 +45,7 @@ const Posed = posed.div({
 
 const Hover = styled(Posed)`
   ${tw(['absolute', 'pin', 'text-white', 'z-10'])};
-  background-color: ${({ theme }) => theme.color};
+  ${Hovered};
   & .preview-img {
     ${tw(['flex-1', 'w-2/3'])};
   }
