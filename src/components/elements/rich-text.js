@@ -53,6 +53,9 @@ export const RichText = css`
     ${tw(['absolute', 'bg-black', 'block', 'h-q8', 'pin-l', 'pin-t', 'w-q8'])};
     top: 0.625rem;
   }
+  & a {
+    ${tw(['text-teal'])};
+  }
 `
 
 export const RichTextSmall = css`

@@ -10,7 +10,7 @@ function Img({ src, ...props }) {
   if (!fluid) {
     if (!url) return null
 
-    return <img src={url} alt="" />
+    return <img src={url} alt="" width="100%" />
   }
   return <GatsbyImg fluid={fluid} {...props} />
 }

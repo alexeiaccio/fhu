@@ -7,6 +7,7 @@ import { getContext } from 'recompose'
 
 import { FlexBox } from '../elements/boxes'
 import MenuChapters from './menu-levels'
+import News from './news'
 import { TextContent } from '../elements/shared'
 import Appeared from '../elements/appeared'
 
@@ -23,8 +24,12 @@ function MenuVolumes({ isVisible, items, toggle }) {
         const title = propPathOr(null, ['title', 'text'], data)
         const chapterItems = propPathOr(null, ['body', 0, 'items'], data)
 
+        if (uid === 'news') {
+          return <News />
+        }
+
         return (
-          <FlexBox key={uuid()} to={`/${uid}`}>
+          <FlexBox key={uuid()}>
             <TextContent
               key={uuid()}
               css={valueStyles}

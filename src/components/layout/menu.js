@@ -7,7 +7,7 @@ import { Scrollbars } from 'react-custom-scrollbars'
 import { getContext } from 'recompose'
 import uuid from 'uuid/v4'
 
-import MenuValues from './menu-volumes'
+import MenuVolumes from './menu-volumes'
 import { Column, FlexBox } from '../elements/boxes'
 import { TextContent, MobileContainer } from '../elements/shared'
 import Appeared from '../elements/appeared'
@@ -182,7 +182,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
                       {menuId}
                     </TextContent>
                     <Appeared key={uuid()} isVisible={isVisible[menuId]}>
-                      <MenuValues
+                      <MenuVolumes
                         key={uuid()}
                         items={valumesItems}
                         location={location}
@@ -193,7 +193,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
               }
 
               return (
-                <MenuValues
+                <MenuVolumes
                   key={uuid()}
                   items={valumesItems}
                   location={location}
@@ -206,7 +206,7 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
         return (
           <Scrollbars
             css={css`
-              ${tw(['overflow-y-auto'])};
+              ${tw(['max-w-full'])};
             `}
             universal
           >
@@ -216,7 +216,14 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
               `}
             >
               <Appeared key={uuid()} isVisible={isMenu}>
-                <Scrollbars universal>{renderMenuContent()}</Scrollbars>
+                <Scrollbars
+                  css={css`
+                    ${tw(['max-w-full'])};
+                  `}
+                  universal
+                >
+                  {renderMenuContent()}
+                </Scrollbars>
               </Appeared>
               <FlexBox
                 css={css`
