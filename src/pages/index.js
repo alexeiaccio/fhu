@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import { propPathOr } from 'crocks'
 
+import { propPathOr } from '../utils'
 import Slider from '../components/blocks/main-slider'
 
 function IndexPage({ data }) {

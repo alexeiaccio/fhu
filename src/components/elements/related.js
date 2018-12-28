@@ -33,32 +33,32 @@ const titleStyles = css`
 function Related({ items }) {
   if (!items || !items.length) return null
 
-  return (
-    <aside>
-      <h2 css={headingStyles}>Related</h2>
-      <div css={wrapperStyles}>
-        {items.map(item => {
-          const correctPath = propPathOr(item, ['link', 'document', 0], item)
-          const uid = propPathOr(null, ['uid'], correctPath)
-          const title = propPathOr(null, ['data', 'title', 'text'], correctPath)
-          const image = propPathOr(null, ['data', 'image'], correctPath)
+  return [
+    <h2 key={uuid()} css={headingStyles}>
+      Related
+    </h2>,
+    <div key={uuid()} css={wrapperStyles}>
+      {items.map(item => {
+        const correctPath = propPathOr(item, ['link', 'document', 0], item)
+        const uid = propPathOr(null, ['uid'], correctPath)
+        const title = propPathOr(null, ['data', 'title', 'text'], correctPath)
+        const image = propPathOr(null, ['data', 'image'], correctPath)
 
-          return (
-            <li css={liStyles} key={uuid()}>
-              {uid && (
-                <Link css={linkStyles} to={`/${uid}`}>
-                  <div css={cardStyles}>
-                    <Img src={image} />
-                    <h3 css={titleStyles}>{title}</h3>
-                  </div>
-                </Link>
-              )}
-            </li>
-          )
-        })}
-      </div>
-    </aside>
-  )
+        return (
+          <li css={liStyles} key={uuid()}>
+            {uid && (
+              <Link css={linkStyles} to={`/${uid}`}>
+                <div css={cardStyles}>
+                  <Img src={image} />
+                  <h3 css={titleStyles}>{title}</h3>
+                </div>
+              </Link>
+            )}
+          </li>
+        )
+      })}
+    </div>,
+  ]
 }
 
 Related.propTypes = {
