@@ -6,8 +6,11 @@ import GatsbyImg from 'gatsby-image'
 import { propPathOr } from '../../utils'
 
 function Img({ src, ...props }) {
+  if (!src) return null
+
   const fluid = propPathOr(null, ['localFile', 'childImageSharp', 'fluid'], src)
   const url = propPathOr(null, ['url'], src)
+
   if (!fluid) {
     if (!url) return null
 
@@ -19,7 +22,11 @@ function Img({ src, ...props }) {
 Img.propTypes = {
   src: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-  ).isRequired,
+  ),
+}
+
+Img.defaultProps = {
+  src: null,
 }
 
 export default Img

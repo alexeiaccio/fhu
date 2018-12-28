@@ -18,6 +18,13 @@ const query = graphql`
         image {
           full {
             url
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 300, jpegProgressive: true) {
+                  ...GatsbyImageSharpFluid_noBase64
+                }
+              }
+            }
           }
         }
         description {
