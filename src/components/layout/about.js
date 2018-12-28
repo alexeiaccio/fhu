@@ -88,7 +88,7 @@ function About() {
         const image = propPathOr(null, ['data', 'image', 'full'], about)
         const title = propPathOr('About', ['data', 'title', 'text'], about)
         const body = propPathOr([], ['data', 'body'], about)
-        const logos = map(propPathOr(null, ['items']), body).flat()
+        const logos = map(propPathOr(null, ['items']), body)
         const description = propPathOr(
           '',
           ['data', 'description', 'text'],
@@ -102,11 +102,13 @@ function About() {
             <div css={descStyles}>{description}</div>
             <StyledLink to="/about">More →</StyledLink>
             <div css={logoStyles}>
-              {logos.map(src =>
-                src ? (
-                  <Img className="logo" key={uuid()} src={src.imagesrc} />
-                ) : null
-              )}
+              {logos
+                .filter(x => x && x)[0]
+                .map(src =>
+                  src ? (
+                    <Img className="logo" key={uuid()} src={src.imagesrc} />
+                  ) : null
+                )}
             </div>
           </Container>
         )
