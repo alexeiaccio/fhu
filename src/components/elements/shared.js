@@ -39,7 +39,14 @@ const BlurContent = ({ levels }) => css`
   filter: blur(${getLevel(levels, 'volume') ? 4 : 0}px);
   &::after {
     ${getLevel(levels, 'volume') &&
-      tw(['absolute', 'bg-white', 'opacity-25', 'pin', 'z-40'])};
+      tw([
+        'absolute',
+        'bg-white',
+        'cursor-pointer',
+        'opacity-25',
+        'pin',
+        'z-40',
+      ])};
     content: '';
   }
 `

@@ -47,6 +47,7 @@ const Layout = ({
   currentTheme,
   levels,
   mainScrollbar,
+  toggleMenu,
   ...props
 }) => {
   const pageDataKey = compose(
@@ -57,7 +58,7 @@ const Layout = ({
   )(props)
   const pageData = propPathOr(null, ['data', pageDataKey, 'data'], props)
   const pageTitle = propPathOr(null, ['title', 'text'], pageData)
-  const pageDescription = propPathOr(null, ['seodescription'], pageData)
+  const pageDescription = propPathOr(null, ['description'], pageData)
   const pageKeywords = propPathOr(null, ['seokeywords'], pageData)
   const pageImage = propPathOr(
     null,
@@ -89,7 +90,12 @@ const Layout = ({
       <MenuContainer levels={levels}>
         <Menu location={location} />
       </MenuContainer>
-      <MainContent levels={levels}>
+      <MainContent
+        levels={levels}
+        onClick={() =>
+          Object.values(levels).length ? toggleMenu(false) : null
+        }
+      >
         <Title location={location} />
         <OutlinedContainer>
           <Scrollbars ref={mainScrollbar} universal>
@@ -106,6 +112,7 @@ Layout.propTypes = {
   currentTheme: PropTypes.string.isRequired,
   levels: PropTypes.objectOf(PropTypes.any).isRequired,
   mainScrollbar: PropTypes.objectOf(PropTypes.any).isRequired,
+  toggleMenu: PropTypes.func.isRequired,
 }
 
 export default compose(
