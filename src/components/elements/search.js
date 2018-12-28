@@ -29,6 +29,9 @@ const searchIconStyles = ({ isOpen }) => css`
     'md:px-q24',
   ])};
   ${isOpen && tw(['bg-teal'])};
+  @media (max-width: 768px) {
+    top: -3px;
+  }
 `
 
 const Open = ({ isOpen }) => css`
@@ -36,12 +39,17 @@ const Open = ({ isOpen }) => css`
 `
 
 const Wrapper = styled.div`
-  ${tw(['absolute', 'hidden', 'pin', 'z-10'])};
+  ${tw(['absolute', 'bg-white', 'hidden', 'z-10'])};
   ${Open};
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  top: 2px;
 `
 
 const paddingsStyles = css`
-  ${tw(['p-q12', 'md:p-q24'])};
+  ${tw(['p-q12', 'w-full', 'md:p-q24'])};
+  box-sizing: border-box;
 `
 
 const BorderedBottom = ({ theme }) => css`
@@ -152,7 +160,7 @@ class Search extends Component {
           {this.state.isOpen ? 'Close' : 'Search'}
         </SearchIcon>
         <Wrapper isOpen={this.state.isOpen}>
-          <SimpleBox css={paddingsStyles}>
+          <div css={paddingsStyles}>
             <Input
               onChange={this.search}
               placeholder="Search"
@@ -160,7 +168,7 @@ class Search extends Component {
               type="search"
               value={this.state.query}
             />
-          </SimpleBox>
+          </div>
         </Wrapper>
         <Results isOpen={this.state.results.length}>
           <ResultsList css={resultListStyles}>

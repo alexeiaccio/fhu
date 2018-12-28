@@ -8,6 +8,7 @@ export const Outlined = ({ theme }) => css`
 export const OutlinedContainer = styled.div`
   ${tw(['h-full', 'w-full'])};
   ${Outlined};
+  box-sizing: border-box;
   padding: 2px 0;
 `
 
@@ -53,12 +54,16 @@ export const MainContent = styled.div`
     'py-q12',
     'pin-r',
     'pin-t',
-    'w-3/4',
     'md:pr-q24',
     'md:py-q24',
+    'md:w-3/4',
   ])};
   ${BlurContent};
   box-sizing: border-box;
+  @media (max-width: 768px) {
+    margin-top: 3px;
+    width: calc(100% - 3.3rem);
+  }
 `
 
 const MenuWidth = ({ levels }) => css`
@@ -88,10 +93,13 @@ export const MenuContainer = styled.div`
   ${MenuWidth};
   box-sizing: border-box;
   @media (max-width: 768px) {
-    min-width: 2.5rem;
+    min-width: 3.3rem;
   }
 `
 
 export const MobileContainer = styled.div`
   ${tw(['flex', 'flex-row', 'md:hidden'])};
+  @media (max-width: 768px) {
+    margin-top: -2px;
+  }
 `

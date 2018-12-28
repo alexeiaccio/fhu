@@ -225,15 +225,17 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
                 `}
               >
                 <Appeared key={uuid()} isVisible={isMenu}>
-                  <Scrollbars
-                    css={css`
-                      ${tw(['max-w-full'])};
-                    `}
-                    universal
-                  >
-                    {renderMenuContent()}
-                    <About />
-                  </Scrollbars>
+                  <OutlinedContainer>
+                    <Scrollbars
+                      css={css`
+                        ${tw(['max-w-full'])};
+                      `}
+                      universal
+                    >
+                      {renderMenuContent()}
+                      <About />
+                    </Scrollbars>
+                  </OutlinedContainer>
                 </Appeared>
                 <FlexBox
                   css={css`
