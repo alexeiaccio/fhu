@@ -64,13 +64,13 @@ const titleStyles = css`
 `
 
 const descStyles = css`
-  ${tw(['my-q16', 'text-sm'])};
+  ${tw(['mt-q16', 'text-sm'])};
 `
 
 const StyledLink = styled(Link)`
   ${Outlined};
   ${Hovered};
-  ${tw(['inline-block', 'px-q12', 'py-q8'])};
+  ${tw(['inline-block', 'mt-q24', 'px-q12', 'py-q8'])};
 `
 
 const logoStyles = css`

@@ -18,7 +18,11 @@ import About from './about'
 import Appeared from '../elements/appeared'
 import { Column, FlexBox } from '../elements/boxes'
 import MenuVolumes from './menu-volumes'
-import { TextContent, MobileContainer } from '../elements/shared'
+import {
+  TextContent,
+  MobileContainer,
+  OutlinedContainer,
+} from '../elements/shared'
 
 const menuQuery = graphql`
   query {
@@ -213,78 +217,75 @@ function Menu({ isMenu, isVisible, location, toggle, toggleMenu }) {
         )
 
         return (
-          <Scrollbars
-            css={css`
-              ${tw(['max-w-full'])};
-            `}
-            universal
-          >
-            <MobileContainer
-              css={css`
-                ${isMenu && tw(['fixed', 'p-q8', 'pin', 'z-50'])};
-              `}
-            >
-              <Appeared key={uuid()} isVisible={isMenu}>
-                <Scrollbars
-                  css={css`
-                    ${tw(['max-w-full'])};
-                  `}
-                  universal
-                >
-                  {renderMenuContent()}
-                  <About />
-                </Scrollbars>
-              </Appeared>
-              <FlexBox
+          <OutlinedContainer>
+            <Scrollbars universal>
+              <MobileContainer
                 css={css`
-                  ${tw(['flex', 'flex-col', 'flex-no-grow'])};
+                  ${isMenu && tw(['fixed', 'p-q8', 'pin', 'z-50'])};
                 `}
-                onClick={() => toggleMenu(!isMenu)}
               >
-                <FlexBox>
-                  <TextContent css={valueStyles}>S</TextContent>
-                </FlexBox>
-                {map(({ node }) => {
-                  const menuId = propPathOr(null, ['primary', 'menuid'], node)
-                  const items = propPathOr(null, ['items'], node)
-                  const menuItems = map(
-                    propPathOr(null, [
-                      'menu',
-                      'document',
-                      0,
-                      'data',
-                      'title',
-                      'text',
-                      0,
-                    ]),
-                    items
-                  )
-                  if (!equals(menuId, 'sessions')) {
-                    return map(
-                      letter =>
-                        letter ? (
-                          <FlexBox key={uuid()}>
-                            <TextContent key={uuid()} css={valueStyles}>
-                              {letter}
-                            </TextContent>
-                          </FlexBox>
-                        ) : null,
-                      menuItems
+                <Appeared key={uuid()} isVisible={isMenu}>
+                  <Scrollbars
+                    css={css`
+                      ${tw(['max-w-full'])};
+                    `}
+                    universal
+                  >
+                    {renderMenuContent()}
+                    <About />
+                  </Scrollbars>
+                </Appeared>
+                <FlexBox
+                  css={css`
+                    ${tw(['flex', 'flex-col', 'flex-no-grow'])};
+                  `}
+                  onClick={() => toggleMenu(!isMenu)}
+                >
+                  <FlexBox>
+                    <TextContent css={valueStyles}>S</TextContent>
+                  </FlexBox>
+                  {map(({ node }) => {
+                    const menuId = propPathOr(null, ['primary', 'menuid'], node)
+                    const items = propPathOr(null, ['items'], node)
+                    const menuItems = map(
+                      propPathOr(null, [
+                        'menu',
+                        'document',
+                        0,
+                        'data',
+                        'title',
+                        'text',
+                        0,
+                      ]),
+                      items
                     )
-                  }
-                  return null
-                }, menu)}
-              </FlexBox>
-            </MobileContainer>
-            <div
-              css={css`
-                ${tw(['hidden', 'md:block'])};
-              `}
-            >
-              {renderMenuContent()}
-              <About />
-            </div>
-          </Scrollbars>
+                    if (!equals(menuId, 'sessions')) {
+                      return map(
+                        letter =>
+                          letter ? (
+                            <FlexBox key={uuid()}>
+                              <TextContent key={uuid()} css={valueStyles}>
+                                {letter}
+                              </TextContent>
+                            </FlexBox>
+                          ) : null,
+                        menuItems
+                      )
+                    }
+                    return null
+                  }, menu)}
+                </FlexBox>
+              </MobileContainer>
+              <div
+                css={css`
+                  ${tw(['hidden', 'md:block'])};
+                `}
+              >
+                {renderMenuContent()}
+                <About />
+              </div>
+            </Scrollbars>
+          </OutlinedContainer>
         )
       }}
     />

@@ -14,9 +14,9 @@ import Menu from './menu'
 import Title from './title'
 import {
   Content,
-  Container,
   MainContent,
   MenuContainer,
+  OutlinedContainer,
 } from '../elements/shared'
 import { withMenu } from '../elements/recomposed'
 
@@ -78,31 +78,25 @@ const Layout = ({
 
   return (
     <ThemeProvider theme={themes[currentTheme]}>
-      <Container>
-        <Global styles={globalStyles} />
-        <Seo
-          pageTitle={pageTitle}
-          pageDescription={pageDescription}
-          pageKeywords={pageKeywords}
-          pageImage={pageImage}
-          pathname={pathname}
-        />
-        <MenuContainer levels={levels}>
-          <Menu location={location} />
-        </MenuContainer>
-        <MainContent levels={levels}>
-          <Title location={location} />
-          <Scrollbars
-            css={css`
-              margin: 2px 0;
-            `}
-            ref={mainScrollbar}
-            universal
-          >
+      <Global styles={globalStyles} />
+      <Seo
+        pageTitle={pageTitle}
+        pageDescription={pageDescription}
+        pageKeywords={pageKeywords}
+        pageImage={pageImage}
+        pathname={pathname}
+      />
+      <MenuContainer levels={levels}>
+        <Menu location={location} />
+      </MenuContainer>
+      <MainContent levels={levels}>
+        <Title location={location} />
+        <OutlinedContainer>
+          <Scrollbars ref={mainScrollbar} universal>
             <Content>{children}</Content>
           </Scrollbars>
-        </MainContent>
-      </Container>
+        </OutlinedContainer>
+      </MainContent>
     </ThemeProvider>
   )
 }
@@ -124,6 +118,7 @@ export default compose(
       changeTheme: () => current => ({ currentTheme: current }),
     }
   ),
+  withMenu,
   lifecycle({
     componentDidMount() {
       if (this.props.location.pathname === '/') {
@@ -137,6 +132,7 @@ export default compose(
         if (this.props.mainScrollbar.current) {
           this.props.mainScrollbar.current.scrollTop()
         }
+        this.props.toggleMenu(false)
         if (this.props.location.pathname === '/') {
           this.props.changeTheme('fuchsia')
         } else {
@@ -144,6 +140,5 @@ export default compose(
         }
       }
     },
-  }),
-  withMenu
+  })
 )(Layout)

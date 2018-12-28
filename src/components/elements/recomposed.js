@@ -15,12 +15,14 @@ export const withMenu = compose(
           ...isVisible,
           [key]: isVisible[key] ? false : true, // eslint-disable-line no-unneeded-ternary
         },
-        levels: {
-          ...levels,
-          [key]: isVisible[key] ? null : level,
-        },
+        levels: isVisible[key]
+          ? {}
+          : {
+              ...levels,
+              [key]: level,
+            },
       }),
-      toggleMenu: () => value => ({ isMenu: value, isVisible: {} }),
+      toggleMenu: () => value => ({ isMenu: value, isVisible: {}, levels: {} }),
     }
   ),
   withContext(

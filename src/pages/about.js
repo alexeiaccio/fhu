@@ -13,9 +13,8 @@ const headingStyles = css`
 `
 
 const sectionStyles = css`
-  ${tw(['py-q24', 'w-full'])};
+  ${tw(['py-q24', 'max-w-md', 'w-full'])};
   margin: 0 auto;
-  max-width: 40rem;
 `
 
 const logoStyles = css`

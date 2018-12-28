@@ -1,11 +1,14 @@
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
-import { Box } from './boxes'
-
 export const Outlined = ({ theme }) => css`
   outline: 4px solid ${theme.color};
   outline-offset: -2px;
+`
+export const OutlinedContainer = styled.div`
+  ${tw(['h-full', 'w-full'])};
+  ${Outlined};
+  padding: 2px 0;
 `
 
 export const TextContent = styled.div`
@@ -29,65 +32,61 @@ export const Content = styled.div`
   box-sizing: border-box;
 `
 
-export const Container = styled.div`
-  ${tw([
-    'flex',
-    'flex-row',
-    'flex-no-grow',
-    'h-screen',
-    'items-start',
-    'p-q8',
-    'w-screen',
-    'md:p-q24',
-  ])};
-  box-sizing: border-box;
-`
-
 const getLevel = (levels, level) => Object.values(levels).some(x => x === level)
 
-const MainWidth = ({ levels }) => css`
-  @media (min-width: 769px) {
-    flex-basis: 75%;
-    flex-basis: ${getLevel(levels, 'volume') && '66%'};
-    flex-basis: ${getLevel(levels, 'volume') &&
-      getLevel(levels, 'chapter') &&
-      '50%'};
+const BlurContent = ({ levels }) => css`
+  filter: blur(${getLevel(levels, 'volume') ? 4 : 0}px);
+  &::after {
+    ${getLevel(levels, 'volume') &&
+      tw(['absolute', 'bg-white', 'opacity-25', 'pin', 'z-40'])};
+    content: '';
   }
 `
 
 export const MainContent = styled.div`
-  ${Box};
-  ${Outlined};
-  ${tw(['flex', 'flex-1', 'flex-col', 'h-full', 'min-w-1/2'])};
-  ${MainWidth};
+  ${tw([
+    'absolute',
+    'flex',
+    'flex-col',
+    'h-full',
+    'pr-q12',
+    'py-q12',
+    'pin-r',
+    'pin-t',
+    'w-3/4',
+    'md:pr-q24',
+    'md:py-q24',
+  ])};
+  ${BlurContent};
+  box-sizing: border-box;
 `
 
 const MenuWidth = ({ levels }) => css`
-  @media (min-width: 769px) {
-    flex-basis: 25%;
-    flex-basis: ${getLevel(levels, 'volume') && '34%'};
-    flex-basis: ${getLevel(levels, 'volume') &&
-      getLevel(levels, 'chapter') &&
-      '50%'};
-  }
+  ${tw(['md:w-1/4'])};
+  ${getLevel(levels, 'volume') && tw(['md:max-w-sm', 'md:w-1/2'])};
+  ${getLevel(levels, 'volume') &&
+    getLevel(levels, 'chapter') &&
+    tw(['md:max-w-md', 'md:w-2/3'])};
 `
 
 export const MenuContainer = styled.div`
-  ${Box};
-  ${Outlined};
   ${tw([
+    'absolute',
     'flex',
     'flex-col',
     'h-full',
     'items-stretch',
     'justify-start',
-    'md:flex-1',
-    'md:max-w-1/2',
-    'md:min-w-1/4',
+    'pl-q12',
+    'py-q12',
+    'pin-l',
+    'pin-t',
+    'z-50',
+    'md:pl-q24',
+    'md:py-q24',
   ])};
   ${MenuWidth};
   box-sizing: border-box;
-  padding: 2px 0;
   @media (max-width: 768px) {
     min-width: 2.5rem;
   }

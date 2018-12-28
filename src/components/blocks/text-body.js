@@ -12,9 +12,8 @@ import { RichText, RichTextSmall } from '../elements/rich-text'
 import Video from '../elements/video'
 
 const articleStyles = css`
-  ${tw(['py-q24', 'w-full'])};
+  ${tw(['py-q24', 'max-w-md', 'w-full'])};
   margin: 0 auto;
-  max-width: 40rem;
 `
 
 const descriptionStyles = css`
