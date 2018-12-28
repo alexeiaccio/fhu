@@ -1,13 +1,13 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { withStateHandlers } from 'recompose'
-import styled from '@emotion/styled'
-import uuid from 'uuid/v4'
 
+import { uuid } from '../../utils'
 import Img from './img'
 import Bullets from './bullets'
 
-const Slide = styled.div`
+const slideStyles = css`
   ${tw(['relative'])};
   & .slide-image {
     max-height: 66.66666vh;
@@ -18,8 +18,12 @@ function Slider({ current, items, next, to }) {
   if (!items) return null
 
   return (
-    <>
-      <Slide onClick={items.length > 1 ? next : null}>
+    <div>
+      <div
+        css={slideStyles}
+        onClick={items.length > 1 ? next : null}
+        onKeyUp={items.length > 1 ? next : null}
+      >
         {items.map(({ imagesrc }, idx) =>
           idx === current ? (
             <Img
@@ -30,9 +34,9 @@ function Slider({ current, items, next, to }) {
             />
           ) : null
         )}
-      </Slide>
+      </div>
       <Bullets active={current} length={items.length} onClick={to} />
-    </>
+    </div>
   )
 }
 

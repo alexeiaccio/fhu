@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { equals, map, propPathOr } from 'crocks'
-import uuid from 'uuid/v4'
 
+import { equals, map, propPathOr, uuid } from '../../utils'
 import Media from '../elements/media'
 import People from '../elements/people'
 import Related from '../elements/related'
@@ -95,9 +94,7 @@ function TextBody({ body }) {
               <Video key={uuid()} primary={primary} />
             )}
             {equals(__typename, 'PrismicTextBodyRelated') && (
-              <aside>
-                <Related key={uuid()} items={items} />
-              </aside>
+              <Related key={uuid()} items={items} />
             )}
           </section>
         )

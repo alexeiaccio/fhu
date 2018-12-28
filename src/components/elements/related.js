@@ -1,33 +1,32 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
-import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import uuid from 'uuid/v4'
-import { propPathOr } from 'crocks'
 
+import { propPathOr, uuid } from '../../utils'
 import Img from './img'
 
-const H2 = styled.h2`
+const headingStyles = css`
   ${tw(['font-semibold', 'mt-q24', 'text-xxl'])};
 `
 
-const Wrapper = styled.ul`
+const wrapperStyles = css`
   ${tw(['flex', 'flex-row', 'flex-wrap'])};
   margin: 0.75rem -0.5rem 0;
 `
 
-const Li = styled.li`
+const liStyles = css`
   ${tw(['flex', 'flex-1', 'max-w-1/2', 'px-q8', 'py-1', 'text-xs'])};
 `
-const StyledLink = styled(Link)`
+const linkStyles = css`
   ${tw(['w-full'])};
 `
-const Card = styled.div`
+const cardStyles = css`
   ${tw(['bg-teal-lighter', 'p-q8'])};
   box-sizing: border-box;
 `
 
-const H3 = styled.h3`
+const titleStyles = css`
   ${tw(['font-semibold', 'mt-q8'])};
 `
 
@@ -35,9 +34,9 @@ function Related({ items }) {
   if (!items || !items.length) return null
 
   return (
-    <>
-      <H2>Related</H2>
-      <Wrapper>
+    <aside>
+      <h2 css={headingStyles}>Related</h2>
+      <div css={wrapperStyles}>
         {items.map(item => {
           const correctPath = propPathOr(item, ['link', 'document', 0], item)
           const uid = propPathOr(null, ['uid'], correctPath)
@@ -45,20 +44,20 @@ function Related({ items }) {
           const image = propPathOr(null, ['data', 'image'], correctPath)
 
           return (
-            <Li key={uuid()}>
+            <li css={liStyles} key={uuid()}>
               {uid && (
-                <StyledLink to={`/${uid}`}>
-                  <Card>
+                <Link css={linkStyles} to={`/${uid}`}>
+                  <div css={cardStyles}>
                     <Img src={image} />
-                    <H3>{title}</H3>
-                  </Card>
-                </StyledLink>
+                    <h3 css={titleStyles}>{title}</h3>
+                  </div>
+                </Link>
               )}
-            </Li>
+            </li>
           )
         })}
-      </Wrapper>
-    </>
+      </div>
+    </aside>
   )
 }
 

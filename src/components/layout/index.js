@@ -1,11 +1,11 @@
-import React from 'react'
+/** @jsx jsx */
+import { Global, jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { Global, css } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
-import { chain, compose, map, option, prop, propPathOr } from 'crocks'
 import { withStateHandlers, lifecycle } from 'recompose'
 import { Scrollbars } from 'react-custom-scrollbars'
 
+import { chain, compose, map, option, prop, propPathOr } from '../../utils'
 import '../fonts/stylesheet.css'
 
 import Seo from './seo'
@@ -89,6 +89,7 @@ const Layout = ({ children, currentTheme, levels, ...props }) => {
             css={css`
               margin: 2px 0;
             `}
+            universal
           >
             <Content>{children}</Content>
           </Scrollbars>

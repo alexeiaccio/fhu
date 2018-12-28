@@ -2,11 +2,18 @@
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-import { compose, equals, filter, map, omit, propPathOr } from 'crocks'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { getContext } from 'recompose'
-import uuid from 'uuid/v4'
 
+import {
+  compose,
+  equals,
+  filter,
+  map,
+  omit,
+  propPathOr,
+  uuid,
+} from '../../utils'
 import About from './about'
 import Appeared from '../elements/appeared'
 import { Column, FlexBox } from '../elements/boxes'

@@ -1,8 +1,9 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import { StaticQuery, Link, graphql } from 'gatsby'
 import styled from '@emotion/styled'
-import { propPathOr } from 'crocks'
 
+import { propPathOr } from '../../utils'
 import { Box } from '../elements/boxes'
 import { Outlined } from '../elements/shared'
 import Img from '../elements/img'
@@ -51,15 +52,15 @@ const Container = styled.div`
   box-sizing: border-box;
 `
 
-const Title = styled(Link)`
+const titleStyles = css`
   ${tw(['block', 'font-extrabold', 'my-q12'])};
 `
 
-const Date = styled.div`
+const dateStyles = css`
   ${tw(['italic', 'mt-q12', 'text-right', 'text-xs'])};
 `
 
-const Desc = styled.div`
+const descStyles = css`
   ${tw(['text-sm'])};
 `
 
@@ -86,9 +87,11 @@ function News() {
         return (
           <Container>
             <Img src={image} />
-            <Title to={uid}>{title}</Title>
-            <Desc>{description}...</Desc>
-            <Date>{date}</Date>
+            <Link css={titleStyles} to={uid}>
+              {title}
+            </Link>
+            <div css={descStyles}>{description}...</div>
+            <div css={dateStyles}>{date}</div>
           </Container>
         )
       }}

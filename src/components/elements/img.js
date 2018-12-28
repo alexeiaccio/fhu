@@ -2,7 +2,8 @@
 import { jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import GatsbyImg from 'gatsby-image'
-import { propPathOr } from 'crocks'
+
+import { propPathOr } from '../../utils'
 
 function Img({ src, ...props }) {
   const fluid = propPathOr(null, ['localFile', 'childImageSharp', 'fluid'], src)
@@ -10,7 +11,7 @@ function Img({ src, ...props }) {
   if (!fluid) {
     if (!url) return null
 
-    return <img src={url} alt="" width="100%" />
+    return <img src={url} alt="" width="100%" {...props} />
   }
   return <GatsbyImg fluid={fluid} {...props} />
 }

@@ -11,8 +11,8 @@ const siteKeywords = 'Gatsby, web'
 const siteThemeColor = '#009688'
 
 // Accounts & API keys
-const twitter = 'your-twitter-account'
-const fbAppId = 'your-fb-app-id'
+const twitter = ''
+const fbAppId = ''
 // const gaId = 'your-ga-id'
 
 // Used internally

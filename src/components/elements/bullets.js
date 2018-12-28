@@ -2,7 +2,8 @@
 import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
-import uuid from 'uuid/v4'
+
+import { uuid } from '../../utils'
 
 const Active = ({ active }) => css`
   ${active ? tw(['bg-fuchsia']) : tw(['bg-grey', 'cursor-pointer'])};

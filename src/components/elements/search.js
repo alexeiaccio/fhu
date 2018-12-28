@@ -2,10 +2,10 @@ import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Index } from 'elasticlunr'
-import { propPathOr } from 'crocks'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 
+import { propPathOr, uuid } from '../../utils'
 import { FlexBox, SimpleBox } from './boxes'
 import Tags from './tags'
 
@@ -39,6 +39,7 @@ const Wrapper = styled.div`
   ${tw(['absolute', 'hidden', 'pin', 'z-10'])};
   ${Open};
 `
+
 const paddingsStyles = css`
   ${tw(['p-q12', 'md:p-q24'])};
 `
@@ -72,7 +73,7 @@ const ResultsList = SimpleBox.withComponent('ul')
 const resultListStyles = css`
   ${tw(['py-q8', 'md:py-q20'])};
 `
-const Li = styled.li`
+const liStyles = css`
   ${tw([
     'inline-block',
     'leading-normal',
@@ -163,7 +164,7 @@ class Search extends Component {
         </Wrapper>
         <Results isOpen={this.state.results.length}>
           <ResultsList css={resultListStyles}>
-            {this.state.results.slice(0, 4).map(page => {
+            {this.state.results.slice(0, 5).map(page => {
               const regex = new RegExp(`(${this.state.query}.+?)(")`, 'gim')
               const regexQuery = new RegExp(
                 `(${this.state.query})(.{0,48})`,
@@ -176,7 +177,7 @@ class Search extends Component {
               const restQuery = propPathOr('', [2], matchedQuery)
 
               return (
-                <Li key={page.uid}>
+                <li css={liStyles} key={uuid()}>
                   <Link css={linkStyles} to={`/${page.uid}`}>
                     <span css={searchedTitleStyles}>{page.title}</span>
                     <span>
@@ -194,7 +195,7 @@ class Search extends Component {
                       tags={page.tags}
                     />
                   </Link>
-                </Li>
+                </li>
               )
             })}
           </ResultsList>

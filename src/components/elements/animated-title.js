@@ -3,8 +3,8 @@ import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { lifecycle } from 'recompose'
-import { compose, filter, isNil, map, not, propPathOr } from 'crocks'
 
+import { compose, filter, isNil, map, not, propPathOr } from '../../utils'
 import { withRandomState } from './recomposed'
 
 function AnimatedTitle({ current, home, slider }) {

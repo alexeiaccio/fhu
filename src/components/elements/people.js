@@ -1,15 +1,15 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
-import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import uuid from 'uuid/v4'
-import { propPathOr } from 'crocks'
 
-const Wrapper = styled.ul`
+import { propPathOr, uuid } from '../../utils'
+
+const wrapperStyles = css`
   ${tw(['flex', 'flex-row', 'flex-wrap', 'mb-q24'])};
 `
 
-const Li = styled.li`
+const liStyles = css`
   ${tw([
     'bg-teal-lighter',
     'font-semibold',
@@ -25,7 +25,7 @@ function People({ items }) {
   if (!items) return null
 
   return (
-    <Wrapper>
+    <div css={wrapperStyles}>
       {items.map(({ link }) => {
         const uid = propPathOr(null, ['document', 0, 'uid'], link)
         const title = propPathOr(
@@ -34,10 +34,12 @@ function People({ items }) {
           link
         )
         return (
-          <Li key={uuid()}>{uid && <Link to={`/${uid}`}>{title}</Link>}</Li>
+          <li css={liStyles} key={uuid()}>
+            {uid && <Link to={`/${uid}`}>{title}</Link>}
+          </li>
         )
       })}
-    </Wrapper>
+    </div>
   )
 }
 

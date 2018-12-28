@@ -1,9 +1,9 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import { StaticQuery, Link, graphql } from 'gatsby'
 import styled from '@emotion/styled'
-import { map, propPathOr } from 'crocks'
-import uuid from 'uuid/v4'
 
+import { map, propPathOr, uuid } from '../../utils'
 import { Box, Hovered } from '../elements/boxes'
 import { Outlined } from '../elements/shared'
 import Img from '../elements/img'
@@ -52,11 +52,11 @@ const Container = styled.div`
   box-sizing: border-box;
 `
 
-const Title = styled.div`
+const titleStyles = css`
   ${tw(['block', 'font-extrabold', 'mb-q16'])};
 `
 
-const Desc = styled.div`
+const descStyles = css`
   ${tw(['my-q16', 'text-sm'])};
 `
 
@@ -66,7 +66,7 @@ const StyledLink = styled(Link)`
   ${tw(['inline-block', 'px-q12', 'py-q8'])};
 `
 
-const LogoWrapper = styled.div`
+const logoStyles = css`
   ${tw(['flex', 'flex-row', 'flex-no-wrap', 'items-center', 'mt-q24'])};
   & .logo {
     ${tw(['w-1/2'])};
@@ -90,17 +90,17 @@ function About() {
 
         return (
           <Container>
-            <Title>{title}</Title>
+            <h3 css={titleStyles}>{title}</h3>
             <Img src={image} />
-            <Desc>{description}</Desc>
+            <div css={descStyles}>{description}</div>
             <StyledLink to="/about">More →</StyledLink>
-            <LogoWrapper>
+            <div css={logoStyles}>
               {logos.map(src =>
                 src ? (
                   <Img className="logo" key={uuid()} src={src.imagesrc} />
                 ) : null
               )}
-            </LogoWrapper>
+            </div>
           </Container>
         )
       }}

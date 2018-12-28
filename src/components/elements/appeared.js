@@ -2,7 +2,8 @@
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import posed, { PoseGroup } from 'react-pose'
-import uuid from 'uuid/v4'
+
+import { uuid } from '../../utils'
 
 export const Posed = posed.div({
   enter: {
@@ -24,7 +25,7 @@ export const Posed = posed.div({
 function Appeared({ children, isVisible }) {
   return (
     <PoseGroup>
-      {isVisible && (
+      {isVisible && [
         <Posed
           css={css`
             ${tw(['cursor-pointer', 'flex-1'])};
@@ -38,8 +39,8 @@ function Appeared({ children, isVisible }) {
           key={uuid()}
         >
           {children}
-        </Posed>
-      )}
+        </Posed>,
+      ]}
     </PoseGroup>
   )
 }

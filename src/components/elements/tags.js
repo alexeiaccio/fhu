@@ -1,13 +1,14 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
-import styled from '@emotion/styled'
-import uuid from 'uuid/v4'
 
-const Wrapper = styled.ul`
+import { uuid } from '../../utils'
+
+const wrapperStyles = css`
   ${tw(['flex', 'flex-row', 'flex-no-wrap'])};
 `
 
-const Li = styled.li`
+const liStyles = css`
   ${tw([
     'bg-teal',
     'font-semibold',
@@ -42,11 +43,13 @@ function Tags({ tags, ...props }) {
   if (!tags) return null
 
   return (
-    <Wrapper {...props}>
+    <div css={wrapperStyles} {...props}>
       {tags.map(tag => (
-        <Li key={uuid()}>{tag}</Li>
+        <li css={liStyles} key={uuid()}>
+          {tag}
+        </li>
       ))}
-    </Wrapper>
+    </div>
   )
 }
 

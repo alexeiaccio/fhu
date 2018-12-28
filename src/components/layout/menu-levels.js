@@ -2,10 +2,9 @@
 import { jsx, css } from '@emotion/core'
 import { navigate } from 'gatsby'
 import PropTypes from 'prop-types'
-import uuid from 'uuid/v4'
 import { getContext } from 'recompose'
-import { equals, map, propPathOr } from 'crocks'
 
+import { equals, map, propPathOr, uuid } from '../../utils'
 import { FlexBox, Column } from '../elements/boxes'
 import { TextContent } from '../elements/shared'
 import Appeared from '../elements/appeared'
@@ -39,7 +38,6 @@ const MenuLevels = getContext({
           <FlexBox key={uuid()}>
             <TextContent
               css={type ? chapterStyles : textStyles}
-              key={uuid()}
               onClick={() => {
                 if (type) {
                   if (toggle) {
@@ -56,8 +54,8 @@ const MenuLevels = getContext({
             >
               {title}
             </TextContent>
-            <Appeared key={uuid()} isVisible={isVisible[uid]}>
-              <MenuLevels key={uuid()} items={nextLevelItems} />
+            <Appeared isVisible={isVisible[uid]}>
+              <MenuLevels items={nextLevelItems} />
             </Appeared>
           </FlexBox>
         )

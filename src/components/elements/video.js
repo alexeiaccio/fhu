@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { propPathOr } from 'crocks'
 
+import { propPathOr } from '../../utils'
 import RichContent from './rich-content'
 
 function Video({ primary }) {

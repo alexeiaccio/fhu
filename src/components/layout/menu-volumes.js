@@ -1,11 +1,10 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { css } from '@emotion/core'
-import uuid from 'uuid/v4'
-import { map, propPathOr } from 'crocks'
 import { getContext } from 'recompose'
-
 import { navigate } from 'gatsby'
+
+import { propPathOr, uuid } from '../../utils'
 import { FlexBox } from '../elements/boxes'
 import MenuChapters from './menu-levels'
 import News from './news'
@@ -19,46 +18,38 @@ const valueStyles = css`
 function MenuVolumes({ isVisible, items, toggle }) {
   if (!items) return null
 
-  return (
-    <>
-      {map(({ data, uid }) => {
-        const title = propPathOr(null, ['title', 'text'], data)
-        const chapterItems = propPathOr(null, ['body', 0, 'items'], data)
+  return items.map(({ data, uid }) => {
+    const title = propPathOr(null, ['title', 'text'], data)
+    const chapterItems = propPathOr(null, ['body', 0, 'items'], data)
 
-        if (uid === 'news') {
-          return <News key={uuid()} />
-        }
-        if (!chapterItems) {
-          return (
-            <FlexBox key={uuid()}>
-              <TextContent
-                key={uuid()}
-                css={valueStyles}
-                onClick={() => navigate(uid)}
-              >
-                {title}
-              </TextContent>
-            </FlexBox>
-          )
-        }
+    if (uid === 'news') {
+      return <News key={uuid()} />
+    }
+    if (!chapterItems) {
+      return (
+        <FlexBox key={uuid()}>
+          <TextContent
+            key={uuid()}
+            css={valueStyles}
+            onClick={() => navigate(uid)}
+          >
+            {title}
+          </TextContent>
+        </FlexBox>
+      )
+    }
 
-        return (
-          <FlexBox key={uuid()}>
-            <TextContent
-              key={uuid()}
-              css={valueStyles}
-              onClick={() => toggle(uid, 'volume')}
-            >
-              {title}
-            </TextContent>
-            <Appeared key={uuid()} isVisible={isVisible[uid]}>
-              <MenuChapters key={uuid()} items={chapterItems} />
-            </Appeared>
-          </FlexBox>
-        )
-      }, items)}
-    </>
-  )
+    return (
+      <FlexBox key={uuid()}>
+        <TextContent css={valueStyles} onClick={() => toggle(uid, 'volume')}>
+          {title}
+        </TextContent>
+        <Appeared isVisible={isVisible[uid]}>
+          <MenuChapters items={chapterItems} />
+        </Appeared>
+      </FlexBox>
+    )
+  })
 }
 
 MenuVolumes.propTypes = {
