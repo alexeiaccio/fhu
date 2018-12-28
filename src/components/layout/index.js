@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { Global, jsx, css } from '@emotion/core'
+import { createRef } from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'emotion-theming'
 import { withStateHandlers, lifecycle } from 'recompose'
@@ -41,7 +42,13 @@ const globalStyles = css`
   }
 `
 
-const Layout = ({ children, currentTheme, levels, ...props }) => {
+const Layout = ({
+  children,
+  currentTheme,
+  levels,
+  mainScrollbar,
+  ...props
+}) => {
   const pageDataKey = compose(
     option('nope'),
     chain(prop(0)),
@@ -89,6 +96,7 @@ const Layout = ({ children, currentTheme, levels, ...props }) => {
             css={css`
               margin: 2px 0;
             `}
+            ref={mainScrollbar}
             universal
           >
             <Content>{children}</Content>
@@ -103,12 +111,14 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   currentTheme: PropTypes.string.isRequired,
   levels: PropTypes.objectOf(PropTypes.any).isRequired,
+  mainScrollbar: PropTypes.objectOf(PropTypes.any).isRequired,
 }
 
 export default compose(
   withStateHandlers(
     {
       currentTheme: 'fuchsia',
+      mainScrollbar: createRef(),
     },
     {
       changeTheme: () => current => ({ currentTheme: current }),
@@ -124,6 +134,9 @@ export default compose(
     },
     componentDidUpdate(prevProps) {
       if (prevProps.location.pathname !== this.props.location.pathname) {
+        if (this.props.mainScrollbar.current) {
+          this.props.mainScrollbar.current.scrollTop()
+        }
         if (this.props.location.pathname === '/') {
           this.props.changeTheme('fuchsia')
         } else {
