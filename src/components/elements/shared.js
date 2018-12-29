@@ -6,7 +6,7 @@ export const Outlined = ({ theme }) => css`
   outline-offset: -2px;
 `
 export const OutlinedContainer = styled.div`
-  ${tw(['h-full', 'w-full'])};
+  ${tw(['flex-1', 'w-full'])};
   ${Outlined};
   box-sizing: border-box;
   padding: 2px 0;
@@ -68,7 +68,6 @@ export const MainContent = styled.div`
   ${BlurContent};
   box-sizing: border-box;
   @media (max-width: 768px) {
-    margin-top: 3px;
     width: calc(100% - 3.3rem);
   }
 `

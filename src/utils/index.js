@@ -6,6 +6,7 @@ import isNil from 'crocks/predicates/isNil'
 import map from 'crocks/pointfree/map'
 import not from 'crocks/logic/not'
 import omit from 'crocks/helpers/omit'
+import once from 'crocks/helpers/once'
 import option from 'crocks/pointfree/option'
 import prop from 'crocks/Maybe/prop'
 import propPathOr from 'crocks/helpers/propPathOr'
@@ -21,6 +22,7 @@ export {
   map,
   not,
   omit,
+  once,
   option,
   prop,
   propPathOr,

@@ -29,9 +29,6 @@ const searchIconStyles = ({ isOpen }) => css`
     'md:px-q24',
   ])};
   ${isOpen && tw(['bg-teal'])};
-  @media (max-width: 768px) {
-    top: -3px;
-  }
 `
 
 const Open = ({ isOpen }) => css`
@@ -39,12 +36,8 @@ const Open = ({ isOpen }) => css`
 `
 
 const Wrapper = styled.div`
-  ${tw(['absolute', 'bg-white', 'hidden', 'z-10'])};
+  ${tw(['absolute', 'bg-white', 'hidden', 'pin', 'z-10'])};
   ${Open};
-  bottom: 2px;
-  left: 0;
-  right: 0;
-  top: 2px;
 `
 
 const paddingsStyles = css`

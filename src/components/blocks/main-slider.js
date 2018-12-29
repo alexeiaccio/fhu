@@ -1,4 +1,5 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { PoseGroup } from 'react-pose'
 import { compose, lifecycle } from 'recompose'
@@ -7,11 +8,12 @@ import Slide from '../elements/slide-with-hover'
 import { withRandomState } from '../elements/recomposed'
 
 function Slider({ current, items }) {
-  // const key = once(() => uuid())
   return (
-    <PoseGroup>
+    <PoseGroup current={current}>
       {items.map((item, idx) =>
-        idx === current ? <Slide key={item} item={item} /> : null
+        idx === current ? (
+          <Slide key={`slider-${idx}`} item={item} idx={idx} /> // eslint-disable-line
+        ) : null
       )}
     </PoseGroup>
   )

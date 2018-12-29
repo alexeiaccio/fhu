@@ -13,32 +13,32 @@ import RichContent from './rich-content'
 
 const Transition = posed.div({
   enter: {
+    animateOnMount: true,
     opacity: 1,
-    transition: { duration: 600 },
+    transition: { duration: 800 },
   },
   exit: {
     opacity: 0,
-    transition: { duration: 600 },
+    delay: 800,
+    transition: { duration: 1000 },
   },
 })
 
-const Wrapper = styled(Transition)`
-  ${tw(['relative'])};
+const transitionStyles = css`
+  /* ${tw(['absolute', 'overflow-hidden', 'pin'])}; */
+  & .slide-image {
+    ${tw(['pin'])};
+    right: 2px;
+  }
 `
 
 const Posed = posed.div({
   hoverable: true,
-  pressable: true,
   init: {
     opacity: 0,
-    scale: 1,
   },
   hover: {
     opacity: 1,
-    scale: 1.02,
-  },
-  press: {
-    scale: 1.01,
   },
 })
 
@@ -53,7 +53,7 @@ const Hover = styled(Posed)`
 const ContentLink = Content.withComponent(Link)
 const ButtonLink = FlexBox.withComponent(Link)
 
-function Slide({ item }) {
+function Slide({ item, ...props }) {
   if (!item) return null
 
   const imgSrc = propPathOr(null, ['image'], item)
@@ -85,7 +85,7 @@ function Slide({ item }) {
   ]
 
   return (
-    <Wrapper>
+    <Transition css={transitionStyles} {...props}>
       <Hover
         css={css`
           ${tw(['hidden', 'md:block'])};
@@ -107,7 +107,11 @@ function Slide({ item }) {
           </Column>
         </ContentLink>
       </Hover>
-      <Img src={imgSrc} />
+      <Img
+        className="slide-image"
+        src={imgSrc}
+        style={{ position: 'absolute' }}
+      />
       <Content
         css={css`
           ${tw(['flex', 'flex-col', 'md:hidden'])};
@@ -125,7 +129,7 @@ function Slide({ item }) {
           </ButtonLink>
         )}
       </Content>
-    </Wrapper>
+    </Transition>
   )
 }
 
