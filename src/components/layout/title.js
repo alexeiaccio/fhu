@@ -40,7 +40,7 @@ const query = graphql`
 const Container = styled.div`
   ${Box};
   ${Outlined};
-  ${tw(['flex-no-grow', 'flex-no-shrink', 'p-q12', 'relative', 'md:p-q24'])};
+  ${tw(['flex-no-grow', 'flex-no-shrink', 'p-q12', 'relative', 'md:px-q24'])};
   box-sizing: border-box;
 `
 

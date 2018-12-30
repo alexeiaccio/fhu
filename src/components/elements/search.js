@@ -8,6 +8,7 @@ import { css } from '@emotion/core'
 import { propPathOr, uuid } from '../../utils'
 import { FlexBox, SimpleBox } from './boxes'
 import Tags from './tags'
+import { Outlined } from './shared'
 
 const SearchIcon = FlexBox.withComponent('button')
 const searchIconStyles = ({ isOpen }) => css`
@@ -38,10 +39,11 @@ const Open = ({ isOpen }) => css`
 const Wrapper = styled.div`
   ${tw(['absolute', 'bg-white', 'hidden', 'pin', 'z-10'])};
   ${Open};
+  ${Outlined};
 `
 
 const paddingsStyles = css`
-  ${tw(['p-q12', 'w-full', 'md:p-q24'])};
+  ${tw(['p-q12', 'w-full', 'md:px-q24'])};
   box-sizing: border-box;
 `
 

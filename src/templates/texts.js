@@ -9,8 +9,9 @@ import Related from '../components/elements/related'
 import RichContent from '../components/elements/rich-content'
 import Tags from '../components/elements/tags'
 import TextBody from '../components/blocks/text-body'
+import Layout from '../components/layout'
 
-function TextsPage({ data }) {
+function TextsPage({ data, location }) {
   const textsUid = propPathOr(null, ['texts', 'uid'], data)
   const texts = propPathOr(null, ['texts', 'data'], data)
   const tags = propPathOr(null, ['texts', 'tags'], data)
@@ -41,7 +42,7 @@ function TextsPage({ data }) {
   )
 
   return (
-    <>
+    <Layout location={location}>
       <RichContent
         css={css`
           & h1 {
@@ -74,13 +75,16 @@ function TextsPage({ data }) {
       >
         <Related items={relatedTexts} />
       </aside>
-    </>
+    </Layout>
   )
 }
 
 TextsPage.propTypes = {
   data: PropTypes.shape({
     texts: PropTypes.object.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }).isRequired,
 }
 

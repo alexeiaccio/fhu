@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import Layout from '../components/layout'
 
 const NotFoundPage = () => (
-  <Fragment>
+  <Layout>
     <h1>404 Page Not Found</h1>
-  </Fragment>
+  </Layout>
 )
 
 export default NotFoundPage

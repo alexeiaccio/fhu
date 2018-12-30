@@ -5,6 +5,7 @@ import { css } from '@emotion/core'
 
 import { propPathOr, uuid } from '../utils'
 import Img from '../components/elements/img'
+import Layout from '../components/layout'
 
 const headingStyles = css`
   ${tw(['font-extrabold', 'text-5xxl'])};
@@ -40,11 +41,11 @@ const descStyles = css`
   ${tw(['mt-q12', 'text-sm'])};
 `
 
-function ArchivePage({ data }) {
+function ArchivePage({ data, location }) {
   const news = propPathOr(null, ['news', 'edges'], data)
 
   return (
-    <>
+    <Layout location={location}>
       <h1 css={headingStyles}>Archive</h1>
       <div css={wrapperStyles}>
         {news.map(({ node }) => {
@@ -74,13 +75,16 @@ function ArchivePage({ data }) {
           )
         })}
       </div>
-    </>
+    </Layout>
   )
 }
 
 ArchivePage.propTypes = {
   data: PropTypes.shape({
     news: PropTypes.object.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }).isRequired,
 }
 

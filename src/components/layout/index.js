@@ -46,6 +46,7 @@ const Layout = ({
   children,
   currentTheme,
   levels,
+  location,
   mainScrollbar,
   toggleMenu,
   ...props
@@ -65,8 +66,7 @@ const Layout = ({
     ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
     pageData
   )
-  const pathname = propPathOr('/', ['location', 'pathname'], props)
-  const location = propPathOr(null, ['location'], props)
+  const pathname = propPathOr('/', ['location', 'pathname'], location)
 
   const themes = {
     fuchsia: {
@@ -111,6 +111,9 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   currentTheme: PropTypes.string.isRequired,
   levels: PropTypes.objectOf(PropTypes.any).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
   mainScrollbar: PropTypes.objectOf(PropTypes.any).isRequired,
   toggleMenu: PropTypes.func.isRequired,
 }

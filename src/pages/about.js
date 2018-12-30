@@ -7,6 +7,7 @@ import { equals, map, propPathOr, uuid } from '../utils'
 import Img from '../components/elements/img'
 import RichContent from '../components/elements/rich-content'
 import { RichText } from '../components/elements/rich-text'
+import Layout from '../components/layout'
 
 const headingStyles = css`
   ${tw(['font-extrabold', 'mb-q24', 'text-5xxl'])};
@@ -30,14 +31,14 @@ const textStyles = css`
   ${tw(['mb-q24'])};
 `
 
-function AboutPage({ data }) {
+function AboutPage({ data, location }) {
   const about = propPathOr(null, ['about', 'data'], data)
   const title = propPathOr(null, ['title', 'text'], about)
   const imgSrc = propPathOr(null, ['image', 'full'], about)
   const body = propPathOr([], ['body'], about)
 
   return (
-    <>
+    <Layout location={location}>
       <h1 css={headingStyles}>{title}</h1>
       <Img src={imgSrc} />
       <section css={sectionStyles}>
@@ -75,13 +76,16 @@ function AboutPage({ data }) {
           body
         )}
       </section>
-    </>
+    </Layout>
   )
 }
 
 AboutPage.propTypes = {
   data: PropTypes.shape({
     about: PropTypes.object.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }).isRequired,
 }
 

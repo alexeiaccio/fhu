@@ -3,16 +3,24 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import { propPathOr } from '../utils'
+import Layout from '../components/layout'
 import Slider from '../components/blocks/main-slider'
 
-function IndexPage({ data }) {
+function IndexPage({ data, location }) {
   const items = propPathOr(null, ['homepage', 'edges', 0, 'node', 'items'])
-  return <Slider items={items(data)} />
+  return (
+    <Layout location={location}>
+      <Slider items={items(data)} />
+    </Layout>
+  )
 }
 
 IndexPage.propTypes = {
   data: PropTypes.shape({
     homepage: PropTypes.object.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }).isRequired,
 }
 
