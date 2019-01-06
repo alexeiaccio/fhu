@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Link } from 'gatsby'
+import { StaticQuery, Link, graphql } from 'gatsby'
 
 import { compose, filter, isNil, map, not, propPathOr } from '../../utils'
 import random from '../../utils/random'
@@ -58,16 +58,43 @@ class Title extends Component {
 }
 
 Title.propTypes = {
-  homepage: PropTypes.objectOf(PropTypes.objectOf),
+  homepage: PropTypes.objectOf(PropTypes.objectOf).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
-  slider: PropTypes.objectOf(PropTypes.array),
+  slider: PropTypes.objectOf(PropTypes.array).isRequired,
 }
 
-Title.defaultProps = {
-  homepage: null,
-  slider: null,
-}
+const withStaticQuery = props => (
+  <StaticQuery
+    query={graphql`
+      query {
+        homepage: prismicHomepage {
+          data {
+            title {
+              text
+            }
+          }
+        }
+        slider: allPrismicHomepageBodySlider(
+          filter: { primary: { sliderid: { eq: "titles" } } }
+        ) {
+          edges {
+            node {
+              items {
+                caption {
+                  text
+                }
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={({ homepage, slider }) => (
+      <Title homepage={homepage} slider={slider} {...props} />
+    )}
+  />
+)
 
-export default Title
+export default withStaticQuery

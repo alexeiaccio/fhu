@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
+// import { StaticQuery, Link, graphql } from 'gatsby'
 import { Link } from 'gatsby'
 import { Index } from 'elasticlunr'
 import styled from '@emotion/styled'
@@ -268,7 +269,23 @@ Search.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
-  search: PropTypes.objectOf(PropTypes.object).isRequired,
+  search: PropTypes.objectOf(PropTypes.object),
+}
+
+Search.defaultProps = {
+  search: null,
 }
 
 export default Search
+// export default props => (
+//   <StaticQuery
+//     query={graphql`
+//       query {
+//         search: siteSearchIndex {
+//           index
+//         }
+//       }
+//     `}
+//     render={({ search }) => <Search search={search} {...props} />}
+//   />
+// )

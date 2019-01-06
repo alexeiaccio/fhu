@@ -6,14 +6,14 @@ import { Scrollbars } from 'react-custom-scrollbars'
 
 import Content from './content'
 import globalStyles from './global-styles'
-// import Header from './header'
+import Header from './header'
 import MainContainer from './main-container'
 import MenuContainer from './menu-container'
 import Outlined from './outlined'
 import themes from './themes'
 import '../fonts/stylesheet.css'
 
-function Layout({ children }) {
+function Layout({ children, location }) {
   return (
     <ThemeProvider theme={themes.teal}>
       <Global styles={globalStyles} />
@@ -21,7 +21,7 @@ function Layout({ children }) {
         <Outlined>Menu</Outlined>
       </MenuContainer>
       <MainContainer level="base">
-        {/* <Header location={location}/> */}
+        <Header location={location} />
         <Outlined>
           <Scrollbars universal>
             <Content>{children}</Content>
