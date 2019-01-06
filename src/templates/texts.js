@@ -5,13 +5,24 @@ import { css } from '@emotion/core'
 
 import { compose, chain, filter, map, propPathOr } from '../utils'
 import Img from '../components/elements/img'
+import Layout from '../components/layout'
 import Related from '../components/elements/related'
 import RichContent from '../components/elements/rich-content'
+import Seo from '../components/seo'
 import Tags from '../components/elements/tags'
 import TextBody from '../components/blocks/text-body'
-import Layout from '../components/layout'
 
 function TextsPage({ data, location }) {
+  const pageData = propPathOr(null, ['texts', 'data'], data)
+  const pageTitle = propPathOr(null, ['title', 'text'], pageData)
+  const pageDescription = propPathOr(null, ['description', 'text'], pageData)
+  const pageKeywords = propPathOr(null, ['seokeywords'], pageData)
+  const pageImage = propPathOr(
+    null,
+    ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
+    pageData
+  )
+  const pathname = propPathOr('/', ['location', 'pathname'], location)
   const textsUid = propPathOr(null, ['texts', 'uid'], data)
   const texts = propPathOr(null, ['texts', 'data'], data)
   const tags = propPathOr(null, ['texts', 'tags'], data)
@@ -43,29 +54,38 @@ function TextsPage({ data, location }) {
 
   return (
     <Layout location={location}>
-      <RichContent
-        css={css`
-          & h1 {
-            ${tw([
-              'break-words',
-              'font-extrabold',
-              'mb-q24',
-              'mt-q12',
-              'text-5xl',
-            ])}
-          }
-        `}
-        content={title}
+      <Seo
+        pageTitle={pageTitle}
+        pageDescription={pageDescription}
+        pageKeywords={pageKeywords}
+        pageImage={pageImage}
+        pathname={pathname}
       />
-      <div
-        css={css`
-          ${tw(['absolute', 'm-q12', 'pin-r', 'pin-t', 'z-10'])}
-        `}
-      >
-        <Tags tags={tags} />
-      </div>
-      <Img src={imgSrc} />
-      <TextBody body={body} />
+      <article>
+        <RichContent
+          css={css`
+            & h1 {
+              ${tw([
+                'break-words',
+                'font-extrabold',
+                'mb-q24',
+                'mt-q12',
+                'text-5xl',
+              ])}
+            }
+          `}
+          content={title}
+        />
+        <div
+          css={css`
+            ${tw(['absolute', 'm-q12', 'pin-r', 'pin-t', 'z-10'])}
+          `}
+        >
+          <Tags tags={tags} />
+        </div>
+        <Img src={imgSrc} />
+        <TextBody body={body} />
+      </article>
       <aside
         css={css`
           ${tw(['pb-q24', 'w-full'])};
@@ -100,6 +120,10 @@ export const PageQuery = graphql`
           html
           text
         }
+        description {
+          text
+        }
+        seokeywords
         image {
           url
           localFile {

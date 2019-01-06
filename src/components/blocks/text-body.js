@@ -46,7 +46,7 @@ function TextBody({ body }) {
   if (!body) return null
 
   return (
-    <article css={articleStyles}>
+    <div css={articleStyles}>
       {map(({ __typename, items, primary }) => {
         const textContent = propPathOr(null, ['text', 'html'], primary)
 
@@ -100,7 +100,7 @@ function TextBody({ body }) {
           </section>
         )
       }, body)}
-    </article>
+    </div>
   )
 }
 

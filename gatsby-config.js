@@ -7,7 +7,7 @@ const path = require('path')
 const siteTitle = 'FHU'
 const siteUrl = 'https://fhu.art'
 const siteDescription = 'Free Home University'
-const siteKeywords = 'Gatsby, web'
+const siteKeywords = 'free, home, university'
 const siteThemeColor = '#009688'
 
 // Accounts & API keys

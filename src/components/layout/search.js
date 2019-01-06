@@ -4,16 +4,22 @@ import { Link } from 'gatsby'
 import { Index } from 'elasticlunr'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
+import posed from 'react-pose'
 
 import { propPathOr, uuid } from '../../utils'
-import { FlexBox, SimpleBox } from './boxes'
-import Tags from './tags'
-import { Outlined } from './shared'
+import Tags from '../elements/tags'
+import { outlinedStyles } from './outlined'
 
-const SearchIcon = FlexBox.withComponent('button')
-const searchIconStyles = ({ isOpen }) => css`
+const Hovered = ({ theme }) => css`
+  &:hover {
+    background-color: ${theme.color};
+  }
+`
+
+const SearchIcon = styled.button`
   ${tw([
     'absolute',
+    'bg-white',
     'border-none',
     'cursor-pointer',
     'flex-no-grow',
@@ -26,24 +32,45 @@ const searchIconStyles = ({ isOpen }) => css`
     'pin-t',
     'px-q12',
     'text-lg',
-    'z-30',
+    'z-20',
     'md:px-q24',
   ])};
-  ${isOpen && tw(['bg-teal'])};
+  ${Hovered};
+  ${outlinedStyles};
 `
 
-const Open = ({ isOpen }) => css`
-  ${isOpen && tw(['flex'])};
-`
+const PosedWrapper = posed.div({
+  open: {
+    x: 0,
+    transition: {
+      duration: 600,
+      ease: 'easeOut',
+    },
+  },
+  close: {
+    x: '100%',
+  },
+})
 
 const Wrapper = styled.div`
-  ${tw(['absolute', 'bg-white', 'hidden', 'pin', 'z-10'])};
-  ${Open};
-  ${Outlined};
+  ${tw(['absolute', 'overflow-hidden', 'pin'])};
+  & > .posed-wrapper {
+    ${tw(['absolute', 'pin', 'z-10'])};
+    padding: 4px;
+  }
 `
 
-const paddingsStyles = css`
-  ${tw(['p-q12', 'w-full', 'md:px-q24'])};
+const inputWrapperStyles = css`
+  ${tw([
+    'bg-white',
+    'flex',
+    'h-full',
+    'items-center',
+    'justify-start',
+    'p-q12',
+    'w-full',
+    'md:px-q24',
+  ])};
   box-sizing: border-box;
 `
 
@@ -66,26 +93,53 @@ const Input = styled.input`
   }
 `
 
-const Results = styled.div`
-  ${tw(['absolute', 'hidden', 'pin-b', 'pin-l', 'pin-r', 'z-20'])};
-  ${Open};
+const PosedResults = posed.div({
+  open: {
+    applyAtStart: { opacity: 1 },
+    height: 'auto',
+  },
+  close: {
+    applyAtEnd: { opacity: 0 },
+    height: 0,
+  },
+})
+
+const Results = styled(PosedResults)`
+  ${tw([
+    'absolute',
+    'bg-white',
+    'overflow-hidden',
+    'pin-b',
+    'pin-l',
+    'pin-r',
+    'z-30',
+  ])};
+  ${outlinedStyles};
   transform: translateY(100%);
 `
 
-const ResultsList = SimpleBox.withComponent('ul')
-const resultListStyles = css`
-  ${tw(['py-q8', 'md:py-q20'])};
+const ResultsList = styled.ul`
+  ${tw([
+    'items-stretch',
+    'justify-start',
+    'py-q8',
+    'relative',
+    'max-w-full',
+    'md:py-q20',
+  ])};
 `
+
 const liStyles = css`
   ${tw([
     'inline-block',
     'leading-normal',
     'px-q12',
-    'py-q4',
+    'py-q8',
     'w-full',
     'hover:bg-teal-lighter',
     'md:px-q24',
   ])};
+  box-sizing: border-box;
 `
 const linkStyles = css`
   ${tw(['inline-block', 'w-full'])};
@@ -132,6 +186,8 @@ class Search extends Component {
           .search(query, { expand: true })
           .map(({ ref }) => this.index.documentStore.getDoc(ref)), // Map over each ID and return the full document
       })
+    } else {
+      this.setState({ results: [] })
     }
   }
 
@@ -146,27 +202,27 @@ class Search extends Component {
   render() {
     return (
       <>
-        <SearchIcon
-          css={searchIconStyles}
-          isOpen={!this.state.isOpen}
-          onClick={this.handleClick}
-          type="button"
-        >
+        <SearchIcon onClick={this.handleClick} type="button">
           {this.state.isOpen ? 'Close' : 'Search'}
         </SearchIcon>
-        <Wrapper isOpen={this.state.isOpen}>
-          <div css={paddingsStyles}>
-            <Input
-              onChange={this.search}
-              placeholder="Search"
-              ref={this.input}
-              type="search"
-              value={this.state.query}
-            />
-          </div>
+        <Wrapper>
+          <PosedWrapper
+            className="posed-wrapper"
+            pose={this.state.isOpen ? 'open' : 'close'}
+          >
+            <div css={inputWrapperStyles}>
+              <Input
+                onChange={this.search}
+                placeholder="Search"
+                ref={this.input}
+                type="search"
+                value={this.state.query}
+              />
+            </div>
+          </PosedWrapper>
         </Wrapper>
-        <Results isOpen={this.state.results.length}>
-          <ResultsList css={resultListStyles}>
+        <Results pose={this.state.results.length ? 'open' : 'close'}>
+          <ResultsList>
             {this.state.results.slice(0, 5).map(page => {
               const regex = new RegExp(`(${this.state.query}.+?)(")`, 'gim')
               const regexQuery = new RegExp(

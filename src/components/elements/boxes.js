@@ -1,8 +1,6 @@
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
-import { Outlined } from './shared'
-
 export const Hovered = ({ theme }) => css`
   &:hover {
     background-color: ${theme.color};
@@ -15,7 +13,6 @@ export const Box = css`
 
 export const SimpleBox = styled.div`
   ${Box};
-  ${Outlined};
   ${tw([
     'bg-white',
     'flex',
@@ -31,7 +28,6 @@ export const SimpleBox = styled.div`
 export const FlexBox = styled.div`
   ${Box};
   ${Hovered};
-  ${Outlined};
   ${tw([
     'bg-white',
     'flex',

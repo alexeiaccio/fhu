@@ -19,7 +19,7 @@ const liStyles = css`
     'text-xs',
     'text-white',
   ])};
-  line-height: 1.375rem;
+  line-height: 1.4rem;
   &::after {
     ${tw([
       'absolute',
@@ -43,13 +43,13 @@ function Tags({ tags, ...props }) {
   if (!tags) return null
 
   return (
-    <div css={wrapperStyles} {...props}>
+    <ul css={wrapperStyles} {...props}>
       {tags.map(tag => (
         <li css={liStyles} key={uuid()}>
           {tag}
         </li>
       ))}
-    </div>
+    </ul>
   )
 }
 
