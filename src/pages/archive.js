@@ -6,6 +6,7 @@ import { css } from '@emotion/core'
 import { propPathOr, uuid } from '../utils'
 import Img from '../components/elements/img'
 import Layout from '../components/layout'
+import Seo from '../components/seo'
 
 const headingStyles = css`
   ${tw(['font-extrabold', 'text-5xxl'])};
@@ -42,10 +43,27 @@ const descStyles = css`
 `
 
 function ArchivePage({ data, location }) {
+  const pageData = propPathOr(null, ['seo', 'data'], data)
+  const pageTitle = propPathOr(null, ['title', 'text'], pageData)
+  const pageDescription = propPathOr(null, ['description', 'text'], pageData)
+  const pageKeywords = propPathOr(null, ['seokeywords'], pageData)
+  const pageImage = propPathOr(
+    null,
+    ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
+    pageData
+  )
+  const pathname = propPathOr('/', ['location', 'pathname'], location)
   const news = propPathOr(null, ['news', 'edges'], data)
 
   return (
     <Layout location={location}>
+      <Seo
+        pageTitle={pageTitle}
+        pageDescription={pageDescription}
+        pageKeywords={pageKeywords}
+        pageImage={pageImage}
+        pathname={pathname}
+      />
       <h1 css={headingStyles}>Archive</h1>
       <div css={wrapperStyles}>
         {news.map(({ node }) => {
@@ -92,6 +110,29 @@ export default ArchivePage
 
 export const PageQuery = graphql`
   query ArchiveQuery {
+    seo: prismicHomepage {
+      data {
+        title {
+          text
+        }
+        description {
+          text
+        }
+        seokeywords
+        image {
+          fb {
+            url
+            localFile {
+              childImageSharp {
+                fixed(width: 1200, height: 628) {
+                  src
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     news: allPrismicText(
       filter: { tags: { regex: "/news/i" } }
       sort: { fields: [data___date], order: DESC }

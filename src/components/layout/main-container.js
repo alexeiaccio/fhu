@@ -18,19 +18,7 @@ const Posed = posed.div({
 })
 
 const Container = styled(Posed)`
-  ${tw([
-    'absolute',
-    'flex',
-    'flex-col',
-    'pr-q12',
-    'py-q12',
-    'pin-b',
-    'pin-r',
-    'pin-t',
-    'md:pr-q24',
-    'md:py-q24',
-  ])};
-  box-sizing: border-box;
+  ${tw(['flex', 'flex-grow', 'flex-col'])};
 `
 
 function MainContainer({ children, level }) {

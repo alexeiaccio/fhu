@@ -5,32 +5,24 @@ import styled from '@emotion/styled'
 const Posed = posed.div({
   mobile: {
     width: '100%',
+    maxWidth: '100%',
   },
   base: {
     width: '25%',
+    maxWidth: '320px',
   },
   volume: {
     width: '33%',
+    maxWidth: '480px',
   },
   chapter: {
     width: '66%',
+    maxWidth: '640px',
   },
 })
 
 const Container = styled(Posed)`
-  ${tw([
-    'absolute',
-    'flex',
-    'flex-col',
-    'pl-q12',
-    'py-q12',
-    'pin-b',
-    'pin-l',
-    'pin-t',
-    'md:pl-q24',
-    'md:py-q24',
-  ])};
-  box-sizing: border-box;
+  ${tw(['flex', 'flex-grow', 'flex-col'])};
 `
 
 function MenuContainer({ children, level }) {

@@ -8,17 +8,11 @@ import { uuid } from '../../utils'
 export const Posed = posed.div({
   enter: {
     applyAtStart: { display: 'flex' },
-    height: 'auto',
     opacity: 1,
-    overflow: 'visible',
-    width: 'auto',
   },
   exit: {
     applyAtEnd: { display: 'none' },
-    height: 0,
     opacity: 0,
-    overflow: 'hidden',
-    width: 0,
   },
 })
 
@@ -28,12 +22,17 @@ function Appeared({ children, isVisible }) {
       {isVisible && [
         <Posed
           css={css`
-            ${tw(['cursor-pointer', 'flex-1'])};
+            ${tw([
+              'cursor-pointer',
+              'flex-grow',
+              'flex-no-shrink',
+              'flex-col',
+            ])};
             @media (max-width: 768px) {
               max-width: calc(100% - 2.5rem);
             }
             @media (min-width: 769px) {
-              max-width: calc(100% - 3.25rem);
+              max-width: calc(100% - 2.8rem);
             }
           `}
           key={uuid()}

@@ -8,6 +8,7 @@ import Img from '../components/elements/img'
 import RichContent from '../components/elements/rich-content'
 import { RichText } from '../components/elements/rich-text'
 import Layout from '../components/layout'
+import Seo from '../components/seo'
 
 const headingStyles = css`
   ${tw(['font-extrabold', 'mb-q24', 'text-5xxl'])};
@@ -35,10 +36,25 @@ function AboutPage({ data, location }) {
   const about = propPathOr(null, ['about', 'data'], data)
   const title = propPathOr(null, ['title', 'text'], about)
   const imgSrc = propPathOr(null, ['image', 'full'], about)
+  const description = propPathOr(null, ['description', 'text'], about)
+  const keywords = propPathOr(null, ['seokeywords'], about)
+  const pageImage = propPathOr(
+    null,
+    ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
+    about
+  )
+  const pathname = propPathOr('/', ['location', 'pathname'], location)
   const body = propPathOr([], ['body'], about)
 
   return (
     <Layout location={location}>
+      <Seo
+        pageTitle={title}
+        pageDescription={description}
+        pageKeywords={keywords}
+        pageImage={pageImage}
+        pathname={pathname}
+      />
       <h1 css={headingStyles}>{title}</h1>
       <Img src={imgSrc} />
       <section css={sectionStyles}>
@@ -98,6 +114,10 @@ export const PageQuery = graphql`
         title {
           text
         }
+        description {
+          text
+        }
+        seokeywords
         image {
           full {
             url
@@ -105,6 +125,16 @@ export const PageQuery = graphql`
               childImageSharp {
                 fluid(maxWidth: 1200, jpegProgressive: true) {
                   ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+          fb {
+            url
+            localFile {
+              childImageSharp {
+                fixed(width: 1200, height: 628) {
+                  src
                 }
               }
             }
