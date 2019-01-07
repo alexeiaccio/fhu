@@ -25,10 +25,8 @@ const Transition = posed.div({
 })
 
 const transitionStyles = css`
-  /* ${tw(['absolute', 'overflow-hidden', 'pin'])}; */
   & .slide-image {
-    ${tw(['pin'])};
-    right: 2px;
+    ${tw(['pin', 'm-q12', 'md:m-q24'])};
   }
 `
 

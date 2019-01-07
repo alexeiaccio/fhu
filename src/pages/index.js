@@ -35,7 +35,8 @@ function IndexPage({ data, location }) {
 
 IndexPage.propTypes = {
   data: PropTypes.shape({
-    homepage: PropTypes.object.isRequired,
+    seo: PropTypes.object.isRequired,
+    slider: PropTypes.object.isRequired,
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,

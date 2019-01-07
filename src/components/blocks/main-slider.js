@@ -1,45 +1,74 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/core'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { PoseGroup } from 'react-pose'
-import { compose, lifecycle } from 'recompose'
+import { Helmet } from 'react-helmet'
 
 import Slide from '../elements/slide-with-hover'
-import { withRandomState } from '../elements/recomposed'
+import random from '../../utils/random'
+import { propPathOr, uuid } from '../../utils'
 
-function Slider({ current, items }) {
-  return (
-    <PoseGroup current={current}>
-      {items.map((item, idx) =>
-        idx === current ? (
-          <Slide key={`slider-${idx}`} item={item} idx={idx} /> // eslint-disable-line
-        ) : null
-      )}
-    </PoseGroup>
-  )
+class Slider extends Component {
+  constructor() {
+    super()
+    this.state = {
+      current: [],
+    }
+  }
+
+  componentDidMount() {
+    this.randomize(this.props.items.length - 1)
+    this.randomizer = setInterval(() => {
+      this.randomize(this.props.items.length - 1)
+    }, 6000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.randomizer)
+    this.randomizer = null
+  }
+
+  randomize = length => {
+    this.setState(state => ({
+      current: []
+        .concat(random(length))
+        .concat(state.current)
+        .slice(0, 2),
+    }))
+  }
+
+  render() {
+    const { items } = this.props
+    const { current } = this.state
+    return (
+      <>
+        <Helmet>
+          {items.map(item => {
+            const imgSrc = propPathOr(
+              null,
+              ['image', 'localFile', 'childImageSharp', 'fluid', 'src'],
+              item
+            )
+            return <link key={uuid} rel="preload" href={imgSrc} as="image" />
+          })}
+        </Helmet>
+        <PoseGroup>
+          {items.map((item, idx) =>
+            current.some(x => x === idx) ? (
+              <Slide key={`slider-${idx}`} item={item} /> // eslint-disable-line
+            ) : null
+          )}
+        </PoseGroup>
+      </>
+    )
+  }
 }
 
 Slider.propTypes = {
-  current: PropTypes.number,
   items: PropTypes.arrayOf(PropTypes.object),
 }
 
 Slider.defaultProps = {
-  current: 0,
   items: [],
 }
 
-export default compose(
-  withRandomState,
-  lifecycle({
-    componentDidMount() {
-      this.ranomizer = setInterval(() => {
-        this.props.randomize(this.props.items.length - 1)
-      }, 6000)
-    },
-    componentWillUnmount() {
-      clearInterval(this.ranomizer)
-      this.ranomizer = null
-    },
-  })
-)(Slider)
+export default Slider
