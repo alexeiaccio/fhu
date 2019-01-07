@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
-// import { StaticQuery, Link, graphql } from 'gatsby'
-import { Link } from 'gatsby'
+import { StaticQuery, Link, graphql } from 'gatsby'
+// import { Link } from 'gatsby'
 import { Index } from 'elasticlunr'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
@@ -276,16 +276,17 @@ Search.defaultProps = {
   search: null,
 }
 
-export default Search
-// export default props => (
-//   <StaticQuery
-//     query={graphql`
-//       query {
-//         search: siteSearchIndex {
-//           index
-//         }
-//       }
-//     `}
-//     render={({ search }) => <Search search={search} {...props} />}
-//   />
-// )
+const withStaticQuery = props => (
+  <StaticQuery
+    query={graphql`
+      query {
+        search: siteSearchIndex {
+          index
+        }
+      }
+    `}
+    render={({ search }) => <Search search={search} {...props} />}
+  />
+)
+
+export default withStaticQuery

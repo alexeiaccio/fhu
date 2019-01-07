@@ -52,13 +52,20 @@ module.exports = {
     {
       resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
       options: {
-        // Fields to index
-        fields: [`title`, `data`],
-        // How to resolve each field`s value for a supported node type
+        fields: [`title`, `data`, `tags`],
         resolvers: {
-          // For any node of type prismicText, list how to resolve the fields` values
           PrismicText: {
-            data: node => node.dataString,
+            data: node => {
+              const str = node.dataString
+              const regexp = new RegExp('(?:text":")(.+?)(?:",")', 'gi')
+              const arr = []
+              let result
+              // eslint-disable-next-line no-cond-assign
+              while ((result = regexp.exec(str))) {
+                arr.push(result[1])
+              }
+              return arr.join(' ').replace(/\\n?/g, '')
+            },
             tags: node => node.tags,
             title: node => node.data.title.text,
             uid: node => node.uid,
