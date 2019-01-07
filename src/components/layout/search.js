@@ -10,7 +10,7 @@ import { propPathOr, uuid } from '../../utils'
 import Tags from '../elements/tags'
 import { outlinedStyles } from './outlined'
 
-const Hovered = ({ theme }) => css`
+const hovered = ({ theme }) => css`
   &:hover {
     background-color: ${theme.color};
   }
@@ -35,7 +35,7 @@ const SearchIcon = styled.button`
     'z-20',
     'md:px-q24',
   ])};
-  ${Hovered};
+  ${hovered};
   ${outlinedStyles};
 `
 
@@ -52,12 +52,20 @@ const PosedWrapper = posed.div({
   },
 })
 
-const Wrapper = styled.div`
-  ${tw(['absolute', 'overflow-hidden', 'pin'])};
+const opened = ({ isOpen }) => css`
+  &,
   & > .posed-wrapper {
-    ${tw(['absolute', 'pin', 'z-10'])};
+    ${isOpen && tw(['pin'])};
+  }
+`
+
+const Wrapper = styled.div`
+  ${tw(['absolute', 'overflow-hidden'])};
+  & > .posed-wrapper {
+    ${tw(['absolute', 'z-10'])};
     padding: 4px;
   }
+  ${opened};
 `
 
 const inputWrapperStyles = css`
@@ -154,9 +162,14 @@ class Search extends Component {
     this.input = createRef()
     this.state = {
       isOpen: false,
+      mount: false,
       query: '',
       results: [],
     }
+  }
+
+  componentDidMount() {
+    this.handleMount()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -165,6 +178,12 @@ class Search extends Component {
     }
     if (this.state.isOpen && !prevState.isOpen) {
       this.input.current.focus()
+    }
+  }
+
+  handleMount = () => {
+    if (this.props.search) {
+      this.setState({ mount: true })
     }
   }
 
@@ -200,12 +219,14 @@ class Search extends Component {
   }
 
   render() {
+    if (!this.state.mount) return null
+
     return (
       <>
         <SearchIcon onClick={this.handleClick} type="button">
           {this.state.isOpen ? 'Close' : 'Search'}
         </SearchIcon>
-        <Wrapper>
+        <Wrapper isOpen={this.state.isOpen}>
           <PosedWrapper
             className="posed-wrapper"
             pose={this.state.isOpen ? 'open' : 'close'}
