@@ -20,7 +20,7 @@ function IndexPage({ data, location }) {
   const pathname = propPathOr('/', ['location', 'pathname'], location)
   const items = propPathOr(null, ['slider', 'edges', 0, 'node', 'items'])
   return (
-    <Layout location={location}>
+    <Layout>
       <Seo
         pageTitle={pageTitle}
         pageDescription={pageDescription}

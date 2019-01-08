@@ -15,18 +15,25 @@ const Transition = posed.div({
   enter: {
     animateOnMount: true,
     opacity: 1,
-    transition: { duration: 800 },
+    transition: { duration: 600 },
+    x: 0,
   },
   exit: {
     opacity: 0,
     delay: 800,
-    transition: { duration: 1000 },
+    transition: { duration: 400 },
+    x: ({ current, idx }) => current === idx && 24,
   },
 })
 
 const transitionStyles = css`
+  ${tw(['md:absolute', 'md:max-w-full', 'md:overflow-hidden', 'md:pin'])};
+`
+
+const imageWrapperStyles = css`
+  ${tw(['pb-2/3', 'relative', 'w-full', 'md:absolute', 'md:pin', 'md:p-0'])};
   & .slide-image {
-    ${tw(['pin', 'm-q12', 'md:m-q24'])};
+    ${tw(['pin', 'md:m-q24'])};
   }
 `
 
@@ -105,11 +112,13 @@ function Slide({ item, ...props }) {
           </Column>
         </ContentLink>
       </Hover>
-      <Img
-        className="slide-image"
-        src={imgSrc}
-        style={{ position: 'absolute' }}
-      />
+      <div css={imageWrapperStyles}>
+        <Img
+          className="slide-image"
+          src={imgSrc}
+          style={{ position: 'absolute' }}
+        />
+      </div>
       <Content
         css={css`
           ${tw(['flex', 'flex-col', 'md:hidden'])};

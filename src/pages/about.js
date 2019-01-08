@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
@@ -11,7 +11,7 @@ import Layout from '../components/layout'
 import Seo from '../components/seo'
 
 const headingStyles = css`
-  ${tw(['font-extrabold', 'mb-q24', 'text-5xxl'])};
+  ${tw(['font-extrabold', 'mb-q24', 'text-5xl'])};
 `
 
 const sectionStyles = css`
@@ -47,7 +47,7 @@ function AboutPage({ data, location }) {
   const body = propPathOr([], ['body'], about)
 
   return (
-    <Layout location={location}>
+    <Layout>
       <Seo
         pageTitle={title}
         pageDescription={description}
@@ -62,7 +62,7 @@ function AboutPage({ data, location }) {
           const textContent = propPathOr(null, ['text', 'html'], primary)
 
           return (
-            <>
+            <Fragment key={uuid()}>
               {equals(__typename, 'PrismicAboutBodyText') && (
                 <RichContent
                   content={textContent}
@@ -70,14 +70,14 @@ function AboutPage({ data, location }) {
                   key={uuid()}
                 />
               )}
-            </>
+            </Fragment>
           )
         }, body)}
       </section>
       <section css={logoStyles}>
         {map(
           ({ __typename, items }) => (
-            <>
+            <Fragment key={uuid()}>
               {equals(__typename, 'PrismicAboutBodyImage') && (
                 <>
                   {items.map(src =>
@@ -87,7 +87,7 @@ function AboutPage({ data, location }) {
                   )}
                 </>
               )}
-            </>
+            </Fragment>
           ),
           body
         )}

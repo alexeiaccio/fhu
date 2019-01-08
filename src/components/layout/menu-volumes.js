@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
+import styled from '@emotion/styled'
 
 import { propPathOr, uuid } from '../../utils'
 import Appeared from './appeared'
@@ -10,14 +11,17 @@ import MenuLevels from './menu-levels'
 import News from './news'
 import Outlined from './outlined'
 import { Consumer } from './context'
+import hovered from './hovered'
 
-const rowStyles = css`
-  ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full'])};
+const OutlinedRow = styled(Outlined)`
+  ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full', 'p-0'])};
+  ${hovered};
   flex: 1 0 auto;
 `
 
 const volumeStyles = css`
   ${tw(['font-extrabold'])};
+  flex: 1 0 auto;
 `
 
 function MenuVolumes({ isVisible, items, toggle }) {
@@ -32,7 +36,7 @@ function MenuVolumes({ isVisible, items, toggle }) {
     }
     if (!chapterItems) {
       return (
-        <Outlined css={rowStyles} key={uuid()}>
+        <OutlinedRow key={uuid()}>
           <Content
             key={uuid()}
             css={volumeStyles}
@@ -40,12 +44,12 @@ function MenuVolumes({ isVisible, items, toggle }) {
           >
             {title}
           </Content>
-        </Outlined>
+        </OutlinedRow>
       )
     }
 
     return (
-      <Outlined css={rowStyles} key={uuid()}>
+      <OutlinedRow key={uuid()}>
         <Content css={volumeStyles} onClick={() => toggle(uid, 'volume')}>
           {title}
         </Content>
@@ -65,7 +69,7 @@ function MenuVolumes({ isVisible, items, toggle }) {
             )}
           </Consumer>
         </Appeared>
-      </Outlined>
+      </OutlinedRow>
     )
   })
 }

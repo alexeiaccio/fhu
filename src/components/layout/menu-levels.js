@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import styled from '@emotion/styled'
 import { navigate } from 'gatsby'
 
 import { equals, propPathOr, uuid } from '../../utils'
@@ -8,14 +9,17 @@ import Appeared from './appeared'
 import Content from './content'
 import Outlined from './outlined'
 import { Consumer } from './context'
+import hovered from './hovered'
 
-const rowStyles = css`
-  ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full'])};
+const OutlinedRow = styled(Outlined)`
+  ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full', 'p-0'])};
+  ${hovered};
   flex: 1 0 auto;
 `
 
 const chapterStyles = css`
   ${tw(['font-extrabold', 'truncate'])};
+  flex: 1 0 auto;
 `
 
 const textStyles = css`
@@ -34,7 +38,7 @@ function MenuLevels({ isVisible, items, toggle, toggleMenu }) {
     const nextLevelItems = propPathOr(null, ['body', 0, 'items'], data)
 
     return (
-      <Outlined css={rowStyles} key={uuid()}>
+      <OutlinedRow key={uuid()}>
         <Content
           css={type ? chapterStyles : textStyles}
           onClick={() => {
@@ -69,7 +73,7 @@ function MenuLevels({ isVisible, items, toggle, toggleMenu }) {
             )}
           </Consumer>
         </Appeared>
-      </Outlined>
+      </OutlinedRow>
     )
   })
 }

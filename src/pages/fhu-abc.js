@@ -42,7 +42,7 @@ const descStyles = css`
   ${tw(['mt-q12', 'text-sm'])};
 `
 
-function ArchivePage({ data, location }) {
+function AbcPage({ data, location }) {
   const pageData = propPathOr(null, ['seo', 'data'], data)
   const pageTitle = propPathOr(null, ['title', 'text'], pageData)
   const pageDescription = propPathOr(null, ['description', 'text'], pageData)
@@ -53,7 +53,7 @@ function ArchivePage({ data, location }) {
     pageData
   )
   const pathname = propPathOr('/', ['location', 'pathname'], location)
-  const news = propPathOr([], ['news', 'edges'], data)
+  const abc = propPathOr([], ['abc', 'edges'], data)
 
   return (
     <Layout>
@@ -64,9 +64,9 @@ function ArchivePage({ data, location }) {
         pageImage={pageImage}
         pathname={pathname}
       />
-      <h1 css={headingStyles}>Archive</h1>
+      <h1 css={headingStyles}>FHU ABC</h1>
       <div css={wrapperStyles}>
-        {news.map(({ node }) => {
+        {abc.map(({ node }) => {
           const uid = propPathOr(null, ['uid'], node)
           const date = propPathOr(null, ['data', 'date'], node)
           const title = propPathOr(null, ['data', 'title', 'text'], node)
@@ -97,19 +97,19 @@ function ArchivePage({ data, location }) {
   )
 }
 
-ArchivePage.propTypes = {
+AbcPage.propTypes = {
   data: PropTypes.shape({
-    news: PropTypes.object,
+    abc: PropTypes.object,
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
 }
 
-export default ArchivePage
+export default AbcPage
 
 export const PageQuery = graphql`
-  query ArchiveQuery {
+  query AbcQuery {
     seo: prismicHomepage {
       data {
         title {
@@ -133,8 +133,8 @@ export const PageQuery = graphql`
         }
       }
     }
-    news: allPrismicText(
-      filter: { tags: { regex: "/news/i" } }
+    abc: allPrismicText(
+      filter: { tags: { regex: "/abc/i" } }
       sort: { fields: [data___date], order: DESC }
     ) {
       edges {

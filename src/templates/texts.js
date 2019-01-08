@@ -53,7 +53,7 @@ function TextsPage({ data, location }) {
   )
 
   return (
-    <Layout location={location}>
+    <Layout>
       <Seo
         pageTitle={pageTitle}
         pageDescription={pageDescription}
@@ -69,7 +69,7 @@ function TextsPage({ data, location }) {
                 'break-words',
                 'font-extrabold',
                 'mb-q24',
-                'mt-q12',
+                'mt-q24',
                 'text-5xl',
               ])}
             }

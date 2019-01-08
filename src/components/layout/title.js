@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { StaticQuery, Link, graphql } from 'gatsby'
+import { Location } from '@reach/router'
 
 import { compose, filter, isNil, map, not, propPathOr } from '../../utils'
 import random from '../../utils/random'
@@ -14,13 +15,17 @@ class Title extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
+  componentDidUpdate(_, prevState) {
+    if (
+      this.props.location.pathname !== '/' &&
+      prevState.current === this.state.current
+    ) {
       const items = propPathOr(
         [],
         ['slider', 'edges', 0, 'node', 'items'],
         this.props
       )
+
       this.randomize(items.length - 1)
     }
   }
@@ -47,7 +52,7 @@ class Title extends Component {
       <Link to="/">
         <h1
           css={css`
-            ${tw(['font-extrabold', 'text-3xl'])};
+            ${tw(['font-extrabold', 'pr-q96', 'text-3xl'])};
           `}
         >
           {currentTitle}
@@ -65,36 +70,40 @@ Title.propTypes = {
   slider: PropTypes.objectOf(PropTypes.array).isRequired,
 }
 
-const withStaticQuery = props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        homepage: prismicHomepage {
-          data {
-            title {
-              text
-            }
-          }
-        }
-        slider: allPrismicHomepageBodySlider(
-          filter: { primary: { sliderid: { eq: "titles" } } }
-        ) {
-          edges {
-            node {
-              items {
-                caption {
+const withStaticQuery = () => (
+  <Location>
+    {({ location }) => (
+      <StaticQuery
+        query={graphql`
+          query {
+            homepage: prismicHomepage {
+              data {
+                title {
                   text
                 }
               }
             }
+            slider: allPrismicHomepageBodySlider(
+              filter: { primary: { sliderid: { eq: "titles" } } }
+            ) {
+              edges {
+                node {
+                  items {
+                    caption {
+                      text
+                    }
+                  }
+                }
+              }
+            }
           }
-        }
-      }
-    `}
-    render={({ homepage, slider }) => (
-      <Title homepage={homepage} slider={slider} {...props} />
+        `}
+        render={({ homepage, slider }) => (
+          <Title homepage={homepage} location={location} slider={slider} />
+        )}
+      />
     )}
-  />
+  </Location>
 )
 
 export default withStaticQuery

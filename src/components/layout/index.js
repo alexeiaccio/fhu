@@ -1,8 +1,9 @@
 import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
-import { Global, css } from '@emotion/core'
+import { Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import { Scrollbars } from 'react-custom-scrollbars'
+import { Location } from '@reach/router'
 
 import About from './about'
 import Content from './content'
@@ -18,10 +19,6 @@ import themes from './themes'
 import { Provider, Consumer } from './context'
 
 import '../fonts/stylesheet.css'
-
-const mainContainerStyles = css`
-  padding: 2px;
-`
 
 class Layout extends Component {
   constructor() {
@@ -41,10 +38,9 @@ class Layout extends Component {
     } else {
       this.changeTheme('teal')
     }
-    if (window !== undefined && window.innerWidth < 769) {
-      this.handleMobile(true)
-    } else if (window.innerWidth > 768) {
-      this.handleMobile(false)
+    this.handleMobile()
+    if (window !== undefined) {
+      window.addEventListener('resize', this.handleMobile)
     }
   }
 
@@ -60,20 +56,22 @@ class Layout extends Component {
         this.changeTheme('teal')
       }
     }
-    if (
-      this.props !== prevProps &&
-      !this.state.isMobile &&
-      window !== undefined &&
-      window.innerWidth < 769
-    ) {
-      this.handleMobile(true)
-    } else if (this.state.isMobile && window.innerWidth > 768) {
-      this.handleMobile(false)
+  }
+
+  componentWillUnmount() {
+    if (window !== undefined) {
+      window.removeEventListener('resize', this.handleMobile)
     }
   }
 
-  handleMobile = value => {
-    this.setState({ isMobile: value })
+  handleMobile = () => {
+    if (window !== undefined) {
+      if (!this.state.isMobile && window.innerWidth < 769) {
+        this.setState({ isMobile: true })
+      } else if (this.state.isMobile && window.innerWidth > 768) {
+        this.setState({ isMobile: false })
+      }
+    }
   }
 
   changeTheme = current => {
@@ -93,7 +91,7 @@ class Layout extends Component {
   toggleMenu = value => this.setState({ isMenu: value, isVisible: {} })
 
   render() {
-    const { children, location } = this.props
+    const { children } = this.props
     const { currentTheme, isMenu, isMobile, isVisible } = this.state
     const { toggle, toggleMenu } = this
     const getLevel = (levels, level) =>
@@ -130,8 +128,8 @@ class Layout extends Component {
                 </Outlined>
               </MenuContainer>
             )}
-            <MainContainer css={mainContainerStyles} level={level}>
-              <Header location={location} />
+            <MainContainer level={level}>
+              <Header />
               <Outlined>
                 <Scrollbars ref={this.mainScrollbar} universal>
                   <Content>{children}</Content>
@@ -152,4 +150,10 @@ Layout.propTypes = {
   }).isRequired,
 }
 
-export default Layout
+const withLocation = props => (
+  <Location>
+    {({ location }) => <Layout location={location} {...props} />}
+  </Location>
+)
+
+export default withLocation

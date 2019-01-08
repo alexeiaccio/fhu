@@ -19,7 +19,7 @@ class Slider extends Component {
     this.randomize(this.props.items.length - 1)
     this.randomizer = setInterval(() => {
       this.randomize(this.props.items.length - 1)
-    }, 6000)
+    }, 3000)
   }
 
   componentWillUnmount() {
@@ -28,9 +28,14 @@ class Slider extends Component {
   }
 
   randomize = length => {
+    const makeRandom = random(length)
     this.setState(state => ({
       current: []
-        .concat(random(length))
+        .concat(
+          state.current.some(x => x === makeRandom)
+            ? random(length)
+            : makeRandom
+        )
         .concat(state.current)
         .slice(0, 2),
     }))
@@ -39,6 +44,7 @@ class Slider extends Component {
   render() {
     const { items } = this.props
     const { current } = this.state
+
     return (
       <>
         <Helmet>
@@ -51,10 +57,10 @@ class Slider extends Component {
             return <link key={uuid} rel="preload" href={imgSrc} as="image" />
           })}
         </Helmet>
-        <PoseGroup>
+        <PoseGroup current={current[0]}>
           {items.map((item, idx) =>
-            current.some(x => x === idx) ? (
-              <Slide key={`slider-${idx}`} item={item} /> // eslint-disable-line
+            current[0] === idx ? (
+              <Slide key={`slider-${idx}`} item={item} idx={idx} /> // eslint-disable-line
             ) : null
           )}
         </PoseGroup>

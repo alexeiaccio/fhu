@@ -5,6 +5,7 @@ import { Index } from 'elasticlunr'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import posed from 'react-pose'
+import { Location } from '@reach/router'
 
 import { propPathOr, uuid } from '../../utils'
 import Tags from '../elements/tags'
@@ -296,17 +297,21 @@ Search.defaultProps = {
   search: null,
 }
 
-const withStaticQuery = props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        search: siteSearchIndex {
-          index
-        }
-      }
-    `}
-    render={({ search }) => <Search search={search} {...props} />}
-  />
+const withStaticQuery = () => (
+  <Location>
+    {({ location }) => (
+      <StaticQuery
+        query={graphql`
+          query {
+            search: siteSearchIndex {
+              index
+            }
+          }
+        `}
+        render={({ search }) => <Search search={search} location={location} />}
+      />
+    )}
+  </Location>
 )
 
 export default withStaticQuery

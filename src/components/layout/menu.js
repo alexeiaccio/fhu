@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import styled from '@emotion/styled'
 import { StaticQuery, graphql } from 'gatsby'
 
 import {
@@ -17,6 +18,7 @@ import Content from './content'
 import MenuVolumes from './menu-volumes'
 import Outlined from './outlined'
 import { Consumer } from './context'
+import hovered from './hovered'
 
 const navStyles = css`
   ${tw([
@@ -29,15 +31,19 @@ const navStyles = css`
     'md:flex-shrink',
   ])};
   flex-basis: auto;
-  margin-top: -2px;
 `
 
-const rowStyles = css`
-  ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full'])};
+const OutlinedRow = styled(Outlined)`
+  ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full', 'p-0'])};
+  ${hovered};
 `
 
 const valueStyles = css`
-  ${tw(['capitalize', 'cursor-pointer', 'font-extrabold'])};
+  ${tw(['capitalize', 'font-extrabold'])};
+  &::before {
+    content: '';
+    ${tw('absolute', 'pin')};
+  }
 `
 
 function Menu({ data, isVisible, toggle }) {
@@ -58,7 +64,7 @@ function Menu({ data, isVisible, toggle }) {
 
         if (equals(menuId, 'sessions')) {
           return (
-            <Outlined css={rowStyles} key={uuid()}>
+            <OutlinedRow key={uuid()}>
               <Content
                 css={valueStyles}
                 onClick={() => toggle(menuId, 'volume')}
@@ -76,7 +82,7 @@ function Menu({ data, isVisible, toggle }) {
                   )}
                 </Consumer>
               </Appeared>
-            </Outlined>
+            </OutlinedRow>
           )
         }
 

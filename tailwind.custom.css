@@ -5224,6 +5224,10 @@ table {
   padding: 8.33333%;
 }
 
+.p-2\/3 {
+  padding: 66.66667%;
+}
+
 .p-full {
   padding: 100%;
 }
@@ -5546,6 +5550,16 @@ table {
 .px-1\/6 {
   padding-left: 8.33333%;
   padding-right: 8.33333%;
+}
+
+.py-2\/3 {
+  padding-top: 66.66667%;
+  padding-bottom: 66.66667%;
+}
+
+.px-2\/3 {
+  padding-left: 66.66667%;
+  padding-right: 66.66667%;
 }
 
 .py-full {
@@ -6068,6 +6082,22 @@ table {
 
 .pl-1\/6 {
   padding-left: 8.33333%;
+}
+
+.pt-2\/3 {
+  padding-top: 66.66667%;
+}
+
+.pr-2\/3 {
+  padding-right: 66.66667%;
+}
+
+.pb-2\/3 {
+  padding-bottom: 66.66667%;
+}
+
+.pl-2\/3 {
+  padding-left: 66.66667%;
 }
 
 .pt-full {
@@ -12520,6 +12550,10 @@ table {
     padding: 8.33333%;
   }
 
+  .sm\:p-2\/3 {
+    padding: 66.66667%;
+  }
+
   .sm\:p-full {
     padding: 100%;
   }
@@ -12842,6 +12876,16 @@ table {
   .sm\:px-1\/6 {
     padding-left: 8.33333%;
     padding-right: 8.33333%;
+  }
+
+  .sm\:py-2\/3 {
+    padding-top: 66.66667%;
+    padding-bottom: 66.66667%;
+  }
+
+  .sm\:px-2\/3 {
+    padding-left: 66.66667%;
+    padding-right: 66.66667%;
   }
 
   .sm\:py-full {
@@ -13364,6 +13408,22 @@ table {
 
   .sm\:pl-1\/6 {
     padding-left: 8.33333%;
+  }
+
+  .sm\:pt-2\/3 {
+    padding-top: 66.66667%;
+  }
+
+  .sm\:pr-2\/3 {
+    padding-right: 66.66667%;
+  }
+
+  .sm\:pb-2\/3 {
+    padding-bottom: 66.66667%;
+  }
+
+  .sm\:pl-2\/3 {
+    padding-left: 66.66667%;
   }
 
   .sm\:pt-full {
@@ -19805,6 +19865,10 @@ table {
     padding: 8.33333%;
   }
 
+  .md\:p-2\/3 {
+    padding: 66.66667%;
+  }
+
   .md\:p-full {
     padding: 100%;
   }
@@ -20127,6 +20191,16 @@ table {
   .md\:px-1\/6 {
     padding-left: 8.33333%;
     padding-right: 8.33333%;
+  }
+
+  .md\:py-2\/3 {
+    padding-top: 66.66667%;
+    padding-bottom: 66.66667%;
+  }
+
+  .md\:px-2\/3 {
+    padding-left: 66.66667%;
+    padding-right: 66.66667%;
   }
 
   .md\:py-full {
@@ -20649,6 +20723,22 @@ table {
 
   .md\:pl-1\/6 {
     padding-left: 8.33333%;
+  }
+
+  .md\:pt-2\/3 {
+    padding-top: 66.66667%;
+  }
+
+  .md\:pr-2\/3 {
+    padding-right: 66.66667%;
+  }
+
+  .md\:pb-2\/3 {
+    padding-bottom: 66.66667%;
+  }
+
+  .md\:pl-2\/3 {
+    padding-left: 66.66667%;
   }
 
   .md\:pt-full {
@@ -27090,6 +27180,10 @@ table {
     padding: 8.33333%;
   }
 
+  .lg\:p-2\/3 {
+    padding: 66.66667%;
+  }
+
   .lg\:p-full {
     padding: 100%;
   }
@@ -27412,6 +27506,16 @@ table {
   .lg\:px-1\/6 {
     padding-left: 8.33333%;
     padding-right: 8.33333%;
+  }
+
+  .lg\:py-2\/3 {
+    padding-top: 66.66667%;
+    padding-bottom: 66.66667%;
+  }
+
+  .lg\:px-2\/3 {
+    padding-left: 66.66667%;
+    padding-right: 66.66667%;
   }
 
   .lg\:py-full {
@@ -27934,6 +28038,22 @@ table {
 
   .lg\:pl-1\/6 {
     padding-left: 8.33333%;
+  }
+
+  .lg\:pt-2\/3 {
+    padding-top: 66.66667%;
+  }
+
+  .lg\:pr-2\/3 {
+    padding-right: 66.66667%;
+  }
+
+  .lg\:pb-2\/3 {
+    padding-bottom: 66.66667%;
+  }
+
+  .lg\:pl-2\/3 {
+    padding-left: 66.66667%;
   }
 
   .lg\:pt-full {
@@ -34375,6 +34495,10 @@ table {
     padding: 8.33333%;
   }
 
+  .xl\:p-2\/3 {
+    padding: 66.66667%;
+  }
+
   .xl\:p-full {
     padding: 100%;
   }
@@ -34697,6 +34821,16 @@ table {
   .xl\:px-1\/6 {
     padding-left: 8.33333%;
     padding-right: 8.33333%;
+  }
+
+  .xl\:py-2\/3 {
+    padding-top: 66.66667%;
+    padding-bottom: 66.66667%;
+  }
+
+  .xl\:px-2\/3 {
+    padding-left: 66.66667%;
+    padding-right: 66.66667%;
   }
 
   .xl\:py-full {
@@ -35219,6 +35353,22 @@ table {
 
   .xl\:pl-1\/6 {
     padding-left: 8.33333%;
+  }
+
+  .xl\:pt-2\/3 {
+    padding-top: 66.66667%;
+  }
+
+  .xl\:pr-2\/3 {
+    padding-right: 66.66667%;
+  }
+
+  .xl\:pb-2\/3 {
+    padding-bottom: 66.66667%;
+  }
+
+  .xl\:pl-2\/3 {
+    padding-left: 66.66667%;
   }
 
   .xl\:pt-full {
@@ -41660,6 +41810,10 @@ table {
     padding: 8.33333%;
   }
 
+  .screen\:p-2\/3 {
+    padding: 66.66667%;
+  }
+
   .screen\:p-full {
     padding: 100%;
   }
@@ -41982,6 +42136,16 @@ table {
   .screen\:px-1\/6 {
     padding-left: 8.33333%;
     padding-right: 8.33333%;
+  }
+
+  .screen\:py-2\/3 {
+    padding-top: 66.66667%;
+    padding-bottom: 66.66667%;
+  }
+
+  .screen\:px-2\/3 {
+    padding-left: 66.66667%;
+    padding-right: 66.66667%;
   }
 
   .screen\:py-full {
@@ -42504,6 +42668,22 @@ table {
 
   .screen\:pl-1\/6 {
     padding-left: 8.33333%;
+  }
+
+  .screen\:pt-2\/3 {
+    padding-top: 66.66667%;
+  }
+
+  .screen\:pr-2\/3 {
+    padding-right: 66.66667%;
+  }
+
+  .screen\:pb-2\/3 {
+    padding-bottom: 66.66667%;
+  }
+
+  .screen\:pl-2\/3 {
+    padding-left: 66.66667%;
   }
 
   .screen\:pt-full {
@@ -48945,6 +49125,10 @@ table {
     padding: 8.33333%;
   }
 
+  .desktop\:p-2\/3 {
+    padding: 66.66667%;
+  }
+
   .desktop\:p-full {
     padding: 100%;
   }
@@ -49267,6 +49451,16 @@ table {
   .desktop\:px-1\/6 {
     padding-left: 8.33333%;
     padding-right: 8.33333%;
+  }
+
+  .desktop\:py-2\/3 {
+    padding-top: 66.66667%;
+    padding-bottom: 66.66667%;
+  }
+
+  .desktop\:px-2\/3 {
+    padding-left: 66.66667%;
+    padding-right: 66.66667%;
   }
 
   .desktop\:py-full {
@@ -49789,6 +49983,22 @@ table {
 
   .desktop\:pl-1\/6 {
     padding-left: 8.33333%;
+  }
+
+  .desktop\:pt-2\/3 {
+    padding-top: 66.66667%;
+  }
+
+  .desktop\:pr-2\/3 {
+    padding-right: 66.66667%;
+  }
+
+  .desktop\:pb-2\/3 {
+    padding-bottom: 66.66667%;
+  }
+
+  .desktop\:pl-2\/3 {
+    padding-left: 66.66667%;
   }
 
   .desktop\:pt-full {
