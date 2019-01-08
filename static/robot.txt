@@ -1,0 +1,7 @@
+User-agent: Yandex
+Allow: /
+sitemap: https://www.fhu.art/sitemap.xml
+
+User-agent: *
+Allow: /
+sitemap: https://www.fhu.art/sitemap.xml
