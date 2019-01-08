@@ -7,6 +7,10 @@ const Posed = posed.div({
     width: '100%',
     maxWidth: '100%',
   },
+  closed: {
+    width: '0%',
+    maxWidth: '0%',
+  },
   base: {
     width: '25%',
     maxWidth: '320px',

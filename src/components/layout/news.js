@@ -57,7 +57,7 @@ function News({ news }) {
 }
 
 News.propTypes = {
-  news: PropTypes.objectOf(PropTypes.object).isRequired,
+  news: PropTypes.objectOf(PropTypes.array).isRequired,
 }
 
 const withStaticQuery = memo(props => (

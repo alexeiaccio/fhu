@@ -16,7 +16,7 @@ const rowStyles = css`
   flex: 1 0 auto;
 `
 
-const valumeStyles = css`
+const volumeStyles = css`
   ${tw(['font-extrabold'])};
 `
 
@@ -35,7 +35,7 @@ function MenuVolumes({ isVisible, items, toggle }) {
         <Outlined css={rowStyles} key={uuid()}>
           <Content
             key={uuid()}
-            css={valumeStyles}
+            css={volumeStyles}
             onClick={() => navigate(uid)}
           >
             {title}
@@ -46,7 +46,7 @@ function MenuVolumes({ isVisible, items, toggle }) {
 
     return (
       <Outlined css={rowStyles} key={uuid()}>
-        <Content css={valumeStyles} onClick={() => toggle(uid, 'volume')}>
+        <Content css={volumeStyles} onClick={() => toggle(uid, 'volume')}>
           {title}
         </Content>
         <Appeared isVisible={!!isVisible[uid]} key={uuid()}>

@@ -3,9 +3,6 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 const Posed = posed.div({
-  mobile: {
-    width: '100%',
-  },
   base: {
     width: '75%',
   },

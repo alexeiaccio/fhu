@@ -12,6 +12,7 @@ import Header from './header'
 import MainContainer from './main-container'
 import Menu from './menu'
 import MenuContainer from './menu-container'
+import MobileMenu from './mobile-menu'
 import Outlined from './outlined'
 import themes from './themes'
 import { Provider, Consumer } from './context'
@@ -28,7 +29,8 @@ class Layout extends Component {
     this.mainScrollbar = createRef()
     this.state = {
       currentTheme: 'fuchsia',
-      // isMenu: false,
+      isMenu: false,
+      isMobile: null,
       isVisible: {},
     }
   }
@@ -38,6 +40,11 @@ class Layout extends Component {
       this.changeTheme('fuchsia')
     } else {
       this.changeTheme('teal')
+    }
+    if (window !== undefined && window.innerWidth < 769) {
+      this.handleMobile(true)
+    } else if (window.innerWidth > 768) {
+      this.handleMobile(false)
     }
   }
 
@@ -53,6 +60,20 @@ class Layout extends Component {
         this.changeTheme('teal')
       }
     }
+    if (
+      this.props !== prevProps &&
+      !this.state.isMobile &&
+      window !== undefined &&
+      window.innerWidth < 769
+    ) {
+      this.handleMobile(true)
+    } else if (this.state.isMobile && window.innerWidth > 768) {
+      this.handleMobile(false)
+    }
+  }
+
+  handleMobile = value => {
+    this.setState({ isMobile: value })
   }
 
   changeTheme = current => {
@@ -69,11 +90,11 @@ class Layout extends Component {
           },
     }))
 
-  toggleMenu = () => this.setState({ isVisible: {} })
+  toggleMenu = value => this.setState({ isMenu: value, isVisible: {} })
 
   render() {
     const { children, location } = this.props
-    const { currentTheme, isVisible } = this.state
+    const { currentTheme, isMenu, isMobile, isVisible } = this.state
     const { toggle, toggleMenu } = this
     const getLevel = (levels, level) =>
       Object.values(levels).some(x => x === level)
@@ -87,30 +108,38 @@ class Layout extends Component {
     return (
       <ThemeProvider theme={themes[currentTheme]}>
         <Global styles={globalStyles} />
-        <Container>
-          <MenuContainer level={level}>
-            <Outlined>
-              <Scrollbars universal>
-                <About />
-                <Provider value={{ isVisible, toggle, toggleMenu }}>
-                  <Consumer>
-                    {({ isVisible: isMenuVisible, toggle: menuToggle }) => (
-                      <Menu isVisible={isMenuVisible} toggle={menuToggle} />
-                    )}
-                  </Consumer>
-                </Provider>
-              </Scrollbars>
-            </Outlined>
-          </MenuContainer>
-          <MainContainer css={mainContainerStyles} level={level}>
-            <Header location={location} />
-            <Outlined>
-              <Scrollbars ref={this.mainScrollbar} universal>
-                <Content>{children}</Content>
-              </Scrollbars>
-            </Outlined>
-          </MainContainer>
-        </Container>
+        <Provider value={{ isVisible, toggle, toggleMenu }}>
+          <Container>
+            {isMobile && (
+              <MobileMenu
+                isMenu={isMenu}
+                onClick={() => this.toggleMenu(!isMenu)}
+              />
+            )}
+            {!isMobile && (
+              <MenuContainer level={level}>
+                <Outlined>
+                  <Scrollbars universal>
+                    <About />
+                    <Consumer>
+                      {({ isVisible: isMenuVisible, toggle: menuToggle }) => (
+                        <Menu isVisible={isMenuVisible} toggle={menuToggle} />
+                      )}
+                    </Consumer>
+                  </Scrollbars>
+                </Outlined>
+              </MenuContainer>
+            )}
+            <MainContainer css={mainContainerStyles} level={level}>
+              <Header location={location} />
+              <Outlined>
+                <Scrollbars ref={this.mainScrollbar} universal>
+                  <Content>{children}</Content>
+                </Scrollbars>
+              </Outlined>
+            </MainContainer>
+          </Container>
+        </Provider>
       </ThemeProvider>
     )
   }
