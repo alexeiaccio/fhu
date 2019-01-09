@@ -73,6 +73,13 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint:
+          'https://art.us7.list-manage.com/subscribe/post?u=813aa539fb44184d33c39797e&amp;id=2184db05e1',
+      },
+    },
     // {
     //   resolve: 'gatsby-plugin-google-analytics',
     //   options: {

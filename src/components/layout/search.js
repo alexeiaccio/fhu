@@ -12,6 +12,7 @@ import Tags from '../elements/tags'
 import { outlinedStyles } from './outlined'
 
 const hovered = ({ theme }) => css`
+  transition: background-color 200ms ease-in-out;
   &:hover {
     background-color: ${theme.color};
   }

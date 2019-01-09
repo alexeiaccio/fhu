@@ -7,6 +7,7 @@ import { propPathOr, uuid } from '../utils'
 import Img from '../components/elements/img'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
+import Subscribe from '../components/blocks/subscribe'
 
 const headingStyles = css`
   ${tw(['font-extrabold', 'text-5xl'])};
@@ -93,6 +94,7 @@ function ArchivePage({ data, location }) {
           )
         })}
       </div>
+      <Subscribe />
     </Layout>
   )
 }
