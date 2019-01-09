@@ -21,7 +21,7 @@ const shadowStyles = ({
   ${position === 'top' ? tw(['pin-t']) : tw(['pin-b'])};
   background: linear-gradient(
     to ${position === 'top' ? 'bottom' : 'top'},
-    rgba(${getThemeColor(theme)}, 0.5) 0%,
+    rgba(${getThemeColor(theme)}, 0.36) 0%,
     rgba(${getThemeColor(theme)}, 0) 100%
   );
   opacity: ${position === 'top' ? shadowTopOpacity : shadowBottomOpacity};
