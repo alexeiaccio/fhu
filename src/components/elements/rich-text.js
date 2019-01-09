@@ -36,7 +36,7 @@ export const RichText = css`
     ${tw(['my-q16', 'md:mb-q24'])};
   }
   & p {
-    ${tw(['leading-tight', 'mb-q16', 'md:mb-q24', 'text-justify'])};
+    ${tw(['leading-tight', 'mb-q16', 'md:mb-q24'])};
   }
   & strong {
     ${tw(['font-bold', 'tracking-wide'])};

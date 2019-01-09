@@ -2,6 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 const path = require('path')
+const { htmlSerializer, linkResolver } = require('./src/utils/prismic')
 
 // SEO configuration
 const siteTitle = 'FHU'
@@ -47,6 +48,8 @@ module.exports = {
       options: {
         repositoryName: 'freehome',
         accessToken: process.env.PRICMIC_TOKEN,
+        linkResolver,
+        htmlSerializer,
       },
     },
     {
@@ -80,13 +83,6 @@ module.exports = {
           'https://art.us7.list-manage.com/subscribe/post?u=813aa539fb44184d33c39797e&amp;id=2184db05e1',
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-google-analytics',
-    //   options: {
-    //     trackingId: gaId,
-    //     head: false // put GA in the <head> for optimal tracking
-    //   }
-    // },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {

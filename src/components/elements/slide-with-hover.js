@@ -43,6 +43,7 @@ const Posed = posed.div({
     opacity: 0,
   },
   hover: {
+    delay: 400,
     opacity: 1,
   },
 })

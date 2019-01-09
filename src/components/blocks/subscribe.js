@@ -21,7 +21,7 @@ const formStyles = css`
 `
 
 const BorderedBottom = ({ theme }) => css`
-  border-bottom: 4px solid ${theme.color};
+  border-bottom: 1px solid ${theme.color};
 `
 
 const Input = styled.input`

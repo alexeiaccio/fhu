@@ -62,6 +62,7 @@
     "gatsby-plugin-webpack-size": "0.0.3",
     "gatsby-source-prismic": "^2.1.0",
     "gatsby-transformer-sharp": "^2.1.9",
+    "prismic-dom": "^2.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-custom-scrollbars": "^4.2.1",
@@ -70,6 +71,7 @@
     "react-pose": "^4.0.4",
     "recompose": "^0.30.0",
     "tailwindcss": "^0.7.3",
+    "typograf": "^6.7.4",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

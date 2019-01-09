@@ -2,8 +2,9 @@
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { withStateHandlers } from 'recompose'
+import { Helmet } from 'react-helmet'
 
-import { uuid } from '../../utils'
+import { propPathOr, uuid } from '../../utils'
 import Img from './img'
 import Bullets from './bullets'
 
@@ -19,6 +20,17 @@ function Slider({ current, items, next, to }) {
 
   return (
     <div>
+      <Helmet>
+        {items.map(({ imagesrc }) => {
+          const imgSrc = propPathOr(
+            null,
+            ['localFile', 'childImageSharp', 'fluid', 'src'],
+            imagesrc
+          )
+
+          return <link key={uuid} rel="preload" href={imgSrc} as="image" />
+        })}
+      </Helmet>
       <div
         css={slideStyles}
         onClick={items.length > 1 ? next : null}

@@ -2,13 +2,13 @@ import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
 export const outlinedStyles = ({ theme }) => css`
-  outline: 4px solid ${theme.color};
-  outline-offset: -2px;
+  outline: 1px solid ${theme.color};
+  outline-offset: -0.5px;
 `
 
 export default styled.div`
   ${tw(['flex-1', 'w-full'])};
   ${outlinedStyles};
   box-sizing: border-box;
-  padding: 2px 0;
+  padding: 0.5px 0;
 `
