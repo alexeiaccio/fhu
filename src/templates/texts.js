@@ -167,6 +167,13 @@ export const PageQuery = graphql`
               }
             }
           }
+          ... on PrismicTextBodyLead {
+            primary {
+              text {
+                html
+              }
+            }
+          }
           ... on PrismicTextBodyText {
             primary {
               text {

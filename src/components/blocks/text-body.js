@@ -16,6 +16,14 @@ const articleStyles = css`
   margin: 0 auto;
 `
 
+const leadStyles = css`
+  ${RichText};
+  ${tw(['mb-q24'])};
+  & p {
+    ${tw(['text-xl'])};
+  }
+`
+
 const descriptionStyles = css`
   ${RichTextSmall};
   ${tw(['mb-q24'])};
@@ -56,6 +64,13 @@ function TextBody({ body }) {
               <RichContent
                 content={textContent}
                 css={descriptionStyles}
+                key={uuid()}
+              />
+            )}
+            {equals(__typename, 'PrismicTextBodyLead') && (
+              <RichContent
+                content={textContent}
+                css={leadStyles}
                 key={uuid()}
               />
             )}

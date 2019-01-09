@@ -1,8 +1,7 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
-import { Scrollbars } from 'react-custom-scrollbars'
 import { Location } from '@reach/router'
 
 import About from './about'
@@ -15,6 +14,7 @@ import Menu from './menu'
 import MenuContainer from './menu-container'
 import MobileMenu from './mobile-menu'
 import Outlined from './outlined'
+import Scrollbars from './scrollbars'
 import themes from './themes'
 import { Provider, Consumer } from './context'
 
@@ -23,7 +23,6 @@ import '../fonts/stylesheet.css'
 class Layout extends Component {
   constructor() {
     super()
-    this.mainScrollbar = createRef()
     this.state = {
       currentTheme: 'fuchsia',
       isMenu: false,
@@ -46,9 +45,6 @@ class Layout extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
-      if (this.mainScrollbar.current) {
-        this.mainScrollbar.current.scrollTop()
-      }
       this.toggleMenu(false)
       if (this.props.location.pathname === '/') {
         this.changeTheme('fuchsia')
@@ -117,7 +113,7 @@ class Layout extends Component {
             {!isMobile && (
               <MenuContainer level={level}>
                 <Outlined>
-                  <Scrollbars universal>
+                  <Scrollbars>
                     <About />
                     <Consumer>
                       {({ isVisible: isMenuVisible, toggle: menuToggle }) => (
@@ -131,7 +127,7 @@ class Layout extends Component {
             <MainContainer level={level}>
               <Header />
               <Outlined>
-                <Scrollbars ref={this.mainScrollbar} universal>
+                <Scrollbars>
                   <Content>{children}</Content>
                 </Scrollbars>
               </Outlined>
