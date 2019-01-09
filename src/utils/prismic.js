@@ -6,9 +6,6 @@ const linkResolver = () => doc => doc.uid
 const { Elements } = PrismicDOM.RichText
 
 const htmlSerializer = () => (type, element, content, children) => {
-  const target = element.data.target
-    ? `target="${element.data.target}" rel="noopener noreferrer"`
-    : ''
   switch (type) {
     case Elements.heading1:
       return `<h1>${tp.execute(children.join(''))}</h1>`
@@ -33,6 +30,10 @@ const htmlSerializer = () => (type, element, content, children) => {
     case Elements.oList:
       return `<ol>${tp.execute(children.join(''))}</ol>`
     case Elements.hyperlink:
+      // eslint-disable-next-line
+      const target = element.data.target
+        ? `target="${element.data.target}" rel="noopener noreferrer"`
+        : ''
       if (element.data.link_type === 'Document') {
         return `<a class="link" ${target} href="/${
           element.data.uid
