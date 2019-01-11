@@ -22,6 +22,10 @@ const leadStyles = css`
   & p {
     ${tw(['text-xl'])};
   }
+  & ul,
+  & ol {
+    ${tw(['text-body'])};
+  }
 `
 
 const descriptionStyles = css`
@@ -37,15 +41,38 @@ const textStyles = css`
 const rightStyles = css`
   ${RichText};
   ${tw(['mb-q24'])};
-  & p {
+  & > * {
     ${tw(['text-right'])};
+  }
+  & ul > li::before,
+  & ol > li::before {
+    content: none;
+  }
+  & ul > li::after {
+    content: '';
+    ${tw([
+      'bg-teal',
+      'inline-block',
+      'h-q8',
+      'ml-q12',
+      'pin-l',
+      'pin-t',
+      'rounded-full',
+      'w-q8',
+    ])};
+    top: 0.65rem;
+  }
+  & ol > li::after {
+    content: counter(li);
+    counter-increment: li;
+    ${tw(['inline-block', 'ml-q12'])};
   }
 `
 
 const centerStyles = css`
   ${RichText};
   ${tw(['mb-q24'])};
-  & p {
+  & > * {
     ${tw(['text-center'])};
   }
 `

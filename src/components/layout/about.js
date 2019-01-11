@@ -17,9 +17,17 @@ const descStyles = css`
   ${tw(['mt-q16', 'text-sm'])};
 `
 
+const hovered = ({ theme }) => css`
+  transition: background-color 200ms ease-in-out;
+  &:hover {
+    background-color: ${theme.color};
+  }
+`
+
 const StyledLink = styled(Link)`
   ${tw(['inline-block', 'mt-q24', 'px-q12', 'py-q8'])};
   ${outlinedStyles};
+  ${hovered};
 `
 
 const logoStyles = css`

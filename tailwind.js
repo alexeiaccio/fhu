@@ -263,17 +263,17 @@ module.exports = {
     '5xl': '3rem', // 48px
     // Custom
     xxs: '.625rem', // 10px
-    mobile: 'calc(14px + 12 * ((100vw - 320px) / 576))',
-    body: 'calc(18px + 6 * ((100vw - 320px) / 1280))',
-    description: 'calc(10px + 4 * ((100vw - 320px) / 1280))',
-    heading0: 'calc(104px + 72 * ((100vw - 320px) / 1280))',
-    heading1: 'calc(36px + 108 * ((100vw - 320px) / 1280))',
-    heading2: 'calc(32px + 36 * ((100vw - 320px) / 1280))',
-    heading3: 'calc(34px + 18 * ((100vw - 320px) / 1280))',
-    heading4: 'calc(30px + 18 * ((100vw - 320px) / 1280))',
-    heading5: 'calc(21px + 12 * ((100vw - 320px) / 1280))',
-    heading6: 'calc(21px + 3 * ((100vw - 320px) / 1280))',
-    list: 'calc(14px + 4 * ((100vw - 320px) / 1280))',
+    mobile: '.875rem',
+    body: '1rem',
+    description: '.875rem',
+    heading0: '3.5rem',
+    heading1: '3rem',
+    heading2: '2.25rem',
+    heading3: '1.875rem',
+    heading4: '1.5rem',
+    heading5: '1.25rem',
+    heading6: '1.125rem',
+    list: '.875rem',
   },
 
   /*

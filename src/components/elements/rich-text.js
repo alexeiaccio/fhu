@@ -6,6 +6,7 @@ import {
   Heading3,
   Heading4,
   Heading5,
+  Heading6,
   List,
 } from './typography'
 
@@ -19,39 +20,69 @@ export const Headers = css`
   & h4 {
     ${Heading4};
   }
+  & h5 {
+    ${Heading5};
+  }
+  & h6 {
+    ${Heading6};
+  }
 `
 
 export const RichText = css`
   ${Body};
   & h2 {
     ${Heading2};
-    ${tw(['my-q36', 'md:mb-q48'])};
+    ${tw(['mt-q48', 'mb-q24'])};
   }
   & h3 {
     ${Heading3};
-    ${tw(['my-q24', 'md:mb-q36'])};
+    ${tw(['mt-q36', 'mb-q24'])};
   }
   & h4 {
     ${Heading4};
-    ${tw(['my-q16', 'md:mb-q24'])};
+    ${tw(['mt-q32', 'mb-q20'])};
+  }
+  & h5 {
+    ${Heading5};
+    ${tw(['mt-q24', 'mb-q16'])};
+  }
+  & h6 {
+    ${Heading6};
+    ${tw(['mt-q20', 'mb-q12'])};
   }
   & p {
-    ${tw(['leading-tight', 'mb-q16', 'md:mb-q24'])};
+    ${tw(['leading-normal', 'mb-q16', 'md:mb-q24'])};
   }
   & strong {
     ${tw(['font-bold', 'tracking-wide'])};
   }
-  & ul {
+  & ul,
+  & ol {
     ${List};
-    ${tw(['my-q48'])};
+    ${tw(['mb-q36'])};
+    counter-reset: li;
   }
   & li {
-    ${tw(['mb-q12', 'pl-q32', 'relative'])};
+    ${tw(['mb-q6'])};
   }
-  & ul > li::after {
+  & ul > li::before {
     content: '';
-    ${tw(['absolute', 'bg-black', 'block', 'h-q8', 'pin-l', 'pin-t', 'w-q8'])};
-    top: 0.625rem;
+    ${tw([
+      'bg-teal',
+      'inline-block',
+      'h-q8',
+      'mr-q16',
+      'pin-l',
+      'pin-t',
+      'rounded-full',
+      'w-q8',
+    ])};
+    top: 0.65rem;
+  }
+  & ol > li::before {
+    content: counter(li);
+    counter-increment: li;
+    ${tw(['inline-block', 'mr-q16'])};
   }
   & a {
     ${tw(['text-teal'])};
@@ -62,26 +93,59 @@ export const RichTextSmall = css`
   ${List};
   & h2 {
     ${Heading3};
-    ${tw(['mb-q32', 'md:mb-q36'])};
+    ${tw(['mt-q48', 'mb-q24'])};
   }
   & h3 {
     ${Heading4};
-    ${tw(['mb-q24', 'md:mb-q32'])};
+    ${tw(['mt-q36', 'mb-q24'])};
   }
   & h4 {
     ${Heading5};
-    ${tw(['mb-q16', 'md:mb-q24'])};
+    ${tw(['mt-q32', 'mb-q20'])};
   }
-  & ul {
+  & h5 {
+    ${Heading5};
+    ${tw(['mt-q24', 'mb-q16'])};
+  }
+  & h6 {
+    ${Body};
+    ${tw(['mt-q20', 'mb-q12'])};
+  }
+  & p {
+    ${tw(['leading-normal', 'mb-q16', 'md:mb-q24'])};
+  }
+  & strong {
+    ${tw(['font-bold', 'tracking-wide'])};
+  }
+  & ul,
+  & ol {
     ${List};
-    ${tw(['my-q48'])};
+    ${tw(['mb-q36'])};
+    counter-reset: li;
   }
   & li {
-    ${tw(['mb-q12', 'pl-q32', 'relative'])};
+    ${tw(['mb-q4'])};
   }
-  & ul > li::after {
+  & ul > li::before {
     content: '';
-    ${tw(['absolute', 'bg-black', 'block', 'h-q8', 'pin-l', 'pin-t', 'w-q8'])};
-    top: 0.625rem;
+    ${tw([
+      'bg-teal',
+      'inline-block',
+      'h-q8',
+      'mr-q12',
+      'pin-l',
+      'pin-t',
+      'rounded-full',
+      'w-q8',
+    ])};
+    top: 0.65rem;
+  }
+  & ol > li::before {
+    content: counter(li);
+    counter-increment: li;
+    ${tw(['inline-block', 'mr-q12'])};
+  }
+  & a {
+    ${tw(['text-teal'])};
   }
 `

@@ -7273,47 +7273,47 @@ table {
 }
 
 .text-mobile {
-  font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+  font-size: .875rem;
 }
 
 .text-body {
-  font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
+  font-size: 1rem;
 }
 
 .text-description {
-  font-size: calc(10px + 4 * ((100vw - 320px) / 1280));
+  font-size: .875rem;
 }
 
 .text-heading0 {
-  font-size: calc(104px + 72 * ((100vw - 320px) / 1280));
+  font-size: 3.5rem;
 }
 
 .text-heading1 {
-  font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
+  font-size: 3rem;
 }
 
 .text-heading2 {
-  font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+  font-size: 2.25rem;
 }
 
 .text-heading3 {
-  font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+  font-size: 1.875rem;
 }
 
 .text-heading4 {
-  font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+  font-size: 1.5rem;
 }
 
 .text-heading5 {
-  font-size: calc(21px + 12 * ((100vw - 320px) / 1280));
+  font-size: 1.25rem;
 }
 
 .text-heading6 {
-  font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+  font-size: 1.125rem;
 }
 
 .text-list {
-  font-size: calc(14px + 4 * ((100vw - 320px) / 1280));
+  font-size: .875rem;
 }
 
 .italic {
@@ -14587,47 +14587,47 @@ table {
   }
 
   .sm\:text-mobile {
-    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+    font-size: .875rem;
   }
 
   .sm\:text-body {
-    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
+    font-size: 1rem;
   }
 
   .sm\:text-description {
-    font-size: calc(10px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .sm\:text-heading0 {
-    font-size: calc(104px + 72 * ((100vw - 320px) / 1280));
+    font-size: 3.5rem;
   }
 
   .sm\:text-heading1 {
-    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
+    font-size: 3rem;
   }
 
   .sm\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: 2.25rem;
   }
 
   .sm\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.875rem;
   }
 
   .sm\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.5rem;
   }
 
   .sm\:text-heading5 {
-    font-size: calc(21px + 12 * ((100vw - 320px) / 1280));
+    font-size: 1.25rem;
   }
 
   .sm\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: 1.125rem;
   }
 
   .sm\:text-list {
-    font-size: calc(14px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .sm\:italic {
@@ -21902,47 +21902,47 @@ table {
   }
 
   .md\:text-mobile {
-    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+    font-size: .875rem;
   }
 
   .md\:text-body {
-    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
+    font-size: 1rem;
   }
 
   .md\:text-description {
-    font-size: calc(10px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .md\:text-heading0 {
-    font-size: calc(104px + 72 * ((100vw - 320px) / 1280));
+    font-size: 3.5rem;
   }
 
   .md\:text-heading1 {
-    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
+    font-size: 3rem;
   }
 
   .md\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: 2.25rem;
   }
 
   .md\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.875rem;
   }
 
   .md\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.5rem;
   }
 
   .md\:text-heading5 {
-    font-size: calc(21px + 12 * ((100vw - 320px) / 1280));
+    font-size: 1.25rem;
   }
 
   .md\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: 1.125rem;
   }
 
   .md\:text-list {
-    font-size: calc(14px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .md\:italic {
@@ -29217,47 +29217,47 @@ table {
   }
 
   .lg\:text-mobile {
-    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+    font-size: .875rem;
   }
 
   .lg\:text-body {
-    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
+    font-size: 1rem;
   }
 
   .lg\:text-description {
-    font-size: calc(10px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .lg\:text-heading0 {
-    font-size: calc(104px + 72 * ((100vw - 320px) / 1280));
+    font-size: 3.5rem;
   }
 
   .lg\:text-heading1 {
-    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
+    font-size: 3rem;
   }
 
   .lg\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: 2.25rem;
   }
 
   .lg\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.875rem;
   }
 
   .lg\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.5rem;
   }
 
   .lg\:text-heading5 {
-    font-size: calc(21px + 12 * ((100vw - 320px) / 1280));
+    font-size: 1.25rem;
   }
 
   .lg\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: 1.125rem;
   }
 
   .lg\:text-list {
-    font-size: calc(14px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .lg\:italic {
@@ -36532,47 +36532,47 @@ table {
   }
 
   .xl\:text-mobile {
-    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+    font-size: .875rem;
   }
 
   .xl\:text-body {
-    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
+    font-size: 1rem;
   }
 
   .xl\:text-description {
-    font-size: calc(10px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .xl\:text-heading0 {
-    font-size: calc(104px + 72 * ((100vw - 320px) / 1280));
+    font-size: 3.5rem;
   }
 
   .xl\:text-heading1 {
-    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
+    font-size: 3rem;
   }
 
   .xl\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: 2.25rem;
   }
 
   .xl\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.875rem;
   }
 
   .xl\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.5rem;
   }
 
   .xl\:text-heading5 {
-    font-size: calc(21px + 12 * ((100vw - 320px) / 1280));
+    font-size: 1.25rem;
   }
 
   .xl\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: 1.125rem;
   }
 
   .xl\:text-list {
-    font-size: calc(14px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .xl\:italic {
@@ -43847,47 +43847,47 @@ table {
   }
 
   .screen\:text-mobile {
-    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+    font-size: .875rem;
   }
 
   .screen\:text-body {
-    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
+    font-size: 1rem;
   }
 
   .screen\:text-description {
-    font-size: calc(10px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .screen\:text-heading0 {
-    font-size: calc(104px + 72 * ((100vw - 320px) / 1280));
+    font-size: 3.5rem;
   }
 
   .screen\:text-heading1 {
-    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
+    font-size: 3rem;
   }
 
   .screen\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: 2.25rem;
   }
 
   .screen\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.875rem;
   }
 
   .screen\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.5rem;
   }
 
   .screen\:text-heading5 {
-    font-size: calc(21px + 12 * ((100vw - 320px) / 1280));
+    font-size: 1.25rem;
   }
 
   .screen\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: 1.125rem;
   }
 
   .screen\:text-list {
-    font-size: calc(14px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .screen\:italic {
@@ -51162,47 +51162,47 @@ table {
   }
 
   .desktop\:text-mobile {
-    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+    font-size: .875rem;
   }
 
   .desktop\:text-body {
-    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
+    font-size: 1rem;
   }
 
   .desktop\:text-description {
-    font-size: calc(10px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .desktop\:text-heading0 {
-    font-size: calc(104px + 72 * ((100vw - 320px) / 1280));
+    font-size: 3.5rem;
   }
 
   .desktop\:text-heading1 {
-    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
+    font-size: 3rem;
   }
 
   .desktop\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: 2.25rem;
   }
 
   .desktop\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.875rem;
   }
 
   .desktop\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: 1.5rem;
   }
 
   .desktop\:text-heading5 {
-    font-size: calc(21px + 12 * ((100vw - 320px) / 1280));
+    font-size: 1.25rem;
   }
 
   .desktop\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: 1.125rem;
   }
 
   .desktop\:text-list {
-    font-size: calc(14px + 4 * ((100vw - 320px) / 1280));
+    font-size: .875rem;
   }
 
   .desktop\:italic {
