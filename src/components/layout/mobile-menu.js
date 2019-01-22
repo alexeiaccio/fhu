@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
-import { Scrollbars } from 'react-custom-scrollbars'
 
 import About from './about'
 import Content from './content'
@@ -10,6 +9,7 @@ import Menu from './menu'
 import MenuContainer from './menu-container'
 import Outlined from './outlined'
 import { Consumer } from './context'
+import Scrollbars from './scrollbars'
 
 const opener = ({ isMenu }) => css`
   ${isMenu && tw(['absolute', 'pin', 'p-q12', 'z-50'])};
@@ -30,7 +30,7 @@ function MobileMenu({ isMenu, onClick }) {
     <Container isMenu={isMenu}>
       <MenuContainer level={isMenu ? 'mobile' : 'closed'}>
         <Outlined>
-          <Scrollbars universal>
+          <Scrollbars>
             <About />
             <Consumer>
               {({ isVisible: isMenuVisible, toggle: menuToggle }) => (

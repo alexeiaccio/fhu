@@ -1,70 +1,93 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withStateHandlers } from 'recompose'
-import { Helmet } from 'react-helmet'
+import { css } from '@emotion/core'
+import posed from 'react-pose'
+import { spring, value } from 'popmotion'
 
-import { propPathOr, uuid } from '../../utils'
-import Img from './img'
 import Bullets from './bullets'
+import Images from './slider-images'
+import { propPathOr } from '../../utils'
 
-const slideStyles = css`
-  ${tw(['relative'])};
-  & .slide-image {
-    max-height: 66.66666vh;
-  }
+const sliderStyles = css`
+  ${tw(['overflow-hidden', 'relative'])};
+  max-height: 66.66666vh;
+  padding-bottom: 66.66666%;
 `
 
-function Slider({ current, items, next, to }) {
-  if (!items) return null
+const wrapperStyles = css`
+  ${tw(['absolute', 'pin'])};
+`
 
-  return (
-    <div>
-      <Helmet>
-        {items.map(({ imagesrc }) => {
-          const imgSrc = propPathOr(
-            null,
-            ['localFile', 'childImageSharp', 'fluid', 'src'],
-            imagesrc
-          )
+const Draggable = posed.div({
+  draggable: 'x',
+  dragEnd: {
+    transition: ({ from, to, velocity }) =>
+      spring({ from, to, velocity, stiffness: 250, damping: 50 }),
+  },
+})
 
-          return <link key={uuid} rel="preload" href={imgSrc} as="image" />
-        })}
-      </Helmet>
-      <div
-        css={slideStyles}
-        onClick={items.length > 1 ? next : null}
-        onKeyUp={items.length > 1 ? next : null}
-      >
-        {items.map(({ imagesrc }, idx) =>
-          idx === current ? (
-            <Img
-              className="slide-image"
-              key={uuid()}
-              imgStyle={{ objectFit: 'contain' }}
-              src={imagesrc}
-            />
-          ) : null
-        )}
-      </div>
-      <Bullets active={current} length={items.length} onClick={to} />
-    </div>
-  )
+class Slider extends PureComponent {
+  static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }
+
+  constructor() {
+    super()
+    this.state = {
+      current: 0,
+      clientX: null,
+    }
+    this.x = value(0)
+  }
+
+  handleDragStart = e => {
+    const { clientX } = propPathOr(e, ['touches', 0], e)
+    this.setState({ clientX })
+  }
+
+  handleDragEnd = e => {
+    const { items } = this.props
+    const { clientX: oldClientX, current } = this.state
+    const { clientX: newClientX } = propPathOr(e, ['changedTouches', 0], e)
+
+    if (current + 1 < items.length && newClientX - oldClientX < -30) {
+      this.setState({ current: current + 1 })
+    } else if (current > 0 && newClientX - oldClientX > 30) {
+      this.setState({ current: current - 1 })
+    }
+    this.setState({ clientX: null })
+  }
+
+  to = number => {
+    this.setState({ current: number })
+  }
+
+  render() {
+    const { items } = this.props
+    if (!items) return null
+
+    const { current, clientX } = this.state
+    const valuesMap = { x: this.x }
+
+    return (
+      <>
+        <div css={sliderStyles}>
+          <Draggable
+            css={css`
+              ${wrapperStyles};
+              cursor: ${clientX ? 'grabbing' : 'grab'};
+            `}
+            onDragEnd={this.handleDragEnd}
+            onDragStart={this.handleDragStart}
+            values={valuesMap}
+          >
+            <Images current={current} items={items} />
+          </Draggable>
+        </div>
+        <Bullets active={current} length={items.length} onClick={this.to} />
+      </>
+    )
+  }
 }
 
-Slider.propTypes = {
-  current: PropTypes.number.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  next: PropTypes.func.isRequired,
-  to: PropTypes.func.isRequired,
-}
-
-export default withStateHandlers(({ init = 0 }) => ({ current: init }), {
-  next: ({ current }, props) => () => ({
-    current: (current + 1) % props.items.length,
-  }),
-  previous: ({ current }, props) => () => ({
-    current: (current - 1) % props.items.length,
-  }),
-  to: () => value => ({ current: value }),
-})(Slider)
+export default Slider
