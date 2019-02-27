@@ -1,12 +1,12 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import React from 'react'
+import { css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import posed from 'react-pose'
 
 import { propPathOr, uuid } from '../../utils'
-import { Column, FlexBox, Hovered } from './boxes'
+import { Column, FlexBox } from './boxes'
 import Img from './img'
 import { Content } from './shared'
 import RichContent from './rich-content'
@@ -16,13 +16,11 @@ const Transition = posed.div({
     animateOnMount: true,
     opacity: 1,
     transition: { duration: 600 },
-    x: 0,
   },
   exit: {
     opacity: 0,
     delay: 800,
     transition: { duration: 400 },
-    x: ({ current, idx }) => current === idx && 24,
   },
 })
 
@@ -49,8 +47,7 @@ const Posed = posed.div({
 })
 
 const Hover = styled(Posed)`
-  ${tw(['absolute', 'pin', 'text-white', 'z-10'])};
-  ${Hovered};
+  ${tw(['absolute', 'pin', 'z-10'])};
   & .preview-img {
     ${tw(['flex-1', 'w-2/3'])};
   }
@@ -72,7 +69,7 @@ function Slide({ item, ...props }) {
     title && (
       <h2
         css={css`
-          ${tw(['flex-no-grow', 'my-q16'])};
+          ${tw(['flex-no-grow', 'mb-q16'])};
         `}
         key={uuid()}
       >
@@ -99,16 +96,23 @@ function Slide({ item, ...props }) {
       >
         <ContentLink
           css={css`
-            ${tw(['flex', 'h-full'])};
+            ${tw([
+              'absolute',
+              'bg-fuchsia',
+              'flex',
+              'pin-b',
+              'pin-l',
+              'pin-r',
+              'text-white',
+            ])};
           `}
           to={uid ? `/${uid}` : '/'}
         >
           <Column
             css={css`
-              ${tw(['h-full', 'items-start'])};
+              ${tw(['items-start'])};
             `}
           >
-            <Img className="preview-img" src={imgSrc} />
             {renderDescription()}
           </Column>
         </ContentLink>

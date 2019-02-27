@@ -1,21 +1,32 @@
-import posed from 'react-pose'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
-const Posed = posed.div({
-  base: {
-    width: '75%',
-  },
-  volume: {
-    width: '67%',
-  },
-  chapter: {
-    width: '34%',
-  },
-})
+const poseStyles = ({ pose }) => `
+  filter: blur(${pose !== 'base' ? 4 : 0}px);
+  &::after {
+    display: ${pose !== 'base' ? 'block' : 'none'};
+    opacity: ${pose !== 'base' ? 0.24 : 0};
+  }
+`
 
-const Container = styled(Posed)`
-  ${tw(['flex', 'flex-grow', 'flex-col'])};
+const Container = styled.div`
+  ${tw([
+    'flex',
+    'flex-grow',
+    'flex-col',
+    'w-3/4',
+    'md:absolute',
+    'md:pin-b',
+    'md:pin-r',
+    'md:pin-t',
+  ])};
+  transition: filter 0ms linear 200ms;
+  &::after {
+    ${tw(['absolute', 'bg-white', 'pin'])};
+    content: '';
+    transition: opacity 200ms ease-in-out;
+  }
+  ${poseStyles};
 `
 
 function MainContainer({ children, level }) {

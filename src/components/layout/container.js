@@ -6,9 +6,9 @@ export default styled.div`
     'flex',
     'flex-row',
     'flex-no-wrap',
-    'p-q12',
+    'm-q12',
     'pin',
-    'md:p-q24',
+    'md:m-q24',
   ])};
   box-sizing: border-box;
 `

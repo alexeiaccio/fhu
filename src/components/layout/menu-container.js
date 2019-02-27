@@ -26,7 +26,17 @@ const Posed = posed.div({
 })
 
 const Container = styled(Posed)`
-  ${tw(['flex', 'flex-grow', 'flex-col'])};
+  ${tw([
+    'bg-white',
+    'flex',
+    'flex-grow',
+    'flex-col',
+    'md:absolute',
+    'md:pin-b',
+    'md:pin-l',
+    'md:pin-t',
+    'md:z-50',
+  ])};
 `
 
 function MenuContainer({ children, level }) {

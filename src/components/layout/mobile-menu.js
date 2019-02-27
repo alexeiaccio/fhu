@@ -12,7 +12,7 @@ import { Consumer } from './context'
 import Scrollbars from './scrollbars'
 
 const opener = ({ isMenu }) => css`
-  ${isMenu && tw(['absolute', 'pin', 'p-q12', 'z-50'])};
+  ${isMenu && tw(['absolute', 'pin', 'z-50'])};
 `
 
 const Container = styled.div`

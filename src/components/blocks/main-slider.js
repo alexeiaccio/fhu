@@ -57,10 +57,10 @@ class Slider extends Component {
             return <link key={uuid} rel="preload" href={imgSrc} as="image" />
           })}
         </Helmet>
-        <PoseGroup current={current[0]}>
+        <PoseGroup>
           {items.map((item, idx) =>
             current[0] === idx ? (
-              <Slide key={`slider-${idx}`} item={item} idx={idx} /> // eslint-disable-line
+              <Slide key={`slider-${idx}`} item={item} /> // eslint-disable-line
             ) : null
           )}
         </PoseGroup>
