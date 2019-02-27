@@ -35,6 +35,7 @@ function Bullets({ active, length, onClick }) {
           'flex-row',
           'flex-no-wrap',
           'justify-center',
+          'mb-q24',
           'mt-q12',
           'w-full',
         ])};

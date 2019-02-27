@@ -54,7 +54,14 @@ const Images = ({ current, items }) => {
           <div
             key={uuid()}
             css={css`
-              ${tw(['bg-contain', 'bg-no-repeat', 'flex-no-shrink', 'h-full'])};
+              ${tw([
+                'bg-black',
+                'bg-center',
+                'bg-contain',
+                'bg-no-repeat',
+                'flex-no-shrink',
+                'h-full',
+              ])};
               background-image: url(${getSrc(imagesrc)});
               width: ${100 / items.length}%;
             `}
