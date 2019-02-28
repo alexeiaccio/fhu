@@ -207,6 +207,9 @@ export const PageQuery = graphql`
                   }
                 }
               }
+              caption {
+                html
+              }
             }
           }
           ... on PrismicTextBodyMedia {

@@ -1,6 +1,9 @@
+import React from 'react'
 import posed from 'react-pose'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
+
+import { Consumer } from './context'
 
 const Posed = posed.div({
   mobile: {
@@ -39,8 +42,28 @@ const Container = styled(Posed)`
   ])};
 `
 
+const poseStyles = ({ pose }) => `
+  display: ${pose !== 'base' ? 'block' : 'none'};
+  opacity: ${pose !== 'base' ? 0.24 : 0};
+`
+
+const Fade = styled.div`
+  ${tw(['absolute', 'bg-white', 'cursor-pointer', 'pin', 'z-40'])};
+  ${poseStyles};
+  transition: opacity 200ms ease-in-out;
+`
+
 function MenuContainer({ children, level }) {
-  return <Container pose={level}>{children}</Container>
+  return (
+    <Consumer>
+      {({ toggleMenu }) => (
+        <>
+          <Fade onClick={toggleMenu} pose={level} title="Close menu" />
+          <Container pose={level}>{children}</Container>
+        </>
+      )}
+    </Consumer>
+  )
 }
 
 MenuContainer.propTypes = {

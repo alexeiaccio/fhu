@@ -39,15 +39,17 @@ const Posed = posed.div({
   hoverable: true,
   init: {
     opacity: 0,
+    y: 20,
   },
   hover: {
     delay: 400,
     opacity: 1,
+    y: 0,
   },
 })
 
 const Hover = styled(Posed)`
-  ${tw(['absolute', 'pin', 'z-10'])};
+  ${tw(['absolute', 'pin-b', 'pin-l', 'pin-r', 'z-10'])};
   & .preview-img {
     ${tw(['flex-1', 'w-2/3'])};
   }
@@ -96,15 +98,7 @@ function Slide({ item, ...props }) {
       >
         <ContentLink
           css={css`
-            ${tw([
-              'absolute',
-              'bg-fuchsia',
-              'flex',
-              'pin-b',
-              'pin-l',
-              'pin-r',
-              'text-white',
-            ])};
+            ${tw(['bg-fuchsia', 'flex', 'text-white'])};
           `}
           to={uid ? `/${uid}` : '/'}
         >

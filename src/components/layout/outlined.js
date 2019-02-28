@@ -1,7 +1,6 @@
-import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
-export const outlinedStyles = ({ theme }) => css`
+export const outlinedStyles = ({ theme }) => `
   outline: 1px solid ${theme.color};
   outline-offset: -0.5px;
 `

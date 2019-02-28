@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import posed from 'react-pose'
 import { spring, value } from 'popmotion'
+import styled from '@emotion/styled'
 
 import Bullets from './bullets'
 import Images from './slider-images'
 import { propPathOr } from '../../utils'
+import RichContent from './rich-content'
 
 const sliderStyles = css`
   ${tw(['overflow-hidden', 'relative'])};
@@ -25,6 +27,31 @@ const Draggable = posed.div({
       spring({ from, to, velocity, stiffness: 250, damping: 50 }),
   },
 })
+
+const poseStyles = ({ pose }) => `
+  left:${pose === 'right' ? 'auto' : 0};
+  right:${pose === 'right' ? 0 : 'auto'};
+  transform: translateX(${pose === 'right' ? '100%' : '-100%'});
+`
+
+const Arrow = styled.div`
+  ${tw([
+    'absolute',
+    'cursor-pointer',
+    'hidden',
+    'items-center',
+    'justify-center',
+    'opacity-25',
+    'pin-b',
+    'pin-t',
+    'text-black',
+    'w-q24',
+    'hover:opacity-100',
+    'md:flex',
+  ])};
+  ${poseStyles};
+  transition: opacity 200ms ease-in-out;
+`
 
 class Slider extends PureComponent {
   static propTypes = {
@@ -71,19 +98,45 @@ class Slider extends PureComponent {
 
     return (
       <>
-        <div css={sliderStyles}>
-          <Draggable
-            css={css`
-              ${wrapperStyles};
-              cursor: ${clientX ? 'grabbing' : 'grab'};
-            `}
-            onDragEnd={this.handleDragEnd}
-            onDragStart={this.handleDragStart}
-            values={valuesMap}
+        <div
+          css={css`
+            ${tw(['relative'])};
+          `}
+        >
+          <div css={sliderStyles}>
+            <Draggable
+              css={css`
+                ${wrapperStyles};
+                cursor: ${clientX ? 'grabbing' : 'grab'};
+              `}
+              onDragEnd={this.handleDragEnd}
+              onDragStart={this.handleDragStart}
+              values={valuesMap}
+            >
+              <Images current={current} items={items} />
+            </Draggable>
+          </div>
+          <Arrow
+            onClick={() => this.to((current - 1) % items.length)}
+            pose="left"
           >
-            <Images current={current} items={items} />
-          </Draggable>
+            <span>◀︎</span>
+          </Arrow>
+          <Arrow
+            onClick={() => this.to((current + 1) % items.length)}
+            pose="right"
+          >
+            <span>▶︎</span>
+          </Arrow>
         </div>
+        {items[current].caption && (
+          <RichContent
+            css={css`
+              ${tw(['my-q12'])};
+            `}
+            content={items[current].caption.html}
+          />
+        )}
         <Bullets active={current} length={items.length} onClick={this.to} />
       </>
     )

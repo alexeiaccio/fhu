@@ -21,11 +21,6 @@ const Container = styled.div`
     'md:pin-t',
   ])};
   transition: filter 0ms linear 200ms;
-  &::after {
-    ${tw(['absolute', 'bg-white', 'pin'])};
-    content: '';
-    transition: opacity 200ms ease-in-out;
-  }
   ${poseStyles};
 `
 
