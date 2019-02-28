@@ -34,10 +34,10 @@ function News({ news }) {
     36
   )
   const description = propPathOr(
-    '',
+    null,
     ['data', 'description', 'text'],
     newsNode
-  ).slice(0, 64)
+  )
 
   return (
     <Outlined>
@@ -49,8 +49,10 @@ function News({ news }) {
         <Link css={titleStyles} to={uid}>
           {title}
         </Link>
-        <div css={descStyles}>{description}...</div>
-        <div css={dateStyles}>{date}</div>
+        {description && (
+          <div css={descStyles}>{description.slice(0, 64)}...</div>
+        )}
+        {date && <div css={dateStyles}>{date}</div>}
       </Content>
     </Outlined>
   )
