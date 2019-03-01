@@ -96,6 +96,8 @@ class Slider extends PureComponent {
     const { current, clientX } = this.state
     const valuesMap = { x: this.x }
 
+    const caption = propPathOr(null, [current, 'caption'], items)
+
     return (
       <>
         <div
@@ -129,12 +131,12 @@ class Slider extends PureComponent {
             <span>▶︎</span>
           </Arrow>
         </div>
-        {items[current].caption && (
+        {caption && (
           <RichContent
             css={css`
               ${tw(['my-q12'])};
             `}
-            content={items[current].caption.html}
+            content={caption.html}
           />
         )}
         <Bullets active={current} length={items.length} onClick={this.to} />
