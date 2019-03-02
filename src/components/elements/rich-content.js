@@ -8,7 +8,11 @@ const RichContent = ({ content, ...props }) =>
   ) : null
 
 RichContent.propTypes = {
-  content: PropTypes.string.isRequired,
+  content: PropTypes.string,
+}
+
+RichContent.defaultProps = {
+  content: null,
 }
 
 export default RichContent

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
@@ -8,7 +8,7 @@ import Content from './content'
 import Menu from './menu'
 import MenuContainer from './menu-container'
 import Outlined from './outlined'
-import { Consumer } from './context'
+import { MenuContext } from './context'
 import Scrollbars from './scrollbars'
 
 const opener = ({ isMenu }) => css`
@@ -26,17 +26,16 @@ const moduleMenuStyles = css`
 `
 
 function MobileMenu({ isMenu, onClick }) {
+  const { isVisible: isMenuVisible, toggle: menuToggle } = useContext(
+    MenuContext
+  )
   return (
     <Container isMenu={isMenu}>
       <MenuContainer level={isMenu ? 'mobile' : 'closed'}>
         <Outlined>
           <Scrollbars>
             <About />
-            <Consumer>
-              {({ isVisible: isMenuVisible, toggle: menuToggle }) => (
-                <Menu isVisible={isMenuVisible} toggle={menuToggle} />
-              )}
-            </Consumer>
+            <Menu isVisible={isMenuVisible} toggle={menuToggle} />
           </Scrollbars>
         </Outlined>
       </MenuContainer>

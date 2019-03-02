@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
@@ -8,7 +8,7 @@ import { equals, propPathOr, uuid } from '../../utils'
 import Appeared from './appeared'
 import Content from './content'
 import Outlined from './outlined'
-import { Consumer } from './context'
+import { MenuContext } from './context'
 import hovered from './hovered'
 
 const OutlinedRow = styled(Outlined)`
@@ -28,6 +28,11 @@ const textStyles = css`
 
 function MenuLevels({ isVisible, items, toggle, toggleMenu }) {
   if (!items) return null
+  const {
+    isVisible: isLevelsVisible,
+    toggle: levelsToggle,
+    toggleMenu: levelsToggleMenu,
+  } = useContext(MenuContext)
 
   return items.map(({ link }) => {
     const document = propPathOr(null, ['document', 0], link)
@@ -58,20 +63,12 @@ function MenuLevels({ isVisible, items, toggle, toggleMenu }) {
           {title}
         </Content>
         <Appeared isVisible={!!isVisible[uid]} key={uuid()}>
-          <Consumer key={uuid()}>
-            {({
-              isVisible: isLevelsVisible,
-              toggle: levelsToggle,
-              toggleMenu: levelsToggleMenu,
-            }) => (
-              <MenuLevels
-                items={nextLevelItems}
-                isVisible={isLevelsVisible}
-                toggle={levelsToggle}
-                toggleMenu={levelsToggleMenu}
-              />
-            )}
-          </Consumer>
+          <MenuLevels
+            items={nextLevelItems}
+            isVisible={isLevelsVisible}
+            toggle={levelsToggle}
+            toggleMenu={levelsToggleMenu}
+          />
         </Appeared>
       </OutlinedRow>
     )

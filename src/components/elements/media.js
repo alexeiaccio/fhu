@@ -1,8 +1,15 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
+import styled from '@emotion/styled'
 
+import { Content } from './shared'
 import { uuid } from '../../utils'
+import { FlexBox, outlinedStyles } from './boxes'
+
+const ButtonLink = styled(FlexBox.withComponent('a'))`
+  ${outlinedStyles};
+`
 
 const wrapperStyles = css`
   ${tw(['mt-q24', 'px-q20'])};
@@ -22,20 +29,37 @@ function Media({ items }) {
 
   return (
     <div>
-      {items.map(({ link }) => (
-        <div css={wrapperStyles} key={uuid()}>
-          {link.name && (
-            <h5 css={headingStyles}>{link.name.replace(/\..+$/, '')}</h5>
-          )}
-          {link.url && (
-            /* eslint-disable-next-line jsx-a11y/media-has-caption */
-            <video css={videoStyles} controls="controls">
-              <source src={link.url} type="video/mp4" />
-              <track label={link.name || ''} src={link.url} />
-            </video>
-          )}
-        </div>
-      ))}
+      {items.map(({ link }) => {
+        const type = link.name.replace(/^.+\./, '')
+        if (!link.url) return null
+
+        return (
+          <div css={wrapperStyles} key={uuid()}>
+            {link.name && (
+              <h5 css={headingStyles}>{link.name.replace(/\..+$/, '')}</h5>
+            )}
+            {type === 'pdf' ? (
+              <ButtonLink
+                css={css`
+                  ${tw(['mt-q24'])};
+                `}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                <Content>Download PDF ↓</Content>
+              </ButtonLink>
+            ) : (
+              /* eslint-disable-next-line jsx-a11y/media-has-caption */
+              <video css={videoStyles} controls="controls">
+                <source src={link.url} type="video/mp4" />
+                <track label={link.name || ''} src={link.url} />
+              </video>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }

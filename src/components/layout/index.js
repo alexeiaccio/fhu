@@ -16,7 +16,7 @@ import MobileMenu from './mobile-menu'
 import Outlined from './outlined'
 import Scrollbars from './scrollbars'
 import themes from './themes'
-import { Provider, Consumer } from './context'
+import { Provider } from './context'
 
 import '../fonts/stylesheet.css'
 
@@ -115,11 +115,7 @@ class Layout extends Component {
                 <Outlined>
                   <Scrollbars>
                     <About />
-                    <Consumer>
-                      {({ isVisible: isMenuVisible, toggle: menuToggle }) => (
-                        <Menu isVisible={isMenuVisible} toggle={menuToggle} />
-                      )}
-                    </Consumer>
+                    <Menu isVisible={isVisible} toggle={toggle} />
                   </Scrollbars>
                 </Outlined>
               </MenuContainer>

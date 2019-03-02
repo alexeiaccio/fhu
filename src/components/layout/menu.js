@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
@@ -17,7 +17,7 @@ import Appeared from './appeared'
 import Content from './content'
 import MenuVolumes from './menu-volumes'
 import Outlined from './outlined'
-import { Consumer } from './context'
+import { MenuContext } from './context'
 import hovered from './hovered'
 
 const navStyles = css`
@@ -48,6 +48,9 @@ const valueStyles = css`
 
 function Menu({ data, isVisible, toggle }) {
   const menu = propPathOr(null, ['mainmenu', 'edges'], data)
+  const { isVisible: isVolumesVisible, toggle: volumesToggle } = useContext(
+    MenuContext
+  )
 
   return (
     <nav css={navStyles}>
@@ -72,30 +75,23 @@ function Menu({ data, isVisible, toggle }) {
                 {menuId}
               </Content>
               <Appeared isVisible={!!isVisible[menuId]} key={uuid()}>
-                <Consumer>
-                  {({ isVisible: isVolumesVisible, toggle: volumesToggle }) => (
-                    <MenuVolumes
-                      items={volumesItems}
-                      isVisible={isVolumesVisible}
-                      toggle={volumesToggle}
-                    />
-                  )}
-                </Consumer>
+                <MenuVolumes
+                  items={volumesItems}
+                  isVisible={isVolumesVisible}
+                  toggle={volumesToggle}
+                />
               </Appeared>
             </OutlinedRow>
           )
         }
 
         return (
-          <Consumer key={uuid()}>
-            {({ isVisible: isVolumesVisible, toggle: volumesToggle }) => (
-              <MenuVolumes
-                items={volumesItems}
-                isVisible={isVolumesVisible}
-                toggle={volumesToggle}
-              />
-            )}
-          </Consumer>
+          <MenuVolumes
+            items={volumesItems}
+            key={uuid()}
+            isVisible={isVolumesVisible}
+            toggle={volumesToggle}
+          />
         )
       }, menu)}
     </nav>

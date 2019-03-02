@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
@@ -10,7 +10,7 @@ import Content from './content'
 import MenuLevels from './menu-levels'
 import News from './news'
 import Outlined from './outlined'
-import { Consumer } from './context'
+import { MenuContext } from './context'
 import hovered from './hovered'
 
 const OutlinedRow = styled(Outlined)`
@@ -26,6 +26,11 @@ const volumeStyles = css`
 
 function MenuVolumes({ isVisible, items, toggle }) {
   if (!items) return null
+  const {
+    isVisible: isVolumesVisible,
+    toggle: volumesToggle,
+    toggleMenu,
+  } = useContext(MenuContext)
 
   return items.map(({ data, uid }) => {
     const title = propPathOr(null, ['title', 'text'], data)
@@ -54,20 +59,12 @@ function MenuVolumes({ isVisible, items, toggle }) {
           {title}
         </Content>
         <Appeared isVisible={!!isVisible[uid]} key={uuid()}>
-          <Consumer key={uuid()}>
-            {({
-              isVisible: isVolumesVisible,
-              toggle: volumesToggle,
-              toggleMenu,
-            }) => (
-              <MenuLevels
-                items={chapterItems}
-                isVisible={isVolumesVisible}
-                toggle={volumesToggle}
-                toggleMenu={toggleMenu}
-              />
-            )}
-          </Consumer>
+          <MenuLevels
+            items={chapterItems}
+            isVisible={isVolumesVisible}
+            toggle={volumesToggle}
+            toggleMenu={toggleMenu}
+          />
         </Appeared>
       </OutlinedRow>
     )

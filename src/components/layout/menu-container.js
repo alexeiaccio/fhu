@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import posed from 'react-pose'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
-import { Consumer } from './context'
+import { MenuContext } from './context'
 
 const Posed = posed.div({
   mobile: {
@@ -56,15 +56,12 @@ const Fade = styled.div`
 `
 
 function MenuContainer({ children, level }) {
+  const { toggleMenu } = useContext(MenuContext)
   return (
-    <Consumer>
-      {({ toggleMenu }) => (
-        <>
-          <Fade onClick={toggleMenu} pose={level} title="Close menu" />
-          <Container pose={level}>{children}</Container>
-        </>
-      )}
-    </Consumer>
+    <>
+      <Fade onClick={() => toggleMenu(false)} pose={level} title="Close menu" />
+      <Container pose={level}>{children}</Container>
+    </>
   )
 }
 

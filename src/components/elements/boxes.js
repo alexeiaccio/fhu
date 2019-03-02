@@ -51,3 +51,8 @@ export const Column = styled.div`
   flex-basis: 0;
   flex: 1 1 auto;
 `
+
+export const outlinedStyles = ({ theme }) => `
+  outline: 1px solid ${theme.color};
+  outline-offset: -0.5px;
+`
