@@ -83,7 +83,13 @@ function TextsPage({ data, location }) {
         >
           <Tags tags={tags} />
         </div>
-        <Img src={imgSrc} />
+        <div
+          css={css`
+            ${tw(['max-w-md', 'mx-auto'])};
+          `}
+        >
+          <Img src={imgSrc} />
+        </div>
         <TextBody body={body} />
       </article>
       <aside
