@@ -18,7 +18,7 @@ import Content from './content'
 import MenuVolumes from './menu-volumes'
 import Outlined from './outlined'
 import { MenuContext } from './context'
-import hovered from './hovered'
+import { hovered, inHoverStyles, hover } from './hovered'
 
 const navStyles = css`
   ${tw([
@@ -40,7 +40,8 @@ const OutlinedRow = styled(Outlined)`
 
 const valueStyles = css`
   ${tw(['capitalize', 'font-extrabold'])};
-  &::before {
+  ${hover};
+  &::after {
     content: '';
     ${tw('absolute', 'pin')};
   }
@@ -72,7 +73,7 @@ function Menu({ data, isVisible, toggle }) {
                 css={valueStyles}
                 onClick={() => toggle(menuId, 'volume')}
               >
-                {menuId}
+                <span css={inHoverStyles}>{menuId}</span>
               </Content>
               <Appeared isVisible={!!isVisible[menuId]} key={uuid()}>
                 <MenuVolumes

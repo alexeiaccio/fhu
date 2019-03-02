@@ -11,7 +11,7 @@ import MenuLevels from './menu-levels'
 import News from './news'
 import Outlined from './outlined'
 import { MenuContext } from './context'
-import hovered from './hovered'
+import { hover, hovered, inHoverStyles } from './hovered'
 
 const OutlinedRow = styled(Outlined)`
   ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full', 'p-0'])};
@@ -21,6 +21,7 @@ const OutlinedRow = styled(Outlined)`
 
 const volumeStyles = css`
   ${tw(['font-extrabold'])};
+  ${hover};
   flex: 1 0 auto;
 `
 
@@ -47,7 +48,7 @@ function MenuVolumes({ isVisible, items, toggle }) {
             css={volumeStyles}
             onClick={() => navigate(uid)}
           >
-            {title}
+            <span css={inHoverStyles}>{title}</span>
           </Content>
         </OutlinedRow>
       )
@@ -56,7 +57,7 @@ function MenuVolumes({ isVisible, items, toggle }) {
     return (
       <OutlinedRow key={uuid()}>
         <Content css={volumeStyles} onClick={() => toggle(uid, 'volume')}>
-          {title}
+          <span css={inHoverStyles}>{title}</span>
         </Content>
         <Appeared isVisible={!!isVisible[uid]} key={uuid()}>
           <MenuLevels

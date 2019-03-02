@@ -9,7 +9,7 @@ import Appeared from './appeared'
 import Content from './content'
 import Outlined from './outlined'
 import { MenuContext } from './context'
-import hovered from './hovered'
+import { hover, hovered, inHoverStyles } from './hovered'
 
 const OutlinedRow = styled(Outlined)`
   ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full', 'p-0'])};
@@ -19,11 +19,13 @@ const OutlinedRow = styled(Outlined)`
 
 const chapterStyles = css`
   ${tw(['font-extrabold', 'truncate'])};
+  ${hover};
   flex: 1 0 auto;
 `
 
 const textStyles = css`
   ${tw(['font-semibold', 'italic', 'truncate'])};
+  ${hover};
 `
 
 function MenuLevels({ isVisible, items, toggle, toggleMenu }) {
@@ -60,7 +62,7 @@ function MenuLevels({ isVisible, items, toggle, toggleMenu }) {
             }
           }}
         >
-          {title}
+          <span css={inHoverStyles}>{title}</span>
         </Content>
         <Appeared isVisible={!!isVisible[uid]} key={uuid()}>
           <MenuLevels
