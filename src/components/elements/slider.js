@@ -91,7 +91,7 @@ class Slider extends PureComponent {
 
   render() {
     const { items } = this.props
-    if (!items) return null
+    if (!items || !items.length) return null
 
     const { current, clientX } = this.state
     const valuesMap = { x: this.x }

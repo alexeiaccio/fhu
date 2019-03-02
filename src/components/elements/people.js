@@ -34,9 +34,11 @@ function People({ items }) {
           link
         )
         return (
-          <li css={liStyles} key={uuid()}>
-            {uid && <Link to={`/${uid}`}>{title}</Link>}
-          </li>
+          uid && (
+            <li css={liStyles} key={uuid()}>
+              <Link to={`/${uid}`}>{title}</Link>
+            </li>
+          )
         )
       })}
     </div>

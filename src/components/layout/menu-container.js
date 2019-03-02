@@ -16,7 +16,7 @@ const Posed = posed.div({
   },
   base: {
     width: '25%',
-    maxWidth: '320px',
+    maxWidth: '25%',
   },
   volume: {
     width: '33%',
@@ -43,12 +43,14 @@ const Container = styled(Posed)`
 `
 
 const poseStyles = ({ pose }) => `
-  display: ${pose !== 'base' ? 'block' : 'none'};
-  opacity: ${pose !== 'base' ? 0.24 : 0};
+  @media (min-width: 768px) {
+    display: ${pose !== 'base' ? 'block' : 'none'};
+    opacity: ${pose !== 'base' ? 0.24 : 0};
+  }
 `
 
 const Fade = styled.div`
-  ${tw(['absolute', 'bg-white', 'cursor-pointer', 'pin', 'z-40'])};
+  ${tw(['absolute', 'bg-white', 'cursor-pointer', 'hidden', 'pin', 'z-40'])};
   ${poseStyles};
   transition: opacity 200ms ease-in-out;
 `
