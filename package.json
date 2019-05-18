@@ -16,7 +16,7 @@
     "prebuild": "rimraf tailwind.custom.css && postcss tailwind.css -o tailwind.custom.css",
     "predevelop": "rimraf tailwind.custom.css && postcss tailwind.css -o tailwind.custom.css",
     "serve": "gatsby serve",
-    "clean": "rimraf .cache public"
+    "clear": "rimraf .cache public"
   },
   "husky": {
     "hooks": {

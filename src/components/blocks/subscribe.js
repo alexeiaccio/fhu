@@ -61,7 +61,6 @@ const Button = styled.button`
   ])};
   ${outlinedStyles};
   ${hovered};
-  box-sizing: border-box;
 `
 
 const resultBack = ({ result }) => css`

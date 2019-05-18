@@ -5,7 +5,7 @@ import { css } from '@emotion/core'
 
 import { propPathOr } from '../utils'
 import Layout from '../components/layout'
-import OlderNews from '../components/blocks/older-news'
+import OtherNews from '../components/blocks/other-news'
 import Seo from '../components/seo'
 import Subscribe from '../components/blocks/subscribe'
 
@@ -23,7 +23,7 @@ function ArchivePage({ data, location }) {
     ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
     pageData
   )
-  const pathname = propPathOr('/', ['location', 'pathname'], location)
+  const pathname = propPathOr('/', ['pathname'], location)
   const news = propPathOr([], ['news', 'edges'], data)
 
   return (
@@ -36,7 +36,7 @@ function ArchivePage({ data, location }) {
         pathname={pathname}
       />
       <h1 css={headingStyles}>News Archive</h1>
-      <OlderNews news={news} />
+      <OtherNews news={news} pathname={pathname} />
       <Subscribe />
     </Layout>
   )

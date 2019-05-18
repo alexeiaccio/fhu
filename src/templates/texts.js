@@ -6,7 +6,7 @@ import { css } from '@emotion/core'
 import { compose, chain, filter, map, propPathOr } from '../utils'
 import Img from '../components/elements/img'
 import Layout from '../components/layout'
-import OlderNews from '../components/blocks/older-news'
+import OtherNews from '../components/blocks/other-news'
 import Related from '../components/elements/related'
 import RichContent from '../components/elements/rich-content'
 import Seo from '../components/seo'
@@ -24,7 +24,7 @@ function TextsPage({ data, location }) {
     ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
     pageData
   )
-  const pathname = propPathOr('/', ['location', 'pathname'], location)
+  const pathname = propPathOr('/', ['pathname'], location)
   const textsUid = propPathOr(null, ['texts', 'uid'], data)
   const texts = propPathOr(null, ['texts', 'data'], data)
   const tags = propPathOr(null, ['texts', 'tags'], data)
@@ -94,22 +94,22 @@ function TextsPage({ data, location }) {
         </div>
         <TextBody body={body} />
       </article>
-      {tags.find((tag = '') => tag.toLowerCase().includes('news')) ? (
-        <>
-          <OlderNews />
-          <Subscribe />
-        </>
-      ) : (
-        <aside
-          css={css`
-            ${tw(['pb-q24', 'w-full'])};
-            margin: 0 auto;
-            max-width: 40rem;
-          `}
-        >
+      <aside
+        css={css`
+          ${tw(['pb-q24', 'w-full'])};
+          margin: 0 auto;
+          max-width: 40rem;
+        `}
+      >
+        {tags.find((tag = '') => tag.toLowerCase().includes('news')) ? (
+          <>
+            <OtherNews pathname={pathname} />
+            <Subscribe />
+          </>
+        ) : (
           <Related items={relatedTexts} />
-        </aside>
-      )}
+        )}
+      </aside>
     </Layout>
   )
 }
@@ -274,11 +274,7 @@ export const PageQuery = graphql`
         }
       }
     }
-    people: allPrismicText(
-      filter: {
-        data: { body: { elemMatch: { slice_type: { eq: "people" } } } }
-      }
-    ) {
+    people: allPrismicText(filter: {dataString: {regex: "/slice_type\":\"people/"}}) {
       edges {
         node {
           id
