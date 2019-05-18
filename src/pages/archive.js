@@ -24,7 +24,7 @@ function ArchivePage({ data, location }) {
     pageData
   )
   const pathname = propPathOr('/', ['pathname'], location)
-  const news = propPathOr([], ['news', 'edges'], data)
+  const news = propPathOr({ edges: [] }, ['news'], data)
 
   return (
     <Layout>
