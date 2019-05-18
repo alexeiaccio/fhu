@@ -43,16 +43,18 @@ function News({ news }) {
     <Outlined>
       <Content>
         <Link css={headingStyles} to={uid}>
-          Latest News
+          <div css={headingStyles} to={uid}>
+            News
+          </div>
+          <Img src={image} />
+          <div css={titleStyles} to={uid}>
+            {title}
+          </div>
+          {description && (
+            <div css={descStyles}>{description.slice(0, 64)}...</div>
+          )}
+          {date && <div css={dateStyles}>{date}</div>}
         </Link>
-        <Img src={image} />
-        <Link css={titleStyles} to={uid}>
-          {title}
-        </Link>
-        {description && (
-          <div css={descStyles}>{description.slice(0, 64)}...</div>
-        )}
-        {date && <div css={dateStyles}>{date}</div>}
       </Content>
     </Outlined>
   )

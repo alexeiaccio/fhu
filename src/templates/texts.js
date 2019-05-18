@@ -6,9 +6,11 @@ import { css } from '@emotion/core'
 import { compose, chain, filter, map, propPathOr } from '../utils'
 import Img from '../components/elements/img'
 import Layout from '../components/layout'
+import OlderNews from '../components/blocks/older-news'
 import Related from '../components/elements/related'
 import RichContent from '../components/elements/rich-content'
 import Seo from '../components/seo'
+import Subscribe from '../components/blocks/subscribe'
 import Tags from '../components/elements/tags'
 import TextBody from '../components/blocks/text-body'
 
@@ -92,15 +94,22 @@ function TextsPage({ data, location }) {
         </div>
         <TextBody body={body} />
       </article>
-      <aside
-        css={css`
-          ${tw(['pb-q24', 'w-full'])};
-          margin: 0 auto;
-          max-width: 40rem;
-        `}
-      >
-        <Related items={relatedTexts} />
-      </aside>
+      {tags.find((tag = '') => tag.toLowerCase().includes('news')) ? (
+        <>
+          <OlderNews />
+          <Subscribe />
+        </>
+      ) : (
+        <aside
+          css={css`
+            ${tw(['pb-q24', 'w-full'])};
+            margin: 0 auto;
+            max-width: 40rem;
+          `}
+        >
+          <Related items={relatedTexts} />
+        </aside>
+      )}
     </Layout>
   )
 }
