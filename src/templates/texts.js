@@ -88,10 +88,7 @@ function TextsPage({ data, location }) {
         </div>
         <Img
           css={css`
-            max-height: 75vh;
-            & img {
-              object-fit: contain !important;
-            }
+            max-height: 80vh;
           `}
           src={imgSrc}
         />
