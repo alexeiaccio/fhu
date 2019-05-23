@@ -43,8 +43,7 @@ const StyledLink = styled.button`
     'mx-auto',
     'p-q12',
     'text-lg',
-    'w-100',
-    'md:w-1/2',
+    'w-q120',
   ])};
   ${outlinedStyles};
   ${hovered};
@@ -127,8 +126,14 @@ function TextBody({ body, truncated }) {
   const [isOpened, setOpened] = useState(null)
 
   useEffect(() => {
-    if (articleContentRef.current && truncated) {
-      setOpened(articleContentRef.current.getBoundingClientRect().height < 480)
+    if (truncated) {
+      if (articleContentRef.current) {
+        setOpened(
+          articleContentRef.current.getBoundingClientRect().height < 480
+        )
+      }
+    } else {
+      setOpened(true)
     }
   }, [])
 

@@ -95,7 +95,7 @@ class Slider extends PureComponent {
 
     const { current, clientX } = this.state
     const valuesMap = { x: this.x }
-
+    const isSlider = items.length > 1
     const caption = propPathOr(null, [current, 'caption'], items)
 
     return (
@@ -118,18 +118,22 @@ class Slider extends PureComponent {
               <Images current={current} items={items} />
             </Draggable>
           </div>
-          <Arrow
-            onClick={() => this.to((current - 1) % items.length)}
-            pose="left"
-          >
-            <span>◀︎</span>
-          </Arrow>
-          <Arrow
-            onClick={() => this.to((current + 1) % items.length)}
-            pose="right"
-          >
-            <span>▶︎</span>
-          </Arrow>
+          {isSlider && (
+            <>
+              <Arrow
+                onClick={() => this.to((current - 1) % items.length)}
+                pose="left"
+              >
+                <span>◀︎</span>
+              </Arrow>
+              <Arrow
+                onClick={() => this.to((current + 1) % items.length)}
+                pose="right"
+              >
+                <span>▶︎</span>
+              </Arrow>
+            </>
+          )}
         </div>
         {caption && (
           <RichContent

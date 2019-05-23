@@ -41,7 +41,7 @@ function Media({ items }) {
             {type === 'pdf' ? (
               <ButtonLink
                 css={css`
-                  ${tw(['mt-q24'])};
+                  ${tw(['my-q24'])};
                 `}
                 href={link.url}
                 target="_blank"
