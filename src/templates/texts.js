@@ -53,6 +53,7 @@ function TextsPage({ data, location }) {
       ),
     peopleNode
   )
+  const isNews = tags.find((tag = '') => tag.toLowerCase().includes('news'))
 
   return (
     <Layout>
@@ -85,14 +86,16 @@ function TextsPage({ data, location }) {
         >
           <Tags tags={tags} />
         </div>
-        <div
+        <Img
           css={css`
-            ${tw(['max-w-md', 'mx-auto'])};
+            max-height: 75vh;
+            & img {
+              object-fit: contain !important;
+            }
           `}
-        >
-          <Img src={imgSrc} />
-        </div>
-        <TextBody body={body} />
+          src={imgSrc}
+        />
+        <TextBody body={body} truncated={!!isNews} />
       </article>
       <aside
         css={css`
@@ -101,7 +104,7 @@ function TextsPage({ data, location }) {
           max-width: 40rem;
         `}
       >
-        {tags.find((tag = '') => tag.toLowerCase().includes('news')) ? (
+        {isNews ? (
           <>
             <OtherNews pathname={pathname} />
             <Subscribe />

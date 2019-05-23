@@ -46,7 +46,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-prismic',
       options: {
-        repositoryName: 'freehome',
+        repositoryName: process.env.PRICMIC_API,
         accessToken: process.env.PRICMIC_TOKEN,
         linkResolver,
         htmlSerializer,
