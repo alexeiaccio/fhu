@@ -303,7 +303,7 @@ const withStaticQuery = () => (
     {({ location }) => (
       <StaticQuery
         query={graphql`
-          query {
+          query SearchQuery {
             search: siteSearchIndex {
               index
             }

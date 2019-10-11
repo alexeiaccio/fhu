@@ -1,0 +1,92 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID",
+        "placeholder": "Chapter #"
+      }
+    },
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title",
+        "placeholder": "Title"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": null,
+          "height": null
+        },
+        "thumbnails": [
+          {
+            "name": "fb",
+            "width": 1200,
+            "height": 628
+          },
+          {
+            "name": "full",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "label": "Image"
+      }
+    },
+    "description": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph, strong, em",
+        "label": "Description",
+        "placeholder": "Description"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "choices": {
+          "list_of_articles": {
+            "type": "Slice",
+            "fieldset": "Texts",
+            "description": "List of Texts",
+            "icon": "view_list",
+            "non-repeat": {},
+            "repeat": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": ["text"],
+                  "label": "Text Link",
+                  "placeholder": "Select your Text"
+                }
+              }
+            },
+            "display": "list"
+          }
+        }
+      }
+    }
+  },
+  "SEO": {
+    "seodescrition": {
+      "type": "Text",
+      "config": {
+        "label": "SEODescrition",
+        "placeholder": "SEO Description"
+      }
+    },
+    "seokeywords": {
+      "type": "Text",
+      "config": {
+        "label": "SEOKeywords",
+        "placeholder": "SEO Keywords"
+      }
+    }
+  }
+}

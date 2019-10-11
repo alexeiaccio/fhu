@@ -1,0 +1,274 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID",
+        "placeholder": "Path"
+      }
+    },
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title",
+        "placeholder": "Title"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": null,
+          "height": null
+        },
+        "thumbnails": [
+          {
+            "name": "fb",
+            "width": 1200,
+            "height": 628
+          },
+          {
+            "name": "full",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "label": "Image"
+      }
+    },
+    "description": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph, strong, em",
+        "label": "Description",
+        "placeholder": "Description"
+      }
+    },
+    "date": {
+      "type": "Date",
+      "config": {
+        "label": "date"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "choices": {
+          "people": {
+            "type": "Slice",
+            "fieldset": "People",
+            "description": "List of related people",
+            "icon": "people",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": ["text"],
+                  "tags": ["Who we are"],
+                  "label": "Link",
+                  "placeholder": "Link to person page"
+                }
+              }
+            }
+          },
+          "text": {
+            "type": "Slice",
+            "fieldset": "Text",
+            "description": "Rich Text Section",
+            "icon": "text_fields",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "text",
+                  "placeholder": "Your content here"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "righted": {
+            "type": "Slice",
+            "fieldset": "Righted",
+            "description": "Right aligned text",
+            "icon": "format_align_right",
+            "display": "list",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "Text",
+                  "placeholder": "Your content here"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "centered": {
+            "type": "Slice",
+            "fieldset": "Centered",
+            "description": "Centered text",
+            "icon": "format_align_center",
+            "display": "list",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "Text",
+                  "placeholder": "Your content here"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "description": {
+            "type": "Slice",
+            "fieldset": "Description",
+            "description": "Small text",
+            "icon": "format_size",
+            "display": "list",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "Text",
+                  "placeholder": "Your content here"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "Lead": {
+            "type": "Slice",
+            "fieldset": "Lead",
+            "description": "Big text",
+            "icon": "format_color_text",
+            "display": "list",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "Text",
+                  "placeholder": "Your content here"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "image": {
+            "type": "Slice",
+            "fieldset": "Image",
+            "description": "Image or slider",
+            "icon": "local_see",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "imagesrc": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "ImageSrc"
+                }
+              },
+              "caption": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, preformatted, heading3, heading4, heading5, heading6, strong, em, hyperlink, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "Caption",
+                  "placeholder": "Place image caption here"
+                }
+              }
+            }
+          },
+          "video": {
+            "type": "Slice",
+            "fieldset": "Video",
+            "description": "Video embedding",
+            "icon": "ondemand_video",
+            "display": "list",
+            "non-repeat": {
+              "link": {
+                "type": "Embed",
+                "config": {
+                  "label": "Link",
+                  "placeholder": "Link"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "media": {
+            "type": "Slice",
+            "fieldset": "Media",
+            "description": "Media embedding",
+            "icon": "local_play",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "select": "media",
+                  "label": "Link",
+                  "placeholder": "Link to media item"
+                }
+              }
+            }
+          },
+          "related": {
+            "type": "Slice",
+            "fieldset": "Related",
+            "description": "Related texts",
+            "icon": "ac_unit",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": ["text"],
+                  "label": "Link",
+                  "placeholder": "Link to text"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "SEO": {
+    "seodescrition": {
+      "type": "Text",
+      "config": {
+        "label": "SEODescrition",
+        "placeholder": "SEO Description"
+      }
+    },
+    "seokeywords": {
+      "type": "Text",
+      "config": {
+        "label": "SEOKeywords",
+        "placeholder": "SEO Keywords"
+      }
+    }
+  }
+}

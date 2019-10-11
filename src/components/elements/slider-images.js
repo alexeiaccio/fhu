@@ -55,7 +55,7 @@ const Images = ({ current, items }) => {
             key={uuid()}
             css={css`
               ${tw([
-                'bg-black',
+                'bg-white',
                 'bg-center',
                 'bg-contain',
                 'bg-no-repeat',

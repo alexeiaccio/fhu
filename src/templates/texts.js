@@ -165,10 +165,12 @@ export const PageQuery = graphql`
             items {
               link {
                 document {
-                  uid
-                  data {
-                    title {
-                      text
+                  ...on PrismicText {
+                    uid
+                    data {
+                      title {
+                        text
+                      }
                     }
                   }
                 }
@@ -216,7 +218,7 @@ export const PageQuery = graphql`
                 url
                 localFile {
                   childImageSharp {
-                    fluid(maxWidth: 1200, jpegProgressive: true) {
+                    fluid(maxWidth: 1920, jpegProgressive: true) {
                       ...GatsbyImageSharpFluid
                     }
                   }
@@ -248,23 +250,25 @@ export const PageQuery = graphql`
             items {
               link {
                 document {
-                  uid
-                  data {
-                    title {
-                      text
-                    }
-                    image {
-                      url
-                      localFile {
-                        childImageSharp {
-                          fluid(maxWidth: 600, jpegProgressive: true) {
-                            ...GatsbyImageSharpFluid
+                  ...on PrismicText {
+                    uid
+                    data {
+                      title {
+                        text
+                      }
+                      image {
+                        url
+                        localFile {
+                          childImageSharp {
+                            fluid(maxWidth: 600, jpegProgressive: true) {
+                              ...GatsbyImageSharpFluid
+                            }
                           }
                         }
                       }
-                    }
-                    description {
-                      text
+                      description {
+                        text
+                      }
                     }
                   }
                 }

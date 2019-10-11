@@ -90,10 +90,12 @@ export const PageQuery = graphql`
             }
             link {
               document {
-                uid
-                data {
-                  title {
-                    text
+                ... on PrismicText {
+                  uid
+                  data {
+                    title {
+                      text
+                    }
                   }
                 }
               }

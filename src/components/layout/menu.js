@@ -138,36 +138,40 @@ const withStaticQuery = props => (
                           items {
                             link {
                               document {
-                                type
-                                uid
-                                data {
-                                  title {
-                                    text
-                                  }
-                                  body {
-                                    items {
-                                      link {
-                                        document {
-                                          type
-                                          uid
-                                          data {
-                                            title {
-                                              text
-                                            }
-                                            image {
-                                              localFile {
-                                                childImageSharp {
-                                                  fluid(
-                                                    maxWidth: 1200
-                                                    jpegProgressive: true
-                                                  ) {
-                                                    ...GatsbyImageSharpFluid
+                                ... on PrismicChapter {
+                                  type
+                                  uid
+                                  data {
+                                    title {
+                                      text
+                                    }
+                                    body {
+                                      items {
+                                        link {
+                                          document {
+                                            ... on PrismicText {
+                                              type
+                                              uid
+                                              data {
+                                                title {
+                                                  text
+                                                }
+                                                image {
+                                                  localFile {
+                                                    childImageSharp {
+                                                      fluid(
+                                                        maxWidth: 1200
+                                                        jpegProgressive: true
+                                                      ) {
+                                                        ...GatsbyImageSharpFluid
+                                                      }
+                                                    }
                                                   }
                                                 }
+                                                body {
+                                                  __typename
+                                                }
                                               }
-                                            }
-                                            body {
-                                              __typename
                                             }
                                           }
                                         }

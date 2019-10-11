@@ -35,6 +35,7 @@ const Container = styled(Posed)`
     'flex-grow',
     'flex-col',
     'md:absolute',
+    'md:min-w-1/4',
     'md:pin-b',
     'md:pin-l',
     'md:pin-t',

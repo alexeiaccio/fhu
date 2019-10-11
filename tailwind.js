@@ -649,6 +649,7 @@ module.exports = {
     '4xl': '90rem',
     '5xl': '100rem',
     '1/2': '50%',
+    '1/4': '25%',
     full: '100%',
     // Custom
     container: '75rem',

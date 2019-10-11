@@ -67,7 +67,7 @@ About.propTypes = {
   about: PropTypes.objectOf(PropTypes.object).isRequired,
 }
 
-const withStaticQuery = memo(props => (
+const withStaticQuery = props => (
   <StaticQuery
     query={graphql`
       {
@@ -114,6 +114,6 @@ const withStaticQuery = memo(props => (
     `}
     render={({ about }) => <About about={about} {...props} />}
   />
-))
+)
 
-export default withStaticQuery
+export default memo(withStaticQuery)

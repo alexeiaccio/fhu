@@ -1,0 +1,76 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID",
+        "placeholder": "Volume"
+      }
+    },
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title",
+        "placeholder": "Title"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": null,
+          "height": null
+        },
+        "thumbnails": [
+          {
+            "name": "fb",
+            "width": 1200,
+            "height": 628
+          },
+          {
+            "name": "full",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "label": "Image"
+      }
+    },
+    "description": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph, strong, em",
+        "label": "Description",
+        "placeholder": "Description"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "choices": {
+          "chapters": {
+            "type": "Slice",
+            "fieldset": "Chapters",
+            "description": "List of Chapters",
+            "icon": "view_list",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": ["chapter"],
+                  "label": "Chapters Link",
+                  "placeholder": "Select the Chapter"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

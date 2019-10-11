@@ -4548,6 +4548,10 @@ table {
   max-width: 50%;
 }
 
+.max-w-1\/4 {
+  max-width: 25%;
+}
+
 .max-w-full {
   max-width: 100%;
 }
@@ -11882,6 +11886,10 @@ table {
     max-width: 50%;
   }
 
+  .sm\:max-w-1\/4 {
+    max-width: 25%;
+  }
+
   .sm\:max-w-full {
     max-width: 100%;
   }
@@ -19195,6 +19203,10 @@ table {
 
   .md\:max-w-1\/2 {
     max-width: 50%;
+  }
+
+  .md\:max-w-1\/4 {
+    max-width: 25%;
   }
 
   .md\:max-w-full {
@@ -26512,6 +26524,10 @@ table {
     max-width: 50%;
   }
 
+  .lg\:max-w-1\/4 {
+    max-width: 25%;
+  }
+
   .lg\:max-w-full {
     max-width: 100%;
   }
@@ -33825,6 +33841,10 @@ table {
 
   .xl\:max-w-1\/2 {
     max-width: 50%;
+  }
+
+  .xl\:max-w-1\/4 {
+    max-width: 25%;
   }
 
   .xl\:max-w-full {
@@ -41142,6 +41162,10 @@ table {
     max-width: 50%;
   }
 
+  .screen\:max-w-1\/4 {
+    max-width: 25%;
+  }
+
   .screen\:max-w-full {
     max-width: 100%;
   }
@@ -48455,6 +48479,10 @@ table {
 
   .desktop\:max-w-1\/2 {
     max-width: 50%;
+  }
+
+  .desktop\:max-w-1\/4 {
+    max-width: 25%;
   }
 
   .desktop\:max-w-full {

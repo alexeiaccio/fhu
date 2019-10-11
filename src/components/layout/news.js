@@ -64,7 +64,7 @@ News.propTypes = {
   news: PropTypes.objectOf(PropTypes.array).isRequired,
 }
 
-const withStaticQuery = memo(props => (
+const withStaticQuery = props => (
   <StaticQuery
     query={graphql`
       {
@@ -104,6 +104,6 @@ const withStaticQuery = memo(props => (
     `}
     render={({ news }) => <News news={news} {...props} />}
   />
-))
+)
 
-export default withStaticQuery
+export default memo(withStaticQuery)

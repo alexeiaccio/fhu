@@ -147,6 +147,7 @@ function WithStaticQuery(props) {
           }
         }
       `}
+      /* eslint-disable-next-line react/prop-types */
       render={({ news }) => <OtherNews news={props.news || news} {...props} />}
     />
   )

@@ -103,7 +103,7 @@ class Layout extends Component {
       <ThemeProvider theme={themes[currentTheme]}>
         <Global styles={globalStyles} />
         <Provider value={{ isVisible, toggle, toggleMenu }}>
-          <Container>
+          <Container id="modal-root">
             {isMobile && (
               <MobileMenu
                 isMenu={isMenu}

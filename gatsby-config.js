@@ -50,10 +50,18 @@ module.exports = {
         accessToken: process.env.PRICMIC_TOKEN,
         linkResolver,
         htmlSerializer,
+        /* eslint-disable global-require */
+        schemas: {
+          about: require('./src/schemas/about.json'),
+          chapter: require('./src/schemas/chapter.json'),
+          homepage: require('./src/schemas/homepage.json'),
+          text: require('./src/schemas/text.json'),
+          volume: require('./src/schemas/volume.json'),
+        },
       },
     },
     {
-      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+      resolve: `@alexeiaccio/gatsby-plugin-elasticlunr-search`,
       options: {
         fields: [`title`, `data`, `tags`],
         resolvers: {

@@ -35,13 +35,9 @@ const htmlSerializer = () => (type, element, content, children) => {
         ? `target="${element.data.target}" rel="noopener noreferrer"`
         : ''
       if (element.data.link_type === 'Document') {
-        return `<a class="link" ${target} href="/${
-          element.data.uid
-        }">${content}</a>`
+        return `<a class="link" ${target} href="/${element.data.uid}">${content}</a>`
       }
-      return `<a class="link" ${target} href="${
-        element.data.url
-      }">${content}</a>`
+      return `<a class="link" ${target} href="${element.data.url}">${content}</a>`
     default:
       return null
   }
