@@ -98,7 +98,8 @@ function Slide({ item, ...props }) {
       >
         <ContentLink
           css={css`
-            ${tw(['bg-fuchsia', 'flex', 'text-white'])};
+            ${tw(['bg-fuchsia', 'flex'])};
+            color: white !important;
           `}
           to={uid ? `/${uid}` : '/'}
         >
