@@ -36,7 +36,7 @@ function ArchivePage({ data, location }) {
         pathname={pathname}
       />
       <h1 css={headingStyles}>News Archive</h1>
-      <OtherNews news={news} pathname={pathname} />
+      <OtherNews news={news} pathname={pathname} all />
       <Subscribe />
     </Layout>
   )

@@ -61,7 +61,7 @@ const StyledLink = styled(Link)`
   ${hovered};
 `
 
-function OtherNews({ pathname, news }) {
+function OtherNews({ pathname, news, all }) {
   const filteredNews = news.edges.filter(
     ({ node }) => node.uid !== pathname.replace(/^\//, '')
   )
@@ -69,7 +69,7 @@ function OtherNews({ pathname, news }) {
   return (
     <>
       <div css={wrapperStyles}>
-        {filteredNews.slice(0, 8).map(({ node }) => {
+        {filteredNews.slice(0, !all ? 8 : undefined).map(({ node }) => {
           const uid = propPathOr(null, ['uid'], node)
           const date = propPathOr(null, ['data', 'date'], node)
           const title = propPathOr(null, ['data', 'title', 'text'], node)
@@ -96,7 +96,9 @@ function OtherNews({ pathname, news }) {
           )
         })}
       </div>
-      {filteredNews.length > 6 && <StyledLink to="/archive">More →</StyledLink>}
+      {!all && filteredNews.length > 6 && (
+        <StyledLink to="/archive">More →</StyledLink>
+      )}
     </>
   )
 }
@@ -106,6 +108,11 @@ OtherNews.propTypes = {
   news: PropTypes.shape({
     edges: PropTypes.array.isRequired,
   }).isRequired,
+  all: PropTypes.bool,
+}
+
+OtherNews.defaultProps = {
+  all: false,
 }
 
 function WithStaticQuery(props) {
