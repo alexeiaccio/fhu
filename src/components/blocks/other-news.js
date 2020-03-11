@@ -123,7 +123,7 @@ function WithStaticQuery(props) {
           news: allPrismicText(
             filter: { tags: { regex: "/news/i" } }
             sort: { fields: [data___date], order: DESC }
-            limit: 7
+            limit: 10
           ) {
             edges {
               node {
