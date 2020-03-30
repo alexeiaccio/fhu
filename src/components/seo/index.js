@@ -41,7 +41,7 @@ const Seo = ({
   const pageTitleFull = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle
   const pageDescriptionFull = pageDescription || siteDescription
   const pageKeywordsFull = pageKeywords || siteKeywords
-  const pageImageFull = pageImage || '/images/social.png'
+  const pageImageFull = `${siteUrl}/${pageImage || '/images/social.png'}`
   const canonical = siteUrl + (pathname || '')
 
   return (
