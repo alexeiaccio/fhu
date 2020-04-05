@@ -55,6 +55,14 @@
       "type": "Slices",
       "fieldset": "Slice zone",
       "config": {
+        "labels": {
+          "image": [
+            {
+              "name": "wide",
+              "display": "Wide"
+            }
+          ]
+        },
         "choices": {
           "people": {
             "type": "Slice",
