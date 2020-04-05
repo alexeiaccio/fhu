@@ -6,7 +6,7 @@ import { Link } from 'gatsby'
 import { propPathOr, uuid } from '../../utils'
 
 const wrapperStyles = css`
-  ${tw(['flex', 'flex-row', 'flex-wrap', 'mb-q24'])};
+  ${tw(['flex', 'flex-row', 'flex-wrap', 'mb-q24', 'max-w-md', 'w-full'])};
 `
 
 const liStyles = css`

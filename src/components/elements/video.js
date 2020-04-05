@@ -13,7 +13,7 @@ function Video({ primary }) {
   return (
     <RichContent
       css={css`
-        ${tw(['flex', 'justify-center', 'my-q48', 'w-full'])};
+        ${tw(['flex', 'justify-center', 'max-w-md', 'my-q48', 'w-full'])};
       `}
       content={videoContent}
     />

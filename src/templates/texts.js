@@ -213,6 +213,7 @@ export const PageQuery = graphql`
             }
           }
           ... on PrismicTextBodyImage {
+            slice_label
             items {
               imagesrc {
                 url

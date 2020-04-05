@@ -50,7 +50,7 @@ const StyledLink = styled.button`
 `
 
 const articleStyles = css`
-  ${tw(['py-q24', 'max-w-md', 'relative', 'w-full'])};
+  ${tw(['py-q24', 'relative', 'w-full'])};
   margin: 0 auto;
   &::after {
     ${tw(['absolute', 'block', 'pin-b', 'pin-l', 'pin-r'])};
@@ -61,7 +61,7 @@ const articleStyles = css`
 
 const leadStyles = css`
   ${RichText};
-  ${tw(['mb-q24'])};
+  ${tw(['max-w-md', 'mb-q24', 'w-full'])};
   & p {
     ${tw(['text-xl'])};
   }
@@ -73,17 +73,17 @@ const leadStyles = css`
 
 const descriptionStyles = css`
   ${RichTextSmall};
-  ${tw(['mb-q24'])};
+  ${tw(['max-w-md', 'mb-q24', 'w-full'])};
 `
 
 const textStyles = css`
   ${RichText};
-  ${tw(['mb-q24'])};
+  ${tw(['max-w-md', 'mb-q24', 'w-full'])};
 `
 
 const rightStyles = css`
   ${RichText};
-  ${tw(['mb-q24'])};
+  ${tw(['max-w-md', 'mb-q24', 'w-full'])};
   & > * {
     ${tw(['text-right'])};
   }
@@ -114,7 +114,7 @@ const rightStyles = css`
 
 const centerStyles = css`
   ${RichText};
-  ${tw(['mb-q24'])};
+  ${tw(['max-w-md', 'mb-q24', 'w-full'])};
   & > * {
     ${tw(['text-center'])};
   }
@@ -151,11 +151,16 @@ function TextBody({ body, truncated }) {
           pose={isOpened ? 'opened' : 'closed'}
         >
           <div ref={articleContentRef}>
-            {map(({ __typename, items, primary }) => {
+            {map(({ __typename, items, primary, slice_label: label }) => {
               const textContent = propPathOr(null, ['text', 'html'], primary)
 
               return (
-                <section key={uuid()}>
+                <section
+                  key={uuid()}
+                  css={css`
+                    ${tw(['flex', 'flex-col', 'items-center', 'justify-start'])}
+                  `}
+                >
                   {equals(__typename, 'PrismicTextBodyDescription') && (
                     <RichContent
                       content={textContent}
@@ -195,7 +200,7 @@ function TextBody({ body, truncated }) {
                     <People key={uuid()} items={items} />
                   )}
                   {equals(__typename, 'PrismicTextBodyImage') && (
-                    <Slider key={uuid()} items={items} />
+                    <Slider key={uuid()} label={label} items={items} />
                   )}
                   {equals(__typename, 'PrismicTextBodyMedia') && (
                     <Media key={uuid()} items={items} />
@@ -204,7 +209,11 @@ function TextBody({ body, truncated }) {
                     <Video key={uuid()} primary={primary} />
                   )}
                   {equals(__typename, 'PrismicTextBodyRelated') && (
-                    <aside>
+                    <aside
+                      css={css`
+                        ${tw(['max-w-md', 'w-full'])}
+                      `}
+                    >
                       <Related key={uuid()} items={items} />
                     </aside>
                   )}

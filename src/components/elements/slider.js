@@ -19,7 +19,7 @@ const togglerStyles = css`
 `
 
 const sliderStyles = css`
-  ${tw(['overflow-hidden', 'relative'])};
+  ${tw(['overflow-hidden', 'relative', 'w-full'])};
   max-height: 66.66666vh;
   padding-bottom: 66.66666%;
   ${togglerStyles};
@@ -71,6 +71,11 @@ const Arrow = styled.div`
 class Slider extends PureComponent {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    label: PropTypes.string,
+  }
+
+  static defaultProps = {
+    label: false,
   }
 
   constructor() {
@@ -125,7 +130,7 @@ class Slider extends PureComponent {
   }
 
   render() {
-    const { items } = this.props
+    const { items, label } = this.props
     if (!items || !items.length) return null
 
     const { current, clientX, hover, fullsreen } = this.state
@@ -213,7 +218,8 @@ class Slider extends PureComponent {
         ) : (
           <div
             css={css`
-              ${tw(['relative'])};
+              ${tw(['relative', 'w-full'])};
+              ${label !== 'wide' && tw(['max-w-md'])};
             `}
           >
             {renderContent()}
@@ -222,7 +228,8 @@ class Slider extends PureComponent {
         {caption && (
           <RichContent
             css={css`
-              ${tw(['my-q12', 'font-semibold', 'text-xs'])};
+              ${tw(['my-q12', 'font-semibold', 'text-xs', 'w-full'])};
+              ${label !== 'wide' && tw(['max-w-md'])};
             `}
             content={caption.html}
           />

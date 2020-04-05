@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import React from 'react'
+import { css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
@@ -12,7 +12,7 @@ const ButtonLink = styled(FlexBox.withComponent('a'))`
 `
 
 const wrapperStyles = css`
-  ${tw(['mt-q24', 'px-q20'])};
+  ${tw(['max-w-md', 'mt-q24', 'px-q20', 'w-full'])};
   box-sizing: border-box;
 `
 
@@ -28,7 +28,7 @@ function Media({ items }) {
   if (!items) return null
 
   return (
-    <div>
+    <>
       {items.map(({ link }) => {
         const type = link.name.replace(/^.+\./, '')
         if (!link.url) return null
@@ -60,7 +60,7 @@ function Media({ items }) {
           </div>
         )
       })}
-    </div>
+    </>
   )
 }
 
