@@ -10,6 +10,7 @@ import once from 'crocks/helpers/once'
 import option from 'crocks/pointfree/option'
 import prop from 'crocks/Maybe/prop'
 import propPathOr from 'crocks/helpers/propPathOr'
+import mapProps from 'crocks/helpers/mapProps'
 
 import uuid from 'uuid/v4'
 
@@ -20,6 +21,7 @@ export {
   filter,
   isNil,
   map,
+  mapProps,
   not,
   omit,
   once,

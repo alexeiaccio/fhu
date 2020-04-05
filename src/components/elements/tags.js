@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
+import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 
 import { uuid } from '../../utils'
@@ -8,9 +9,12 @@ const wrapperStyles = css`
   ${tw(['flex', 'flex-row', 'flex-no-wrap'])};
 `
 
-const liStyles = css`
+const bgStyles = ({ theme }) => `
+  background-color: ${theme.color};
+`
+
+const Tag = styled.li`
   ${tw([
-    'bg-teal',
     'font-semibold',
     'inline-flex',
     'ml-q16',
@@ -19,11 +23,11 @@ const liStyles = css`
     'text-xs',
     'text-white',
   ])};
+  ${bgStyles};
   line-height: 1.4rem;
   &::after {
     ${tw([
       'absolute',
-      'bg-teal',
       'flex',
       'font-extrabold',
       'h-q16',
@@ -34,6 +38,7 @@ const liStyles = css`
       'text-white',
       'w-q16',
     ])};
+    ${bgStyles};
     content: '•';
     transform: translate3d(-50%, 20%, 0) rotateZ(45deg);
   }
@@ -45,9 +50,7 @@ function Tags({ tags, ...props }) {
   return (
     <ul css={wrapperStyles} {...props}>
       {tags.map(tag => (
-        <li css={liStyles} key={uuid()}>
-          {tag}
-        </li>
+        <Tag key={uuid()}>{tag}</Tag>
       ))}
     </ul>
   )
