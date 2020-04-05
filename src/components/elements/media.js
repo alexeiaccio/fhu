@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 import { Content } from './shared'
-import { uuid } from '../../utils'
+import { uuid, propPathOr } from '../../utils'
 import { FlexBox, outlinedStyles } from './boxes'
 
 const ButtonLink = styled(FlexBox.withComponent('a'))`
@@ -29,9 +29,12 @@ function Media({ items }) {
 
   return (
     <>
-      {items.map(({ link }) => {
-        const type = link.name.replace(/^.+\./, '')
-        if (!link.url) return null
+      {items.map(item => {
+        const link = propPathOr(null, ['link', 'raw'], item)
+
+        if (!link) return null
+
+        const type = link.name && link.name.replace(/^.+\./, '')
 
         return (
           <div css={wrapperStyles} key={uuid()}>

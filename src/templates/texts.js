@@ -36,21 +36,12 @@ export const PageQuery = graphql`
         seokeywords
         image {
           url
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1600, jpegProgressive: true) {
-                ...GatsbyImageSharpFluid_noBase64
-              }
-            }
+          fluid(maxWidth: 1920) {
+            ...GatsbyPrismicImageFluid_noBase64
           }
-          fb {
-            url
-            localFile {
-              childImageSharp {
-                fixed(width: 1200, height: 628) {
-                  src
-                }
-              }
+          thumbnails {
+            fb {
+              url
             }
           }
         }
@@ -112,12 +103,8 @@ export const PageQuery = graphql`
             items {
               imagesrc {
                 url
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 1920, jpegProgressive: true) {
-                      ...GatsbyImageSharpFluid
-                    }
-                  }
+                fluid(maxWidth: 1920) {
+                  ...GatsbyPrismicImageFluid
                 }
               }
               caption {
@@ -128,10 +115,7 @@ export const PageQuery = graphql`
           ... on PrismicTextBodyMedia {
             items {
               link {
-                link_type
-                name
-                url
-                size
+                raw
               }
             }
           }
@@ -154,12 +138,8 @@ export const PageQuery = graphql`
                       }
                       image {
                         url
-                        localFile {
-                          childImageSharp {
-                            fluid(maxWidth: 600, jpegProgressive: true) {
-                              ...GatsbyImageSharpFluid
-                            }
-                          }
+                        fluid(maxWidth: 1920) {
+                          ...GatsbyPrismicImageFluid
                         }
                       }
                       description {
@@ -185,17 +165,13 @@ export const PageQuery = graphql`
             }
             image {
               url
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 600, jpegProgressive: true) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
+              fluid(maxWidth: 600) {
+                ...GatsbyPrismicImageFluid
               }
             }
             body {
               ... on PrismicTextBodyPeople {
-                prismicId
+                id
                 items {
                   link {
                     uid

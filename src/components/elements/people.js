@@ -27,10 +27,10 @@ function People({ items }) {
   return (
     <div css={wrapperStyles}>
       {items.map(({ link }) => {
-        const uid = propPathOr(null, ['document', 0, 'uid'], link)
+        const uid = propPathOr(null, ['document', 'uid'], link)
         const title = propPathOr(
           null,
-          ['document', 0, 'data', 'title', 'text'],
+          ['document', 'data', 'title', 'text'],
           link
         )
         return (

@@ -73,7 +73,7 @@ function OtherNews({ pathname, news, all }) {
           const uid = propPathOr(null, ['uid'], node)
           const date = propPathOr(null, ['data', 'date'], node)
           const title = propPathOr(null, ['data', 'title', 'text'], node)
-          const image = propPathOr(null, ['data', 'image', 'full'], node)
+          const image = propPathOr(null, ['data', 'image'], node)
           const description = propPathOr(
             '',
             ['data', 'description', 'text'],
@@ -134,15 +134,9 @@ function WithStaticQuery(props) {
                     text
                   }
                   image {
-                    full {
-                      url
-                      localFile {
-                        childImageSharp {
-                          fluid(maxWidth: 600, jpegProgressive: true) {
-                            ...GatsbyImageSharpFluid_noBase64
-                          }
-                        }
-                      }
+                    url
+                    fluid(maxWidth: 600) {
+                      ...GatsbyPrismicImageFluid_noBase64
                     }
                   }
                   description {

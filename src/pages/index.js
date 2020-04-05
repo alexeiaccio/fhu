@@ -11,7 +11,7 @@ import TextPage from '../components/blocks/text-page'
 function IndexPage({ data, location }) {
   const highlights = propPathOr(
     null,
-    ['highlights', 'items', 0, 'link', 'document', 0],
+    ['highlights', 'items', 0, 'link', 'document'],
     data
   )
 
@@ -33,11 +33,7 @@ function IndexPage({ data, location }) {
   const pageTitle = propPathOr(null, ['title', 'text'], pageData)
   const pageDescription = propPathOr(null, ['description', 'text'], pageData)
   const pageKeywords = propPathOr(null, ['seokeywords'], pageData)
-  const pageImage = propPathOr(
-    null,
-    ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
-    pageData
-  )
+  const pageImage = propPathOr(null, ['image', 'fb', 'src'], pageData)
 
   return (
     <Layout>
@@ -79,14 +75,9 @@ export const PageQuery = graphql`
         }
         seokeywords
         image {
-          fb {
-            url
-            localFile {
-              childImageSharp {
-                fixed(width: 1200, height: 628) {
-                  src
-                }
-              }
+          thumbnails {
+            fb {
+              url
             }
           }
         }
@@ -99,12 +90,9 @@ export const PageQuery = graphql`
         node {
           items {
             image {
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 1600, jpegProgressive: true) {
-                    ...GatsbyImageSharpFluid_noBase64
-                  }
-                }
+              url
+              fluid(maxWidth: 1920) {
+                ...GatsbyPrismicImageFluid_noBase64
               }
             }
             caption {
@@ -144,21 +132,12 @@ export const PageQuery = graphql`
                 seokeywords
                 image {
                   url
-                  localFile {
-                    childImageSharp {
-                      fluid(maxWidth: 1600, jpegProgressive: true) {
-                        ...GatsbyImageSharpFluid_noBase64
-                      }
-                    }
+                  fluid(maxWidth: 1920) {
+                    ...GatsbyPrismicImageFluid_noBase64
                   }
-                  fb {
-                    url
-                    localFile {
-                      childImageSharp {
-                        fixed(width: 1200, height: 628) {
-                          src
-                        }
-                      }
+                  thumbnails {
+                    fb {
+                      url
                     }
                   }
                 }
@@ -220,12 +199,8 @@ export const PageQuery = graphql`
                     items {
                       imagesrc {
                         url
-                        localFile {
-                          childImageSharp {
-                            fluid(maxWidth: 1920, jpegProgressive: true) {
-                              ...GatsbyImageSharpFluid
-                            }
-                          }
+                        fluid(maxWidth: 1920) {
+                          ...GatsbyPrismicImageFluid
                         }
                       }
                       caption {
@@ -236,10 +211,7 @@ export const PageQuery = graphql`
                   ... on PrismicTextBodyMedia {
                     items {
                       link {
-                        link_type
-                        name
-                        url
-                        size
+                        raw
                       }
                     }
                   }
@@ -262,12 +234,8 @@ export const PageQuery = graphql`
                               }
                               image {
                                 url
-                                localFile {
-                                  childImageSharp {
-                                    fluid(maxWidth: 600, jpegProgressive: true) {
-                                      ...GatsbyImageSharpFluid
-                                    }
-                                  }
+                                fluid(maxWidth: 600) {
+                                  ...GatsbyPrismicImageFluid
                                 }
                               }
                               description {
@@ -297,17 +265,13 @@ export const PageQuery = graphql`
             }
             image {
               url
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 600, jpegProgressive: true) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
+              fluid(maxWidth: 600) {
+                ...GatsbyPrismicImageFluid
               }
             }
             body {
               ... on PrismicTextBodyPeople {
-                prismicId
+                id
                 items {
                   link {
                     uid

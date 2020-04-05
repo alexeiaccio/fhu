@@ -35,14 +35,10 @@ const textStyles = css`
 function AboutPage({ data, location }) {
   const about = propPathOr(null, ['about', 'data'], data)
   const title = propPathOr(null, ['title', 'text'], about)
-  const imgSrc = propPathOr(null, ['image', 'full'], about)
+  const imgSrc = propPathOr(null, ['image'], about)
   const description = propPathOr(null, ['description', 'text'], about)
   const keywords = propPathOr(null, ['seokeywords'], about)
-  const pageImage = propPathOr(
-    null,
-    ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
-    about
-  )
+  const pageImage = propPathOr(null, ['image', 'fb', 'src'], about)
   const pathname = propPathOr('/', ['location', 'pathname'], location)
   const body = propPathOr([], ['body'], about)
 
@@ -119,24 +115,12 @@ export const PageQuery = graphql`
         }
         seokeywords
         image {
-          full {
-            url
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 1200, jpegProgressive: true) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
+          fluid(maxWidth: 1920) {
+            ...GatsbyPrismicImageFluid
           }
-          fb {
-            url
-            localFile {
-              childImageSharp {
-                fixed(width: 1200, height: 628) {
-                  src
-                }
-              }
+          thumbnails {
+            fb {
+              url
             }
           }
         }
@@ -153,12 +137,8 @@ export const PageQuery = graphql`
             items {
               imagesrc {
                 url
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 600, jpegProgressive: true) {
-                      ...GatsbyImageSharpFluid_noBase64
-                    }
-                  }
+                fluid(maxWidth: 600) {
+                  ...GatsbyPrismicImageFluid_noBase64
                 }
               }
             }

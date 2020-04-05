@@ -58,7 +58,7 @@ function Menu({ data, isVisible, toggle }) {
       {map(({ node }) => {
         const menuId = propPathOr(null, ['primary', 'menuid'], node)
         const items = propPathOr(null, ['items'], node)
-        const menuItems = map(propPathOr(null, ['menu', 'document', 0]), items)
+        const menuItems = map(propPathOr(null, ['menu', 'document']), items)
         const volumesItems = compose(
           map(omit(['__typename'])),
           filter(item =>
@@ -126,50 +126,43 @@ const withStaticQuery = props => (
                           text
                         }
                         image {
-                          localFile {
-                            childImageSharp {
-                              fluid(maxWidth: 1200, jpegProgressive: true) {
-                                ...GatsbyImageSharpFluid
-                              }
-                            }
+                          fluid(maxWidth: 1200) {
+                            ...GatsbyPrismicImageFluid
                           }
                         }
                         body {
-                          items {
-                            link {
-                              document {
-                                ... on PrismicChapter {
-                                  type
-                                  uid
-                                  data {
-                                    title {
-                                      text
-                                    }
-                                    body {
-                                      items {
-                                        link {
-                                          document {
-                                            ... on PrismicText {
-                                              type
-                                              uid
-                                              data {
-                                                title {
-                                                  text
-                                                }
-                                                image {
-                                                  localFile {
-                                                    childImageSharp {
-                                                      fluid(
-                                                        maxWidth: 1200
-                                                        jpegProgressive: true
-                                                      ) {
-                                                        ...GatsbyImageSharpFluid
+                          ... on PrismicVolumeBodyChapters {
+                            items {
+                              link {
+                                document {
+                                  ... on PrismicChapter {
+                                    type
+                                    uid
+                                    data {
+                                      title {
+                                        text
+                                      }
+                                      body {
+                                        ... on PrismicChapterBodyListOfArticles {
+                                          items {
+                                            link {
+                                              document {
+                                                ... on PrismicText {
+                                                  type
+                                                  uid
+                                                  data {
+                                                    title {
+                                                      text
+                                                    }
+                                                    image {
+                                                      fluid(maxWidth: 1200) {
+                                                        ...GatsbyPrismicImageFluid
                                                       }
                                                     }
+                                                    body {
+                                                      __typename
+                                                    }
                                                   }
-                                                }
-                                                body {
-                                                  __typename
                                                 }
                                               }
                                             }

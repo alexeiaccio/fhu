@@ -18,11 +18,7 @@ function ArchivePage({ data, location }) {
   const pageTitle = propPathOr(null, ['title', 'text'], pageData)
   const pageDescription = propPathOr(null, ['description', 'text'], pageData)
   const pageKeywords = propPathOr(null, ['seokeywords'], pageData)
-  const pageImage = propPathOr(
-    null,
-    ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
-    pageData
-  )
+  const pageImage = propPathOr(null, ['image', 'fb', 'src'], pageData)
   const pathname = propPathOr('/', ['pathname'], location)
   const news = propPathOr({ edges: [] }, ['news'], data)
 
@@ -65,14 +61,9 @@ export const PageQuery = graphql`
         }
         seokeywords
         image {
-          fb {
-            url
-            localFile {
-              childImageSharp {
-                fixed(width: 1200, height: 628) {
-                  src
-                }
-              }
+          thumbnails {
+            fb {
+              url
             }
           }
         }
@@ -91,15 +82,8 @@ export const PageQuery = graphql`
               text
             }
             image {
-              full {
-                url
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 600, jpegProgressive: true) {
-                      ...GatsbyImageSharpFluid_noBase64
-                    }
-                  }
-                }
+              fluid(maxWidth: 1920) {
+                ...GatsbyPrismicImageFluid
               }
             }
             description {
