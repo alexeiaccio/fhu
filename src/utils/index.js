@@ -4,6 +4,7 @@ import equals from 'crocks/pointfree/equals'
 import filter from 'crocks/pointfree/filter'
 import isNil from 'crocks/predicates/isNil'
 import map from 'crocks/pointfree/map'
+import reduce from 'crocks/pointfree/reduce'
 import not from 'crocks/logic/not'
 import omit from 'crocks/helpers/omit'
 import once from 'crocks/helpers/once'
@@ -28,5 +29,6 @@ export {
   option,
   prop,
   propPathOr,
+  reduce,
   uuid,
 }

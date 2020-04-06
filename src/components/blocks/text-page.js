@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { compose, chain, filter, map, propPathOr } from '../../utils'
+import { compose, reduce, filter, map, propPathOr } from '../../utils'
 import Layout from '../layout'
 import Seo from '../seo'
 import Img from '../elements/img'
@@ -30,22 +30,18 @@ function TextPage({ data, location }) {
   const people = propPathOr(null, ['people', 'edges'], data)
   const peopleNode = map(propPathOr(null, ['node']), people)
   const filterPeople = compose(
-    chain(map(propPathOr(null, ['id']))),
-    map(
-      filter(node => {
-        const items = propPathOr([], ['items'], node)
-        return items.some(
-          item => propPathOr(null, ['link', 'uid'], item) === textsUid
-        )
-      })
-    ),
-    map(propPathOr(null, ['node', 'data', 'body']))
+    filter(propPathOr(null, ['id'])),
+    filter(node => {
+      const items = propPathOr([], ['items'], node)
+      return items.some(
+        item => propPathOr(null, ['link', 'uid'], item) === textsUid
+      )
+    }),
+    propPathOr(null, ['data', 'body'])
   )
-  const relatedTexts = filter(
-    item =>
-      filterPeople(people).some(
-        x => x && x.includes(propPathOr('', ['id'], item))
-      ),
+  const relatedTexts = reduce(
+    (res, cur) => (filterPeople(cur).length !== 0 ? [...res, cur] : res),
+    [],
     peopleNode
   )
   const isNews = tags.find((tag = '') => tag.toLowerCase().includes('news'))
