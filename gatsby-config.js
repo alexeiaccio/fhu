@@ -58,6 +58,7 @@ module.exports = {
           text: require('./src/schemas/text.json'),
           volume: require('./src/schemas/volume.json'),
         },
+        shouldDownloadImage: () => false,
       },
     },
     {

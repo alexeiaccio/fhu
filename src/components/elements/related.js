@@ -39,7 +39,7 @@ function Related({ items }) {
     </h2>,
     <div key={uuid()} css={wrapperStyles}>
       {items.map(item => {
-        const correctPath = propPathOr(item, ['link', 'document', 0], item)
+        const correctPath = propPathOr(item, ['link', 'document'], item)
         const uid = propPathOr(null, ['uid'], correctPath)
         const title = propPathOr(null, ['data', 'title', 'text'], correctPath)
         const image = propPathOr(null, ['data', 'image'], correctPath)

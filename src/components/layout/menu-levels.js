@@ -37,7 +37,7 @@ function MenuLevels({ isVisible, items, toggle, toggleMenu }) {
   } = useContext(MenuContext)
 
   return items.map(({ link }) => {
-    const document = propPathOr(null, ['document', 0], link)
+    const document = propPathOr(null, ['document'], link)
     const type = equals('chapter', propPathOr(null, ['type'], document))
     const uid = propPathOr(null, ['uid'], document)
     const data = propPathOr(null, ['data'], document)

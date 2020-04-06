@@ -38,7 +38,7 @@ const logoStyles = css`
 `
 
 function About({ about }) {
-  const image = propPathOr(null, ['data', 'image', 'full'], about)
+  const image = propPathOr(null, ['data', 'image'], about)
   const title = propPathOr('About', ['data', 'title', 'text'], about)
   const body = propPathOr([], ['data', 'body'], about)
   const logos = map(propPathOr(null, ['items']), body)
@@ -77,15 +77,9 @@ const withStaticQuery = props => (
               text
             }
             image {
-              full {
-                url
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 600, jpegProgressive: true) {
-                      ...GatsbyImageSharpFluid_noBase64
-                    }
-                  }
-                }
+              url
+              fluid(maxWidth: 600) {
+                ...GatsbyPrismicImageFluid_noBase64
               }
             }
             description {
@@ -97,12 +91,8 @@ const withStaticQuery = props => (
                 items {
                   imagesrc {
                     url
-                    localFile {
-                      childImageSharp {
-                        fluid(maxWidth: 600, jpegProgressive: true) {
-                          ...GatsbyImageSharpFluid_noBase64
-                        }
-                      }
+                    fluid(maxWidth: 600) {
+                      ...GatsbyPrismicImageFluid_noBase64
                     }
                   }
                 }

@@ -63,7 +63,7 @@ function Slide({ item, ...props }) {
 
   const imgSrc = propPathOr(null, ['image'], item)
   const caption = propPathOr(null, ['caption', 'html'], item)
-  const link = propPathOr(null, ['link', 'document', 0], item)
+  const link = propPathOr(null, ['link', 'document'], item)
   const title = propPathOr(null, ['data', 'title', 'text'], link)
   const uid = propPathOr(null, ['uid'], link)
 

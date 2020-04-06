@@ -8,7 +8,7 @@ import { propPathOr } from '../../utils'
 function Img({ src, ...props }) {
   if (!src) return null
 
-  const fluid = propPathOr(null, ['localFile', 'childImageSharp', 'fluid'], src)
+  const fluid = propPathOr(null, ['fluid'], src)
   const url = propPathOr(null, ['url'], src)
 
   if (!fluid) {
