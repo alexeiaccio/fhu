@@ -61,7 +61,10 @@ const articleStyles = css`
 
 const leadStyles = css`
   ${RichText};
-  ${tw(['max-w-md', 'mb-q24', 'w-full'])};
+  ${tw(['max-w-md', 'mb-q12', 'w-full'])};
+  &:not(:last-child) {
+    ${tw(['mb-q24'])};
+  }
   & p {
     ${tw(['text-xl'])};
   }
@@ -78,7 +81,10 @@ const descriptionStyles = css`
 
 const textStyles = css`
   ${RichText};
-  ${tw(['max-w-md', 'mb-q24', 'w-full'])};
+  ${tw(['max-w-md', 'mb-q12', 'w-full'])};
+  &:not(:last-child) {
+    ${tw(['mb-q24'])};
+  }
 `
 
 const rightStyles = css`
@@ -158,7 +164,12 @@ function TextBody({ body, truncated }) {
                 <section
                   key={uuid()}
                   css={css`
-                    ${tw(['flex', 'flex-col', 'items-center', 'justify-start'])}
+                    ${tw([
+                      'flex',
+                      'flex-col',
+                      'items-center',
+                      'justify-start',
+                    ])};
                   `}
                 >
                   {equals(__typename, 'PrismicTextBodyDescription') && (

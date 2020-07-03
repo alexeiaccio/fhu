@@ -218,23 +218,23 @@ class Slider extends PureComponent {
         ) : (
           <div
             css={css`
-              ${tw(['relative', 'w-full'])};
+              ${tw(['relative', 'w-full', 'mb-q24'])};
               ${label !== 'wide' && tw(['max-w-md'])};
             `}
           >
             {renderContent()}
+            {caption && (
+              <RichContent
+                css={css`
+                  ${tw(['my-q12', 'font-semibold', 'text-xs', 'w-full'])};
+                  ${label !== 'wide' && tw(['max-w-md'])};
+                `}
+                content={caption.html}
+              />
+            )}
+            <Bullets active={current} length={items.length} onClick={this.to} />
           </div>
         )}
-        {caption && (
-          <RichContent
-            css={css`
-              ${tw(['my-q12', 'font-semibold', 'text-xs', 'w-full'])};
-              ${label !== 'wide' && tw(['max-w-md'])};
-            `}
-            content={caption.html}
-          />
-        )}
-        <Bullets active={current} length={items.length} onClick={this.to} />
       </>
     )
   }
