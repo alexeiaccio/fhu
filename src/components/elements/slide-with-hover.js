@@ -1,15 +1,14 @@
-import React from 'react'
 import { css } from '@emotion/core'
-import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import React from 'react'
 import posed from 'react-pose'
-
 import { propPathOr, uuid } from '../../utils'
 import { Column, FlexBox } from './boxes'
 import Img from './img'
-import { Content } from './shared'
 import RichContent from './rich-content'
+import { Content } from './shared'
 
 const Transition = posed.div({
   enter: {

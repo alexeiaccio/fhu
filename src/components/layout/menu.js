@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
-import { StaticQuery, graphql } from 'gatsby'
-
+import { graphql, StaticQuery } from 'gatsby'
+import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
 import {
   compose,
   equals,
@@ -15,10 +14,10 @@ import {
 } from '../../utils'
 import Appeared from './appeared'
 import Content from './content'
+import { MenuContext } from './context'
+import { hover, hovered, inHoverStyles } from './hovered'
 import MenuVolumes from './menu-volumes'
 import Outlined from './outlined'
-import { MenuContext } from './context'
-import { hovered, inHoverStyles, hover } from './hovered'
 
 const navStyles = css`
   ${tw([
@@ -109,7 +108,9 @@ const withStaticQuery = props => (
   <StaticQuery
     query={graphql`
       query {
-        mainmenu: allPrismicHomepageBodyMenu {
+        mainmenu: allPrismicHomepageBodyMenu(
+          filter: { primary: { menuid: { ne: "links" } } }
+        ) {
           edges {
             node {
               primary {
