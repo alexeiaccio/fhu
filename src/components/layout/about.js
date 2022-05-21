@@ -1,13 +1,12 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { StaticQuery, Link, graphql } from 'gatsby'
 import styled from '@emotion/styled'
-
-import { map, propPathOr, uuid } from '../../utils'
-import { outlinedStyles } from './outlined'
-import Content from './content'
+import { graphql, Link, StaticQuery } from 'gatsby'
+import PropTypes from 'prop-types'
+import React, { memo } from 'react'
+import { map, propPathOr } from '../../utils'
 import Img from '../elements/img'
+import Content from './content'
+import { outlinedStyles } from './outlined'
 
 const titleStyles = css`
   ${tw(['block', 'font-extrabold', 'mb-q16'])};
@@ -55,7 +54,7 @@ function About({ about }) {
           .filter(x => x && x)[0]
           .map(src =>
             src ? (
-              <Img className="logo" key={uuid()} src={src.imagesrc} />
+              <Img className="logo" key={src.imagesrc.url} src={src.imagesrc} />
             ) : null
           )}
       </div>

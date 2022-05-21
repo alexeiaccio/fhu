@@ -1,15 +1,14 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { navigate } from 'gatsby'
-
-import { equals, propPathOr, uuid } from '../../utils'
+import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
+import { equals, propPathOr } from '../../utils'
 import Appeared from './appeared'
 import Content from './content'
-import Outlined from './outlined'
 import { MenuContext } from './context'
 import { hover, hovered, inHoverStyles } from './hovered'
+import Outlined from './outlined'
 
 const OutlinedRow = styled(Outlined)`
   ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full', 'p-0'])};
@@ -45,7 +44,7 @@ function MenuLevels({ isVisible, items, toggle, toggleMenu }) {
     const nextLevelItems = propPathOr(null, ['body', 0, 'items'], data)
 
     return (
-      <OutlinedRow key={uuid()}>
+      <OutlinedRow key={uid}>
         <Content
           css={type ? chapterStyles : textStyles}
           onClick={() => {
@@ -64,7 +63,7 @@ function MenuLevels({ isVisible, items, toggle, toggleMenu }) {
         >
           <span css={inHoverStyles}>{title}</span>
         </Content>
-        <Appeared isVisible={!!isVisible[uid]} key={uuid()}>
+        <Appeared isVisible={!!isVisible[uid]} key={`${uid}-appeared`}>
           <MenuLevels
             items={nextLevelItems}
             isVisible={isLevelsVisible}

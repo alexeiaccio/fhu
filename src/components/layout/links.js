@@ -29,6 +29,9 @@ const linkStyles = css`
     'p-q12',
     'md:px-q24',
   ])};
+  &:hover {
+    color: white;
+  }
 `
 
 const StyledLink = styled(Link)`
@@ -59,7 +62,7 @@ function Links({ data }) {
           const type = propPathOr(null, ['menu', 'link_type'], item)
           const isDocument = equals('Document', type)
           return isDocument ? (
-            <StyledLink css={linkStyles} to={`/${url}`}>
+            <StyledLink css={linkStyles} key={url} to={`/${url}`}>
               {propPathOr(
                 '',
                 ['menu', 'document', 'data', 'title', 'text'],

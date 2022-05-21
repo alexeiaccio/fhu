@@ -1,11 +1,10 @@
-import React from 'react'
 import { css } from '@emotion/core'
-import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
-
-import { Content } from './shared'
-import { uuid, propPathOr } from '../../utils'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { propPathOr } from '../../utils'
 import { FlexBox, outlinedStyles } from './boxes'
+import { Content } from './shared'
 
 const ButtonLink = styled(FlexBox.withComponent('a'))`
   ${outlinedStyles};
@@ -37,7 +36,7 @@ function Media({ items }) {
         const type = link.name && link.name.replace(/^.+\./, '')
 
         return (
-          <div css={wrapperStyles} key={uuid()}>
+          <div css={wrapperStyles} key={link.url}>
             {link.name && (
               <h5 css={headingStyles}>{link.name.replace(/\..+$/, '')}</h5>
             )}

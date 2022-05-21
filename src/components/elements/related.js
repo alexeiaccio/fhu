@@ -1,9 +1,8 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import PropTypes from 'prop-types'
+import { css, jsx } from '@emotion/core'
 import { Link } from 'gatsby'
-
-import { propPathOr, uuid } from '../../utils'
+import PropTypes from 'prop-types'
+import { propPathOr } from '../../utils'
 import Img from './img'
 
 const headingStyles = css`
@@ -34,10 +33,10 @@ function Related({ items }) {
   if (!items || !items.length) return null
 
   return [
-    <h2 key={uuid()} css={headingStyles}>
+    <h2 key="related" css={headingStyles}>
       Related
     </h2>,
-    <div key={uuid()} css={wrapperStyles}>
+    <div key="items" css={wrapperStyles}>
       {items.map(item => {
         const correctPath = propPathOr(item, ['link', 'document'], item)
         const uid = propPathOr(null, ['uid'], correctPath)
@@ -45,7 +44,7 @@ function Related({ items }) {
         const image = propPathOr(null, ['data', 'image'], correctPath)
 
         return (
-          <li css={liStyles} key={uuid()}>
+          <li css={liStyles} key={uid}>
             {uid && (
               <Link css={linkStyles} to={`/${uid}`}>
                 <div css={cardStyles}>

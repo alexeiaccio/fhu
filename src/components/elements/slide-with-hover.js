@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
 import posed from 'react-pose'
-import { propPathOr, uuid } from '../../utils'
+import { propPathOr } from '../../utils'
 import { Column, FlexBox } from './boxes'
 import Img from './img'
 import RichContent from './rich-content'
@@ -72,7 +72,7 @@ function Slide({ item, ...props }) {
         css={css`
           ${tw(['flex-no-grow', 'mb-q16'])};
         `}
-        key={uuid()}
+        key={title}
       >
         {title}
       </h2>
@@ -83,7 +83,7 @@ function Slide({ item, ...props }) {
           ${tw(['flex-no-grow'])};
         `}
         content={caption}
-        key={uuid()}
+        key={caption}
       />
     ),
   ]

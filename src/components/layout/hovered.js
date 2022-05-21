@@ -5,7 +5,6 @@ export const hovered = ({ theme }) => css`
   transition: background-color 200ms ease-in-out;
   &:hover {
     background-color: ${theme.color};
-    color: white;
   }
 `
 

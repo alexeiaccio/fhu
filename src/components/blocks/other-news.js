@@ -1,10 +1,9 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
-import { Link, StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
-
-import { propPathOr, uuid } from '../../utils'
+import { graphql, Link, StaticQuery } from 'gatsby'
+import PropTypes from 'prop-types'
+import React, { memo } from 'react'
+import { propPathOr } from '../../utils'
 import Img from '../elements/img'
 import { outlinedStyles } from '../layout/outlined'
 
@@ -81,7 +80,7 @@ function OtherNews({ pathname, news, all }) {
           )
 
           return (
-            <li css={liStyles} key={uuid()}>
+            <li css={liStyles} key={uid}>
               {uid && (
                 <Link css={linkStyles} to={`/${uid}`}>
                   <div css={cardStyles}>

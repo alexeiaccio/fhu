@@ -1,13 +1,12 @@
-import React, { Component, createRef } from 'react'
-import PropTypes from 'prop-types'
-import { StaticQuery, Link, graphql } from 'gatsby'
-import { Index } from 'elasticlunr'
-import styled from '@emotion/styled'
 import { css } from '@emotion/core'
-import posed from 'react-pose'
+import styled from '@emotion/styled'
 import { Location } from '@reach/router'
-
-import { propPathOr, uuid } from '../../utils'
+import { Index } from 'elasticlunr'
+import { graphql, Link, StaticQuery } from 'gatsby'
+import PropTypes from 'prop-types'
+import React, { Component, createRef } from 'react'
+import posed from 'react-pose'
+import { propPathOr } from '../../utils'
 import Tags from '../elements/tags'
 import { outlinedStyles } from './outlined'
 
@@ -259,7 +258,7 @@ class Search extends Component {
               const restQuery = propPathOr('', [2], matchedQuery)
 
               return (
-                <li css={liStyles} key={uuid()}>
+                <li css={liStyles} key={page.uid}>
                   <Link css={linkStyles} to={`/${page.uid}`}>
                     <span css={searchedTitleStyles}>{page.title}</span>
                     <span>

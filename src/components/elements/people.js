@@ -1,9 +1,8 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import PropTypes from 'prop-types'
+import { css, jsx } from '@emotion/core'
 import { Link } from 'gatsby'
-
-import { propPathOr, uuid } from '../../utils'
+import PropTypes from 'prop-types'
+import { propPathOr } from '../../utils'
 
 const wrapperStyles = css`
   ${tw(['flex', 'flex-row', 'flex-wrap', 'mb-q24', 'max-w-md', 'w-full'])};
@@ -34,8 +33,8 @@ function People({ items }) {
           link
         )
         return (
-          uid && (
-            <li css={liStyles} key={uuid()}>
+          Boolean(uid) && (
+            <li css={liStyles} key={uid}>
               <Link to={`/${uid}`}>{title}</Link>
             </li>
           )
