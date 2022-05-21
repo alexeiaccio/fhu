@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 import posed, { PoseGroup } from 'react-pose'
-
 import { uuid } from '../../utils'
 
 export const Posed = posed.div({
@@ -17,6 +17,8 @@ export const Posed = posed.div({
 })
 
 function Appeared({ children, isVisible }) {
+  const [key] = useState(() => uuid())
+
   return (
     <PoseGroup>
       {isVisible && [
@@ -35,7 +37,7 @@ function Appeared({ children, isVisible }) {
               max-width: calc(100% - 2.8rem);
             }
           `}
-          key={uuid()}
+          key={key}
         >
           {children}
         </Posed>,

@@ -1,12 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link, graphql } from 'gatsby'
 import { css } from '@emotion/core'
-
-import { propPathOr, uuid } from '../utils'
+import { graphql, Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import React from 'react'
 import Img from '../components/elements/img'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
+import { propPathOr } from '../utils'
 
 const headingStyles = css`
   ${tw(['font-extrabold', 'text-5xl'])};
@@ -74,7 +73,7 @@ function PublicationsPage({ data, location }) {
           )
 
           return (
-            <li css={liStyles} key={uuid()}>
+            <li css={liStyles} key={uid}>
               {uid && (
                 <Link css={linkStyles} to={`/${uid}`}>
                   <div css={cardStyles}>

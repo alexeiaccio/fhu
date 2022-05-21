@@ -1,9 +1,7 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { css, jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
-
-import { uuid } from '../../utils'
 
 const wrapperStyles = css`
   ${tw(['flex', 'flex-row', 'flex-no-wrap'])};
@@ -50,7 +48,7 @@ function Tags({ tags, ...props }) {
   return (
     <ul css={wrapperStyles} {...props}>
       {tags.map(tag => (
-        <Tag key={uuid()}>{tag}</Tag>
+        <Tag key={tag}>{tag}</Tag>
       ))}
     </ul>
   )

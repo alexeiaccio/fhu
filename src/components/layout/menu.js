@@ -1,24 +1,15 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
-import { StaticQuery, graphql } from 'gatsby'
-
-import {
-  compose,
-  equals,
-  filter,
-  map,
-  omit,
-  propPathOr,
-  uuid,
-} from '../../utils'
+import { graphql, StaticQuery } from 'gatsby'
+import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
+import { compose, equals, filter, map, omit, propPathOr } from '../../utils'
 import Appeared from './appeared'
 import Content from './content'
+import { MenuContext } from './context'
+import { hover, hovered, inHoverStyles } from './hovered'
 import MenuVolumes from './menu-volumes'
 import Outlined from './outlined'
-import { MenuContext } from './context'
-import { hovered, inHoverStyles, hover } from './hovered'
 
 const navStyles = css`
   ${tw([
@@ -55,7 +46,7 @@ function Menu({ data, isVisible, toggle }) {
 
   return (
     <nav css={navStyles}>
-      {map(({ node }) => {
+      {map(({ node }, idx) => {
         const menuId = propPathOr(null, ['primary', 'menuid'], node)
         const items = propPathOr(null, ['items'], node)
         const menuItems = map(propPathOr(null, ['menu', 'document']), items)
@@ -68,14 +59,17 @@ function Menu({ data, isVisible, toggle }) {
 
         if (equals(menuId, 'sessions')) {
           return (
-            <OutlinedRow key={uuid()}>
+            <OutlinedRow key={`${menuId}-${idx}`}>
               <Content
                 css={valueStyles}
                 onClick={() => toggle(menuId, 'volume')}
               >
                 <span css={inHoverStyles}>{menuId}</span>
               </Content>
-              <Appeared isVisible={!!isVisible[menuId]} key={uuid()}>
+              <Appeared
+                isVisible={!!isVisible[menuId]}
+                key={`${menuId}-${idx}-appeared`}
+              >
                 <MenuVolumes
                   items={volumesItems}
                   isVisible={isVolumesVisible}
@@ -89,7 +83,7 @@ function Menu({ data, isVisible, toggle }) {
         return (
           <MenuVolumes
             items={volumesItems}
-            key={uuid()}
+            key={`${menuId}-${idx}-volumes`}
             isVisible={isVolumesVisible}
             toggle={volumesToggle}
           />
@@ -109,7 +103,9 @@ const withStaticQuery = props => (
   <StaticQuery
     query={graphql`
       query {
-        mainmenu: allPrismicHomepageBodyMenu {
+        mainmenu: allPrismicHomepageBodyMenu(
+          filter: { primary: { menuid: { ne: "links" } } }
+        ) {
           edges {
             node {
               primary {

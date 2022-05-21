@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Global } from '@emotion/core'
-import { ThemeProvider } from 'emotion-theming'
 import { Location } from '@reach/router'
-
+import { ThemeProvider } from 'emotion-theming'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import '../fonts/stylesheet.css'
 import About from './about'
-import Content from './content'
 import Container from './container'
+import Content from './content'
+import { Provider } from './context'
 import globalStyles from './global-styles'
 import Header from './header'
+import Links from './links'
 import MainContainer from './main-container'
 import Menu from './menu'
 import MenuContainer from './menu-container'
@@ -16,9 +18,6 @@ import MobileMenu from './mobile-menu'
 import Outlined from './outlined'
 import Scrollbars from './scrollbars'
 import themes from './themes'
-import { Provider } from './context'
-
-import '../fonts/stylesheet.css'
 
 class Layout extends Component {
   constructor() {
@@ -87,7 +86,7 @@ class Layout extends Component {
   toggleMenu = value => this.setState({ isMenu: value, isVisible: {} })
 
   render() {
-    const { children } = this.props
+    const { children, onIndex } = this.props
     const { currentTheme, isMenu, isMobile, isVisible } = this.state
     const { toggle, toggleMenu } = this
     const getLevel = (levels, level) =>
@@ -127,6 +126,7 @@ class Layout extends Component {
                   <Content>{children}</Content>
                 </Scrollbars>
               </Outlined>
+              {onIndex && <Links />}
             </MainContainer>
           </Container>
         </Provider>
@@ -140,6 +140,11 @@ Layout.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
+  onIndex: PropTypes.bool,
+}
+
+Layout.defaultProps = {
+  onIndex: false,
 }
 
 const withLocation = props => (

@@ -1,12 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-
-import { mapProps, propPathOr } from '../utils'
-import Layout from '../components/layout'
-import Seo from '../components/seo'
+import PropTypes from 'prop-types'
+import React from 'react'
 import Slider from '../components/blocks/main-slider'
 import TextPage from '../components/blocks/text-page'
+import Layout from '../components/layout'
+import Seo from '../components/seo'
+import { mapProps, propPathOr } from '../utils'
 
 function IndexPage({ data, location }) {
   const highlights = propPathOr(
@@ -36,7 +35,7 @@ function IndexPage({ data, location }) {
   const pageImage = propPathOr(null, ['image', 'fb', 'src'], pageData)
 
   return (
-    <Layout>
+    <Layout onIndex>
       <Seo
         pageTitle={pageTitle}
         pageDescription={pageDescription}

@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { css, jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
-
+import { useState } from 'react'
 import { uuid } from '../../utils'
 
 const Active = ({ active }) => css`
@@ -25,6 +25,8 @@ const Bullet = styled.button`
 `
 
 function Bullets({ active, length, onClick }) {
+  const [keys] = useState(() => Array.from({ length }, () => uuid()))
+
   if (length < 2) return null
 
   return (
@@ -46,7 +48,7 @@ function Bullets({ active, length, onClick }) {
         .map((_, idx) => (
           <Bullet
             active={idx === active}
-            key={uuid()}
+            key={keys[idx]}
             onClick={() => (idx !== active ? onClick(idx) : null)}
             type="button"
           >

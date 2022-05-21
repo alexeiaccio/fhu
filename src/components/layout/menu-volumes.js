@@ -1,17 +1,16 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { navigate } from 'gatsby'
 import styled from '@emotion/styled'
-
-import { propPathOr, uuid } from '../../utils'
+import { navigate } from 'gatsby'
+import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
+import { propPathOr } from '../../utils'
 import Appeared from './appeared'
 import Content from './content'
+import { MenuContext } from './context'
+import { hover, hovered, inHoverStyles } from './hovered'
 import MenuLevels from './menu-levels'
 import News from './news'
 import Outlined from './outlined'
-import { MenuContext } from './context'
-import { hover, hovered, inHoverStyles } from './hovered'
 
 const OutlinedRow = styled(Outlined)`
   ${tw(['flex', 'flex-row', 'flex-wrap', 'max-w-full', 'p-0'])};
@@ -38,16 +37,12 @@ function MenuVolumes({ isVisible, items, toggle }) {
     const chapterItems = propPathOr(null, ['body', 0, 'items'], data)
 
     if (uid === 'news') {
-      return <News key={uuid()} />
+      return <News key={uid} />
     }
     if (!chapterItems) {
       return (
-        <OutlinedRow key={uuid()}>
-          <Content
-            key={uuid()}
-            css={volumeStyles}
-            onClick={() => navigate(uid)}
-          >
+        <OutlinedRow key={uid}>
+          <Content css={volumeStyles} onClick={() => navigate(uid)}>
             <span css={inHoverStyles}>{title}</span>
           </Content>
         </OutlinedRow>
@@ -55,11 +50,11 @@ function MenuVolumes({ isVisible, items, toggle }) {
     }
 
     return (
-      <OutlinedRow key={uuid()}>
+      <OutlinedRow key={uid}>
         <Content css={volumeStyles} onClick={() => toggle(uid, 'volume')}>
           <span css={inHoverStyles}>{title}</span>
         </Content>
-        <Appeared isVisible={!!isVisible[uid]} key={uuid()}>
+        <Appeared isVisible={!!isVisible[uid]}>
           <MenuLevels
             items={chapterItems}
             isVisible={isVolumesVisible}

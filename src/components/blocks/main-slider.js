@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { PoseGroup } from 'react-pose'
+import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
-
-import Slide from '../elements/slide-with-hover'
-import random from '../../utils/random'
+import { PoseGroup } from 'react-pose'
 import { propPathOr, uuid } from '../../utils'
+import random from '../../utils/random'
+import Slide from '../elements/slide-with-hover'
 
 class Slider extends Component {
   constructor() {
